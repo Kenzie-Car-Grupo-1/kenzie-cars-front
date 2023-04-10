@@ -95,14 +95,15 @@ export default createGlobalStyle`
       --text-size-6: 20px;
       --text-size-7: 16px;
       --text-size-8: 14px;
+
+      --font-family-1: 'Lexend', sans-serif;
+      --font-family-2: 'Filter', sans-serif;
     }
     *{
       list-style: none;
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family-1: 'Lexend', sans-serif;
-      font-family-2: 'Filter', sans-serif;
     }
     body,html{
     width: 100vw;
