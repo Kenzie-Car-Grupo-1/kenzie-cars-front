@@ -4,7 +4,7 @@ export const StyledHeaderMobile = styled.div`
   width: 100%;
   height: 80px;
 
-  position: fixed;
+  position: relative;
   z-index: 2 !important;
 
   display: flex;
