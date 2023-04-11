@@ -6,7 +6,7 @@ export const StyledFooter = styled.footer`
   height: 310px;
   width: 100%;
 
-  position: absolute;
+  position: relative;
   bottom: 0;
   padding: 45px 55px;
 

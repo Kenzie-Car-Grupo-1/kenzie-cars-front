@@ -108,7 +108,7 @@ export default createGlobalStyle`
     }
     body,html{
     width: 100vw;
-    height: 100vh;
+    height: 100%;
   }
   body {
     background: var(--color-background);
@@ -153,5 +153,5 @@ export default createGlobalStyle`
   ::-webkit-scrollbar-thumb:hover {
     background: var(--main-color);
   }
-
+  
 `;
