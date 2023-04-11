@@ -11,6 +11,7 @@ interface iButtonStyledProps {
 }
 
 export const StyledButton = styled.button<iButtonStyledProps>`
+  font-family: var(--font-family-3);
   font-weight: 600;
   background-color: ${(props) => props.backgroundColor || "#5126EA"};
   color: ${(props) => props.fontColor || "white"};
@@ -24,7 +25,7 @@ export const StyledButton = styled.button<iButtonStyledProps>`
   &:not(:disabled):hover {
     background-color: ${(props) =>
       props.backgroundColorHover || props.backgroundColor};
-    border-color: ${(props) => props.borderColorHover || props.borderColor};
+    border: ${(props) => props.borderColorHover || props.borderColor};
     color: ${(props) => props.fontColorHover || props.fontColor};
     ${(props) =>
       !props.borderColorHover &&
