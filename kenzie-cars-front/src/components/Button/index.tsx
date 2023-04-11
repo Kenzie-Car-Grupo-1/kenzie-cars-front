@@ -6,6 +6,9 @@ interface iButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fontColor?: string;
   buttonSize: "big" | "medium";
   borderColor?: string;
+  backgroundColorHover?: string;
+  borderColorHover?: string;
+  fontColorHover?: string;
 }
 
 const Button = ({
@@ -14,6 +17,9 @@ const Button = ({
   fontColor,
   buttonSize,
   borderColor,
+  backgroundColorHover,
+  borderColorHover,
+  fontColorHover,
   ...rest
 }: iButtonProps) => {
   return (
@@ -22,6 +28,9 @@ const Button = ({
       buttonSize={buttonSize}
       fontColor={fontColor}
       borderColor={borderColor}
+      backgroundColorHover={backgroundColorHover}
+      borderColorHover={borderColorHover}
+      fontColorHover={fontColorHover}
       {...rest}
     >
       {children}
