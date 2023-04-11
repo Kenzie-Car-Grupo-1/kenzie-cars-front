@@ -9,4 +9,13 @@ export const StyledHeaderMobile = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: #fdfdfd;
+  border-bottom: 2px solid #dee2e6;
+`;
+
+export const StyledLogo = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
 `;

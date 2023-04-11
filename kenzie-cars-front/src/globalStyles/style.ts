@@ -114,9 +114,10 @@ export default createGlobalStyle`
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+ 
   }
   body, input, button, textarea {
-    font-family: 'Roboto';
+    font-family: var(--font-family-1);
     font-size: 1.6rem;
   }
   h1, h2, h3, h4, h5, h6, strong {

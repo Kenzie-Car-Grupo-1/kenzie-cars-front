@@ -1,11 +1,22 @@
-import { StyledHeaderMobile } from "./style";
+import { StyledHeaderMobile, StyledLogo } from "./style";
+import Button from "../../Button";
+import Logo from "../../../assets/Motors shop.png";
 
 const HeaderMobile = () => {
   return (
     <StyledHeaderMobile>
-      <h1>
-        Motors <p>shop</p>{" "}
-      </h1>
+      <StyledLogo>
+        <img src={Logo} alt="" />
+      </StyledLogo>
+      <div>
+        <Button
+          buttonSize="medium"
+          fontColor="var(--grey2)"
+          backgroundColor="white"
+        >
+          Fazer login
+        </Button>
+      </div>
     </StyledHeaderMobile>
   );
 };
