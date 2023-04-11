@@ -31,8 +31,12 @@ export const StyledFooter = styled.footer`
   button {
     background: #212529;
     border-radius: 4px;
-    padding: 16px 22px;
     border: none;
+    width: 53px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (min-width: 760px) {

@@ -39,10 +39,18 @@ export const StyledFilter = styled(motion.div)`
   }
 
   li {
-    font-weight: var(--font-weight-3);
-    font-size: var(--text-size-6);
-    color: var(--grey3);
-    line-height: 25px;
+    button {
+      font-weight: var(--font-weight-3);
+      font-size: var(--text-size-6);
+      color: var(--grey3);
+      line-height: 25px;
+      border: none;
+      background-color: white;
+
+      &:hover {
+        color: var(--brand2);
+      }
+    }
   }
 
   .div-km {
@@ -64,5 +72,28 @@ export const StyledFilter = styled(motion.div)`
 
   .button {
     margin-top: 26px;
+  }
+
+  @media (min-width: 760px) {
+    width: 30%;
+    max-width: 300px;
+
+    .div-filter {
+      display: none;
+    }
+    .button {
+      display: none;
+    }
+
+    .div-km {
+      button {
+        width: 100px;
+
+        &:focus {
+          background-color: var(--brand2);
+          color: white;
+        }
+      }
+    }
   }
 `;

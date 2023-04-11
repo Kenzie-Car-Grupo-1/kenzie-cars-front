@@ -21,7 +21,6 @@ const Filter = ({
   return (
     <AnimatePresence>
       <StyledFilter
-        style={{ width: "100%", height: "100%" }}
         initial={{ x: "-100%" }}
         animate={{ x: isVisibleFilter ? 0 : "-100%" }}
         transition={{ duration: 0.5 }}
@@ -37,7 +36,9 @@ const Filter = ({
             <h2>{filter.title}</h2>
             <ul>
               {filter.items.map((item, index) => (
-                <li key={index}>{item}</li>
+                <li key={index}>
+                  <button>{item}</button>
+                </li>
               ))}
             </ul>
           </div>
@@ -48,6 +49,7 @@ const Filter = ({
             buttonSize="medium"
             backgroundColor="var(--grey5)"
             fontColor="var(--grey3)"
+            backgroundColorHover="var(--grey4)"
           >
             Mínimo
           </Button>
@@ -55,6 +57,7 @@ const Filter = ({
             buttonSize="medium"
             fontColor="var(--grey3)"
             backgroundColor="var(--grey5)"
+            backgroundColorHover="var(--grey4)"
           >
             Máximo
           </Button>
@@ -65,6 +68,7 @@ const Filter = ({
             buttonSize="medium"
             fontColor="var(--grey3)"
             backgroundColor="var(--grey5)"
+            backgroundColorHover="var(--grey4)"
           >
             Mínimo
           </Button>
@@ -72,6 +76,7 @@ const Filter = ({
             buttonSize="medium"
             fontColor="var(--grey3)"
             backgroundColor="var(--grey5)"
+            backgroundColorHover="var(--grey4)"
           >
             Máximo
           </Button>

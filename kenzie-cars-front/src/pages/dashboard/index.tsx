@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/headers";
 
 const Dashboard = () => {
-  const [isVisibleFilter, setIsVisibleFilter] = useState(false);
+  const [isVisibleFilter, setIsVisibleFilter] = useState(true);
   return (
     <>
       <Header />
