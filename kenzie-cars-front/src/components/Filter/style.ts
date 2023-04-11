@@ -5,10 +5,12 @@ export const StyledFilter = styled(motion.div)`
   display: flex;
   flex-direction: column;
   font-family: var(--font-family-1);
-  padding: 100px 27px 0 27px;
+  padding: 30px 27px;
   width: 100vw;
-  /* position: absolute;
-  top: 0; */
+  position: absolute;
+  top: 50px;
+  background-color: white;
+  z-index: 10;
 
   .div-filter {
     width: 100%;
@@ -77,6 +79,7 @@ export const StyledFilter = styled(motion.div)`
   @media (min-width: 760px) {
     width: 30%;
     max-width: 300px;
+    position: relative;
 
     .div-filter {
       display: none;
