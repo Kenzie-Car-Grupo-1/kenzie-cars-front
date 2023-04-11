@@ -1,19 +1,12 @@
 import styled from "styled-components";
 
-// interface iButtonStyledProps {
-//   backgroundColor?: string;
-//   buttonSize: "big" | "medium";
-//   fontColor?: string;
-//   borderColor?: string;
-// }
-
 export const StyledFooter = styled.footer`
   background-color: #0b0d0d;
 
   height: 310px;
   width: 100%;
 
-  position: absolute;
+  position: relative;
   bottom: 0;
   padding: 45px 55px;
 
@@ -38,8 +31,12 @@ export const StyledFooter = styled.footer`
   button {
     background: #212529;
     border-radius: 4px;
-    padding: 16px 22px;
     border: none;
+    width: 53px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (min-width: 760px) {
