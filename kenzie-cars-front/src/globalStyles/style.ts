@@ -98,6 +98,7 @@ export default createGlobalStyle`
 
       --font-family-1: 'Lexend', sans-serif;
       --font-family-2: 'Filter', sans-serif;
+      --font-family-3: 'Inter', sans-serif;
     }
     *{
       list-style: none;

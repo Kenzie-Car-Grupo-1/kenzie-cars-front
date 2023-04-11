@@ -5,13 +5,25 @@ export const StyledHeaderMobile = styled.div`
   height: 80px;
 
   position: fixed;
+  z-index: 2 !important;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
-  background: #fdfdfd;
+  background: var(--grey10);
   border-bottom: 2px solid #dee2e6;
+
+  img {
+    margin-left: 20px;
+  }
+  svg {
+    margin-right: 20px;
+  }
+
+  @media (min-width: 700px) {
+    display: none;
+  }
 `;
 
 export const StyledLogo = styled.div`
