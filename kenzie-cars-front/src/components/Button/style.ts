@@ -5,6 +5,9 @@ interface iButtonStyledProps {
   buttonSize: "big" | "medium";
   fontColor?: string;
   borderColor?: string;
+  backgroundColorHover?: string;
+  borderColorHover?: string;
+  fontColorHover?: string;
 }
 
 export const StyledButton = styled.button<iButtonStyledProps>`
@@ -19,9 +22,16 @@ export const StyledButton = styled.button<iButtonStyledProps>`
   transition: background-color 0.2s;
 
   &:not(:disabled):hover {
-    background-color: ${(props) => props.backgroundColor};
-    filter: brightness(120%);
+    background-color: ${(props) =>
+      props.backgroundColorHover || props.backgroundColor};
+    border-color: ${(props) => props.borderColorHover || props.borderColor};
+    color: ${(props) => props.fontColorHover || props.fontColor};
+    ${(props) =>
+      !props.borderColorHover &&
+      !props.backgroundColorHover &&
+      `filter: brightness(120%);`}
   }
+
   &:disabled {
     background-color: #ced4da;
     color: #ffffff;
