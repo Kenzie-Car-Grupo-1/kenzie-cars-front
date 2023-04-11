@@ -13,13 +13,13 @@ export const StyledNavMobile = styled(motion.nav)`
   top: 80px;
   z-index: 1;
 
-  background: var(--grey10);
+  background: var(--grey9);
 
   button {
     width: 100%;
     border: none;
 
-    background: var(--grey10);
+    background: var(--grey9);
 
     padding: 10px;
 
