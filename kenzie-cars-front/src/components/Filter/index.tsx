@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMediaQuery } from "@react-hook/media-query";
 import { StyledFilter } from "./style";
 import { AnimatePresence } from "framer-motion";
 import Button from "../Button";
@@ -18,6 +19,12 @@ const Filter = ({
   isVisibleFilter,
   setIsVisibleFilter,
 }: IFilterProps) => {
+  const isFilterEnabled = useMediaQuery("(max-width: 760px)");
+
+  useEffect(() => {
+    setIsVisibleFilter(!isFilterEnabled);
+  }, [isFilterEnabled, setIsVisibleFilter]);
+
   return (
     <AnimatePresence>
       <StyledFilter

@@ -14,6 +14,7 @@ export const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  z-index: 9;
 
   h2 {
     color: white;
