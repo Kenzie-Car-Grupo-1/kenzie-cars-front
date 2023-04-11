@@ -1,13 +1,6 @@
+import Icons from "../../service/icons";
 import { StyledFooter } from "./style";
 3;
-import { FaAngleUp } from "react-icons/fa";
-
-// interface iButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-//   backgroundColor?: string;
-//   fontColor?: string;
-//   buttonSize: "big" | "medium";
-//   borderColor?: string;
-// }
 
 const Footer = () => {
   return (
@@ -17,7 +10,7 @@ const Footer = () => {
       </h2>
       <p>@ 2022 - Todos os direitos reservados</p>
       <button>
-        <FaAngleUp color="white" />
+        <Icons.ArrowUP color="white" />
       </button>
     </StyledFooter>
   );
