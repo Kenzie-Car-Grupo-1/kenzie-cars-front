@@ -1,5 +1,6 @@
 import React from "react";
 import { StyledComment } from "./style";
+import CardComment from "./cardComponent";
 
 interface Comment {
   text: string;
@@ -18,22 +19,22 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
-    return (
-      <StyledComment>
-        <h3>Comentários</h3>
-        <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>
-              <div> {/*outra div que seria o card */}
-                <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
-                <p>{`${comment.createdAt.toLocaleDateString()} às ${comment.createdAt.toLocaleTimeString()}`}</p>
-                <p>{comment.text}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </StyledComment>
-    );
-  };
+  return (
+    <StyledComment>
+      <h3>Comentários</h3>
+      <ul>
+        {comments.map((comment, index) => (
+          <CardComment
+            firstName={comment.user.firstName}
+            lastName={comment.user.lastName}
+            text={comment.text}
+            updateAt={comment.updatedAt}
+            idUser={comment.user.id}
+          />
+        ))}
+      </ul>
+    </StyledComment>
+  );
+};
 
 export default Comments;
