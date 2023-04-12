@@ -21,7 +21,7 @@ const Dashboard = () => {
         buttonSize="big"
         backgroundColor="var(--brand2)"
         fontColor="white"
-        onClick={() => setIsVisibleFilter(true)}
+        onClick={() => setIsVisibleFilter(!isVisibleFilter)}
       >
         Filtros
       </Button>
