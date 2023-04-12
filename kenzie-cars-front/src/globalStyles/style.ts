@@ -69,18 +69,17 @@ export default createGlobalStyle`
       --success-2: #CCEBD7;
       --success-3: #DDF3EA;
 
-      --random-1: #E34D8C;
-      --random-2: #C04277;
-      --random-3: #7D2A4D;
-      --random-4: #7000FF;
-      --random-5: #6200E3;
-      --random-6: #36007D;
-      --random-7: #349974;
-      --random-8: #247D5F;
-      --random-9: #153D2E;
-      --random-10: #6100FF;
-      --random-11: #5700E3;
-      --random-12: #30007D;
+      --random-0: #E34D8C;
+      --random-1: #C04277;
+      --random-2: #7D2A4D;
+      --random-3: #7000FF;
+      --random-4: #6200E3;
+      --random-5: #36007D;
+      --random-6: #349974;
+      --random-7: #247D5F;
+      --random-8: #153D2E;
+      --random-9: #6100FF;
+      
 
       --font-weight-1: 700;
       --font-weight-2: 600;
