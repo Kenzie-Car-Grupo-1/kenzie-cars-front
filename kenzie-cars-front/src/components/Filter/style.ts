@@ -77,7 +77,7 @@ export const StyledFilter = styled(motion.div)`
   }
 
   @media (min-width: 760px) {
-    width: 30%;
+    width: 20%;
     max-width: 300px;
     position: relative;
 
