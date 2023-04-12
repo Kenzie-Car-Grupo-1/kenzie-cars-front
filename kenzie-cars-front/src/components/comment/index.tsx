@@ -1,4 +1,5 @@
 import React from "react";
+import { StyledComment } from "./style";
 
 interface Comment {
   text: string;
@@ -17,18 +18,22 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
-  return (
-    <div>
-      <h3>Comentários</h3>
-      {comments.map((comment, index) => (
-        <div key={index}>
-          <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
-          <p>{`${comment.createdAt.toLocaleDateString()} às ${comment.createdAt.toLocaleTimeString()}`}</p>
-          <p>{comment.text}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+    return (
+      <StyledComment>
+        <h3>Comentários</h3>
+        <ul>
+          {comments.map((comment, index) => (
+            <li key={index}>
+              <div> {/*outra div que seria o card */}
+                <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
+                <p>{`${comment.createdAt.toLocaleDateString()} às ${comment.createdAt.toLocaleTimeString()}`}</p>
+                <p>{comment.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </StyledComment>
+    );
+  };
 
 export default Comments;
