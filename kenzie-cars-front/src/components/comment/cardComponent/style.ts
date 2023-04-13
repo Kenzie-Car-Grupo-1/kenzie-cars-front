@@ -1,23 +1,5 @@
 import styled from "styled-components";
 
-const colorVariables = [
-  "--random-1",
-  "--random-2",
-  "--random-3",
-  "--random-4",
-  "--random-5",
-  "--random-6",
-  "--random-7",
-  "--random-8",
-  "--random-9",
-  "--random-10",
-  "--random-11",
-  "--random-12",
-];
-
-const randomColor =
-  colorVariables[Math.floor(Math.random() * colorVariables.length)];
-
 export const StyledCardComment = styled.li`
   background: #fdfdfd;
   display: flex;
