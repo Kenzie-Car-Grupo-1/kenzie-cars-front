@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@react-hook/media-query";
 import { StyledFilter } from "./style";
+
 import { AnimatePresence } from "framer-motion";
 import Button from "../Button";
 import Icons from "../../service/icons";
+import Input from "../input";
 
 interface IFilterProps {
   arrayFilter: {
@@ -52,41 +54,13 @@ const Filter = ({
         ))}
         <h2>Km</h2>
         <div className="div-km">
-          <Button
-            buttonSize="medium"
-            backgroundColor="var(--grey5)"
-            fontColor="var(--grey3)"
-            backgroundColorHover="var(--grey4)"
-          >
-            Mínimo
-          </Button>
-          <Button
-            buttonSize="medium"
-            fontColor="var(--grey3)"
-            backgroundColor="var(--grey5)"
-            backgroundColorHover="var(--grey4)"
-          >
-            Máximo
-          </Button>
+          <Input backgroundColor="var(--grey5)" placeholder="Mínimo" />
+          <Input backgroundColor="var(--grey5)" placeholder="Máximo" />
         </div>
         <h2>Preço</h2>
         <div className="div-km">
-          <Button
-            buttonSize="medium"
-            fontColor="var(--grey3)"
-            backgroundColor="var(--grey5)"
-            backgroundColorHover="var(--grey4)"
-          >
-            Mínimo
-          </Button>
-          <Button
-            buttonSize="medium"
-            fontColor="var(--grey3)"
-            backgroundColor="var(--grey5)"
-            backgroundColorHover="var(--grey4)"
-          >
-            Máximo
-          </Button>
+          <Input backgroundColor="var(--grey5)" placeholder="Mínimo" />
+          <Input backgroundColor="var(--grey5)" placeholder="Máximo" />
         </div>
         <Button
           className="button"

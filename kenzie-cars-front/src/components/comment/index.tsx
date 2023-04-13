@@ -1,6 +1,6 @@
-import React from "react";
 import { StyledComment } from "./style";
 import CardComment from "./cardComponent";
+import InputBoxComment from "./inputBoxComment";
 
 interface Comment {
   text: string;
@@ -18,22 +18,26 @@ interface CommentsProps {
   comments: Comment[];
 }
 
-const Comments: React.FC<CommentsProps> = ({ comments }) => {
+const Comments = ({ comments }: CommentsProps) => {
   return (
-    <StyledComment>
-      <h3>Comentários</h3>
-      <ul>
-        {comments.map((comment, index) => (
-          <CardComment
-            firstName={comment.user.firstName}
-            lastName={comment.user.lastName}
-            text={comment.text}
-            updateAt={comment.updatedAt}
-            idUser={comment.user.id}
-          />
-        ))}
-      </ul>
-    </StyledComment>
+    <>
+      <StyledComment>
+        <h3>Comentários</h3>
+        <ul>
+          {comments.map((comment, index) => (
+            <CardComment
+              firstName={comment.user.firstName}
+              lastName={comment.user.lastName}
+              text={comment.text}
+              updateAt={comment.updatedAt}
+              idUser={comment.user.id}
+            />
+          ))}
+        </ul>
+      </StyledComment>
+
+      <InputBoxComment />
+    </>
   );
 };
 
