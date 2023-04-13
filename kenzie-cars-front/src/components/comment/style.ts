@@ -8,8 +8,9 @@ export const StyledComment = styled.section`
   background: var(--grey10);
   margin: 18px auto 42px auto;
   border-radius: 4px;
+  width: 95%;
 
-  padding: 36px 28px;
+  padding: 36px 20px;
 
   max-width: 751px;
 
