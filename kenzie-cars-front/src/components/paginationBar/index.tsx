@@ -1,30 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bar } from "./style";
 import { Link } from "react-router-dom";
 import { items } from "../CardList/database";
 
 const PaginationBar = () => {
-  const [page, setPage] = useState(1);
-  const pageNumber = Math.ceil(items.length / 12);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPageNumber = Math.ceil(items.length / 12);
 
   function addPage(){
-    if (page < pageNumber && page >= 1) {
-      setPage(page + 1)
+    if (currentPage < totalPageNumber && currentPage >= 1) {
+      setCurrentPage(currentPage + 1)
     }
   }
 
   function decreasePage(){
-    if (page > 1) {
-      setPage(page - 1)
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
     }
   }
 
+  // useEffect(() => {}, [])
+
   return (
     <Bar>
-      {pageNumber == 1 ? (
+      {totalPageNumber == 1 ? (
         <div className="div-pages">
-          <p className="current-page">{page}&nbsp;</p>
-          <p className="next-page">de {pageNumber}&nbsp;</p>
+          <p className="current-page">{currentPage}&nbsp;</p>
+          <p className="next-page">de {totalPageNumber}&nbsp;</p>
         </div>
       ) : (
         <>
@@ -32,8 +34,8 @@ const PaginationBar = () => {
           {"<"} Anterior
           </Link>
           <div className="div-pages">
-            <p className="current-page">&nbsp;{page}&nbsp;</p>
-            <p className="next-page">de {pageNumber}&nbsp;</p>
+            <p className="current-page">&nbsp;{currentPage}&nbsp;</p>
+            <p className="next-page">de {totalPageNumber}&nbsp;</p>
           </div>
           <Link onClick={addPage} to={""}>
             Seguinte {">"}
