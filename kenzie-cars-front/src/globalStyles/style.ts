@@ -26,6 +26,8 @@ export default createGlobalStyle`
       display: block;
     }
     body {
+      width: 100%;
+      height: 100%;
       line-height: 1;
     }
     ol, ul {

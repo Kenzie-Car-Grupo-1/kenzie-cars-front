@@ -6,6 +6,8 @@ import CardList from "../../components/CardList";
 import Filter from "../../components/Filter";
 import arrayFilter from "../../components/Filter/database";
 import Footer from "../../components/Footer";
+import PaginationBar from "../../components/paginationBar";
+import { StyledDiv } from "./style";
 
 const Dashboard = () => {
   const [isVisibleFilter, setIsVisibleFilter] = useState(true);
@@ -13,20 +15,19 @@ const Dashboard = () => {
     <>
       <Header />
       <ImageInitial />
-      <CardList />
-      <Filter
+      <StyledDiv>
+        <Filter
+          isVisibleFilter={isVisibleFilter}
+          setIsVisibleFilter={setIsVisibleFilter}
+          arrayFilter={arrayFilter}
+        />
+        <CardList />
+      </StyledDiv>
+      <PaginationBar
         isVisibleFilter={isVisibleFilter}
         setIsVisibleFilter={setIsVisibleFilter}
-        arrayFilter={arrayFilter}
       />
-      <Button
-        buttonSize="big"
-        backgroundColor="var(--brand2)"
-        fontColor="white"
-        onClick={() => setIsVisibleFilter(!isVisibleFilter)}
-      >
-        Filtros
-      </Button>
+
       <Footer />
     </>
   );

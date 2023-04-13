@@ -233,7 +233,9 @@ export const StyledDivImageAndDetails = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 40px 0px;
+  @media (min-width: 700px) {
+    padding: 40px 0px;
+  }
 `;
 export const StyledDivPicturesAndUser = styled.div`
   display: flex;

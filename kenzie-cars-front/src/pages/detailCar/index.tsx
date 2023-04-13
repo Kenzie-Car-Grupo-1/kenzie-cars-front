@@ -5,7 +5,7 @@ import comments from "../../components/comment/database";
 import Header from "../../components/headers";
 import CarImage from "../../components/carImage";
 import CarDetails from "../../components/carDetails";
-import { StyleBox } from "./style";
+import { StyleBox, StyledDivBackground } from "./style";
 import ModalDetailCar from "../../components/modals/modalDetailImage";
 import { useModal } from "../../context/modal.context";
 
@@ -20,10 +20,10 @@ const DetailCar = () => {
     <>
       <Header />
       <StyleBox>
+        <StyledDivBackground />
         <CarDetails />
       </StyleBox>
       <Comments comments={comments} />
-      {openModalImageCar && <ModalDetailCar />}
     </>
   );
 };

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledBoxImage = styled.div`
   width: 100%;
   height: 300px;
+  z-index: 1;
 
   background-color: var(--brand1);
 

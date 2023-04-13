@@ -49,4 +49,10 @@ export const StyledImageCarModal = styled.div`
     width: 100%;
     height: auto;
   }
+
+  @media (min-width: 700px) {
+    div {
+      max-width: 100%;
+    }
+  }
 `;

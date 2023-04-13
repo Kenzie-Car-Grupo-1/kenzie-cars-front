@@ -21,7 +21,7 @@ const Filter = ({
   isVisibleFilter,
   setIsVisibleFilter,
 }: IFilterProps) => {
-  const isFilterEnabled = useMediaQuery("(max-width: 760px)");
+  const isFilterEnabled = useMediaQuery("(max-width: 1024px)");
 
   useEffect(() => {
     setIsVisibleFilter(!isFilterEnabled);

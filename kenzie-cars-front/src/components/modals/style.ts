@@ -3,14 +3,16 @@ import styled from "styled-components";
 
 export const StyleBackgroundModal = styled(motion.div)`
   width: 100%;
-  height: 200%;
+  height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: flex-start;
 
-  position: absolute;
-  top: 80px;
+  position: fixed;
+  top: 0px;
+
+  z-index: 100;
 
   background: rgba(0, 0, 0, 0.5);
 `;
