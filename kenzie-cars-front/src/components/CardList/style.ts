@@ -10,7 +10,7 @@ export const List = styled.ul`
   overflow-x: scroll;
   gap: 12px;
 
-  @media (min-width: 760px) {
+  @media (min-width: 1024px) {
     width: 80%;
     margin-top: 60px;
 
@@ -20,7 +20,7 @@ export const List = styled.ul`
     gap: 72px 48px;
     margin-bottom: 224px;
 
-    position: absolute;
+    position: static;
     right: 0;
   }
 `;
