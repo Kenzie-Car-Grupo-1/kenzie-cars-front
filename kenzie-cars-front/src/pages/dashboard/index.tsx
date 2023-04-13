@@ -6,6 +6,7 @@ import Footer from "../../components/footer";
 import Header from "../../components/headers";
 import ImageInitial from "../../components/imageInitial";
 import CardList from "../../components/CardList";
+import PaginationBar from "../../components/paginationBar";
 
 const Dashboard = () => {
   const [isVisibleFilter, setIsVisibleFilter] = useState(true);
@@ -27,6 +28,7 @@ const Dashboard = () => {
       >
         Filtros
       </Button>
+      <PaginationBar />
       <Footer />
     </>
   );
