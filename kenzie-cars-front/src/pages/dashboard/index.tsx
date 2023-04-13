@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../../components/Button";
-import Filter from "../../components/filter";
-import arrayFilter from "../../components/filter/database";
-import Footer from "../../components/footer";
+import Filter from "../../components/Filter";
+import arrayFilter from "../../components/Filter/database"
+import Footer from "../../components/Footer";
 import Header from "../../components/headers";
 import ImageInitial from "../../components/imageInitial";
 import CardList from "../../components/CardList";
@@ -20,14 +20,14 @@ const Dashboard = () => {
         setIsVisibleFilter={setIsVisibleFilter}
         arrayFilter={arrayFilter}
       />
-      <Button
+      {/* <Button
         buttonSize="big"
         backgroundColor="var(--brand2)"
         fontColor="white"
         onClick={() => setIsVisibleFilter(!isVisibleFilter)}
       >
         Filtros
-      </Button>
+      </Button> */}
       <PaginationBar />
       <Footer />
     </>

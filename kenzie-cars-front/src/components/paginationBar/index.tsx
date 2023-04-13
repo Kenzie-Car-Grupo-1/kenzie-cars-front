@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Bar } from "./style";
 import { Link } from "react-router-dom";
 import { items } from "../CardList/database";
+import Button from "../Button";
 
 const PaginationBar = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isVisibleFilter, setIsVisibleFilter] = useState(true);
   const totalPageNumber = Math.ceil(items.length / 12);
 
   function addPage(){
@@ -19,10 +21,20 @@ const PaginationBar = () => {
     }
   }
 
-  // useEffect(() => {}, [])
+  // useEffect((
+    
+  // ) => {}, [])
 
   return (
     <Bar>
+      <Button
+        buttonSize="big"
+        backgroundColor="var(--brand2)"
+        fontColor="white"
+        onClick={() => setIsVisibleFilter(!isVisibleFilter)}
+      >
+        Filtros
+      </Button>
       {totalPageNumber == 1 ? (
         <div className="div-pages">
           <p className="current-page">{currentPage}&nbsp;</p>
