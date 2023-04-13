@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Button from "../../components/Button";
-import Filter from "../../components/filter";
-import arrayFilter from "../../components/filter/database";
-import Footer from "../../components/footer";
 import Header from "../../components/headers";
 import ImageInitial from "../../components/imageInitial";
 import CardList from "../../components/CardList";
+import Filter from "../../components/Filter";
+import arrayFilter from "../../components/Filter/database";
+import Footer from "../../components/Footer";
 import PaginationBar from "../../components/paginationBar";
 import { StyledDiv } from "./style";
 

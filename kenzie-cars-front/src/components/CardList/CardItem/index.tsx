@@ -1,7 +1,6 @@
 import Photo from "../../../assets/Photo.png";
 import { Item } from "./style";
 
-
 const CardItem = ({ item, user }: any) => {
   return (
     <Item>
