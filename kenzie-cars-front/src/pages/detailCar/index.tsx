@@ -21,7 +21,7 @@ const DetailCar = () => {
       <Header />
       <StyleBox>
         <StyledDivBackground />
-        <CarDetails />
+        <CarDetails id={carId} />
       </StyleBox>
       <Comments comments={comments} />
     </>

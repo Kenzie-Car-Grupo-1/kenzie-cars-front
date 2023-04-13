@@ -5,13 +5,13 @@ import car from "../../../assets/06a5984f915f5060d7a5f3e0a5f7560d.png";
 import { useModal } from "../../../context/modal.context";
 
 const ModalDetailCar = () => {
-  const { setOpenModalImageCar } = useModal();
+  const { setOpenModalImageCar, imgForModal } = useModal();
   return (
     <StyleBackgroundModal>
       <StyledImageCarModal>
         <h1>Imagem do veiculo</h1>
         <div>
-          <img src={car} alt="" />
+          <img src={imgForModal} alt="" />
         </div>
         <StyledButtonClose
           type="button"

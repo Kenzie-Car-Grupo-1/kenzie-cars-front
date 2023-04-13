@@ -4,6 +4,7 @@ export const StyledImageCarModal = styled.div`
   width: 100%;
   max-width: 520px;
   height: 300px;
+  max-height: 300px;
 
   background: #ffffff;
   border-radius: 8px;
@@ -46,8 +47,10 @@ export const StyledImageCarModal = styled.div`
   }
 
   img {
+    size: cover;
     width: 100%;
-    height: auto;
+    height: 100%;
+    border-radius: 4px;
   }
 
   @media (min-width: 700px) {

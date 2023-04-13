@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledCarDetails = styled.div`
   position: relative;
   bottom: 10px;
+  z-index: 1;
 
   width: 95%;
   max-width: 750px;
@@ -232,6 +233,9 @@ export const StyledDivImageAndDetails = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  max-width: 700px;
 
   @media (min-width: 700px) {
     padding: 40px 0px;
