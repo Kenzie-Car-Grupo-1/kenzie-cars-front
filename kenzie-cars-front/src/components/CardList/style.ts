@@ -9,17 +9,18 @@ export const List = styled.ul`
   position: relative;
   overflow-x: scroll;
   gap: 12px;
-  
-  
+
   @media (min-width: 760px) {
-      width: 80%;
-      margin-top: 60px;
-      
-      flex-wrap: wrap;
-      gap: 72px 48px;
-      margin-bottom: 224px;
-      
-      position: absolute;
-      right: 0;
-    }
+    width: 80%;
+    margin-top: 60px;
+
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 72px 48px;
+    margin-bottom: 224px;
+
+    position: absolute;
+    right: 0;
+  }
 `;
