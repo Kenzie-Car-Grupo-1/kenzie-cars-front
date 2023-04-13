@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react";
 import { Bar } from "./style";
 import { Link } from "react-router-dom";
 import { items } from "../CardList/database";
 import Button from "../Button";
+import { useAds } from "../../context/ads.context";
 
-const PaginationBar = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isVisibleFilter, setIsVisibleFilter] = useState(true);
+interface IPaginationBarProps {
+  isVisibleFilter: boolean;
+  setIsVisibleFilter: (value: boolean) => void;
+}
+
+const PaginationBar = ({
+  isVisibleFilter,
+  setIsVisibleFilter,
+}: IPaginationBarProps) => {
+  const {currentPage, setCurrentPage} = useAds();
   const totalPageNumber = Math.ceil(items.length / 12);
 
-  function addPage(){
+  function addPage() {
     if (currentPage < totalPageNumber && currentPage >= 1) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     }
   }
 
-  function decreasePage(){
+  function decreasePage() {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
     }
   }
-
-  // useEffect((
-    
-  // ) => {}, [])
 
   return (
     <Bar>
@@ -43,7 +46,7 @@ const PaginationBar = () => {
       ) : (
         <>
           <Link onClick={decreasePage} to={""}>
-          {"<"} Anterior
+            {"<"} Anterior
           </Link>
           <div className="div-pages">
             <p className="current-page">&nbsp;{currentPage}&nbsp;</p>
@@ -57,5 +60,6 @@ const PaginationBar = () => {
     </Bar>
   );
 };
+
 
 export default PaginationBar;
