@@ -10,13 +10,15 @@ export const Bar = styled.div`
 
   button {
     margin-bottom: 48px;
+    width: 70%;
+    max-width: 300px;
   }
 
   .div-pages {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     padding: 16px 0;
 
     .current-page .next-page {
@@ -39,7 +41,7 @@ export const Bar = styled.div`
     color: var(--brand2);
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 1024px) {
     width: 100%;
     height: 66px;
 

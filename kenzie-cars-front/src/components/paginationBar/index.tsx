@@ -4,25 +4,32 @@ import { Link } from "react-router-dom";
 import { items } from "../CardList/database";
 import Button from "../Button";
 
-const PaginationBar = () => {
+interface IPaginationBarProps {
+  isVisibleFilter: boolean;
+  setIsVisibleFilter: (value: boolean) => void;
+}
+
+const PaginationBar = ({
+  isVisibleFilter,
+  setIsVisibleFilter,
+}: IPaginationBarProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isVisibleFilter, setIsVisibleFilter] = useState(true);
   const totalPageNumber = Math.ceil(items.length / 12);
 
-  function addPage(){
+  function addPage() {
     if (currentPage < totalPageNumber && currentPage >= 1) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     }
   }
 
-  function decreasePage(){
+  function decreasePage() {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
     }
   }
 
   // useEffect((
-    
+
   // ) => {}, [])
 
   return (
@@ -43,7 +50,7 @@ const PaginationBar = () => {
       ) : (
         <>
           <Link onClick={decreasePage} to={""}>
-          {"<"} Anterior
+            {"<"} Anterior
           </Link>
           <div className="div-pages">
             <p className="current-page">&nbsp;{currentPage}&nbsp;</p>
