@@ -1,12 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Photo from "../../../assets/Photo.png";
 import { Item } from "./style";
 
 const CardItem = ({ item, user }: any) => {
+  const navigate = useNavigate();
   return (
     <Item>
       <div className="div-img">
-        {/* <img src={item.images[0]} alt="" /> */}
-        <img src={Photo} alt={item.model} />
+        <img src={item.images[0]} alt="" />
+        <img
+          src={Photo}
+          alt={
+            item.model
+          } /*onClick={() => navigate(`/dashboard/${"O ID DO CARRO AQUI"}`)}*/
+        />
       </div>
       <div className="div-info">
         <p className="info-title">

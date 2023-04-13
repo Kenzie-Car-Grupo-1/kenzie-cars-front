@@ -28,9 +28,13 @@ export const StyledBoxImageCar = styled.div`
   justify-content: center;
   align-items: center;
 
+  box-sizing: border-box;
+
+  overflow: hidden;
+
   div {
     width: 100%;
-    max-width: 312px;
+    max-width: 260px;
     min-height: 239px;
 
     display: flex;
