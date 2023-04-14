@@ -238,7 +238,8 @@ export const StyledDivImageAndDetails = styled.div`
   max-width: 700px;
 
   @media (min-width: 700px) {
-    padding: 40px 0px;
+    /* padding: 40px 0px; */
+    margin-bottom: 57px;
   }
 `;
 export const StyledDivPicturesAndUser = styled.div`

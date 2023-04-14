@@ -46,8 +46,8 @@ export const StyledBoxImageCar = styled.div`
   }
 
   img {
-    width: 100%;
-    height: auto;
+    /* width: 100%;
+    height: auto; */
     max-height: 400px;
   }
 

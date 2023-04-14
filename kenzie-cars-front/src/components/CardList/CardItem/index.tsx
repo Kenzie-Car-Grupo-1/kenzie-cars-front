@@ -7,12 +7,10 @@ const CardItem = ({ item, user }: any) => {
   return (
     <Item>
       <div className="div-img">
-        <img src={item.images[0]} alt="" />
+        {/* <img src={item.images[0]} alt="" /> */}
         <img
           src={Photo}
-          alt={
-            item.model
-          }
+          alt={item.model}
           onClick={() => navigate(`/dashboard/${item.id}`)}
         />
       </div>
