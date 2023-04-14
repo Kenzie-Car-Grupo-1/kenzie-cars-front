@@ -1,4 +1,4 @@
-import { StyledComment } from "./style";
+import { StyledComment, StyledSection } from "./style";
 import CardComment from "./cardComponent";
 import InputBoxComment from "./inputBoxComment";
 
@@ -20,7 +20,7 @@ interface CommentsProps {
 
 const Comments = ({ comments }: CommentsProps) => {
   return (
-    <>
+    <StyledSection>
       <StyledComment>
         <h3>Comentários</h3>
         <ul>
@@ -37,7 +37,7 @@ const Comments = ({ comments }: CommentsProps) => {
       </StyledComment>
 
       <InputBoxComment />
-    </>
+    </StyledSection>
   );
 };
 

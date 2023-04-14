@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
-export const StyledComment = styled.section`
+export const StyledSection = styled.section`
+  background: var(--grey8);
+  padding: 18px auto 42px auto;
+  margin: 0 auto;
+  padding-top: 18px;
+`;
+
+export const StyledComment = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   background: var(--grey10);
-  margin: 18px auto 42px auto;
+  /* margin: 18px auto 42px auto; */
   border-radius: 4px;
   width: 95%;
+  margin: 0 auto;
 
   padding: 36px 20px;
 
