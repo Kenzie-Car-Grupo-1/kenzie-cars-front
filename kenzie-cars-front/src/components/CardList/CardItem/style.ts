@@ -83,7 +83,7 @@ export const Item = styled.li`
       display: flex;
       justify-content: space-between;
 
-      width: 112px;
+      gap: 12px;
 
       p {
         font-family: var(--font-family-3);
@@ -93,8 +93,9 @@ export const Item = styled.li`
         color: var(--brand1);
         background-color: var(--brand4);
 
+        background-size: cover;
         padding: 4px 8px;
-        width: 50px;
+        width: auto;
       }
     }
 

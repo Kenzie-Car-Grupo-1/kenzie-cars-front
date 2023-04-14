@@ -12,7 +12,8 @@ const CardItem = ({ item, user }: any) => {
           src={Photo}
           alt={
             item.model
-          } /*onClick={() => navigate(`/dashboard/${"O ID DO CARRO AQUI"}`)}*/
+          }
+          onClick={() => navigate(`/dashboard/${item.id}`)}
         />
       </div>
       <div className="div-info">
@@ -22,7 +23,6 @@ const CardItem = ({ item, user }: any) => {
         <p className="info-text">{item.description}</p>
       </div>
       <div className="div-user">
-        {/* <img src={LogoUserEx} alt="" /> */}
         <p className="user-initials">{`${user.firstname[0]}${user.lastname[0]}`}</p>
         <p className="user-fullname">{`${user.firstname} ${user.lastname}`}</p>
       </div>
