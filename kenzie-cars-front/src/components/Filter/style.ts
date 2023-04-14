@@ -58,7 +58,7 @@ export const StyledFilter = styled(motion.div)`
   .div-km {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin-top: 16px;
     margin-bottom: 16px;
 
@@ -74,12 +74,20 @@ export const StyledFilter = styled(motion.div)`
 
   .button {
     margin-top: 26px;
+    align-self: center;
+    width: 50%;
   }
 
-  @media (min-width: 760px) {
-    width: 20%;
-    max-width: 300px;
+  @media (min-width: 1024px) {
+    width: max-content;
+    max-width: 21%;
     position: relative;
+    padding: 0px;
+    margin-left: 30px;
+
+    h2 {
+      margin-top: 0;
+    }
 
     .div-filter {
       display: none;

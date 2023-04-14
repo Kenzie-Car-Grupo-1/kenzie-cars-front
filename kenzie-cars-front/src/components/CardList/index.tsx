@@ -1,14 +1,14 @@
-import { useAds } from "../../context/ads.context";
+import { useCars } from "../../context/cars.context";
 import CardItem from "./cardItem";
-import { items, user } from "./database";
+import { user } from "./database";
 import { List } from "./style";
 
 const CardList = () => {
-  const { ads } = useAds();
+  const { ads } = useCars();
   return (
     <List>
-      {ads.map((ad) => (
-        <CardItem key={ad.id} ad={ad} user={user} />
+      {ads.length && ads.map((ad) => (
+        <CardItem key={ad.id} item={ad} user={user}/>
       ))}
     </List>
   );

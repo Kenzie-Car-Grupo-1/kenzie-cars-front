@@ -23,7 +23,6 @@ const CardItem = ({ item, user }: any) => {
         <p className="info-text">{item.description}</p>
       </div>
       <div className="div-user">
-        {/* <img src={LogoUserEx} alt="" /> */}
         <p className="user-initials">{`${user.firstname[0]}${user.lastname[0]}`}</p>
         <p className="user-fullname">{`${user.firstname} ${user.lastname}`}</p>
       </div>

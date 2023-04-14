@@ -1,8 +1,7 @@
 import { Bar } from "./style";
 import { Link } from "react-router-dom";
-import { items } from "../CardList/database";
 import Button from "../Button";
-import { useAds } from "../../context/ads.context";
+import { useCars } from "../../context/cars.context";
 
 interface IPaginationBarProps {
   isVisibleFilter: boolean;
@@ -13,8 +12,8 @@ const PaginationBar = ({
   isVisibleFilter,
   setIsVisibleFilter,
 }: IPaginationBarProps) => {
-  const {currentPage, setCurrentPage} = useAds();
-  const totalPageNumber = Math.ceil(items.length / 12);
+  const {allAds, currentPage, setCurrentPage} = useCars();
+  const totalPageNumber = Math.ceil(allAds / 12);
 
   function addPage() {
     if (currentPage < totalPageNumber && currentPage >= 1) {
