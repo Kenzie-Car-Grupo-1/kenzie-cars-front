@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const StyledInputBoxComment = styled.section`
+export const StyledInputBoxComment = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   background: var(--grey10);
 
-  margin: 0 auto 45px auto;
+  margin: 42px auto 45px auto;
   border-radius: 4px;
 
   width: 95%;
