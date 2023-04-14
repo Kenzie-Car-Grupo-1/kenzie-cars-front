@@ -2,25 +2,25 @@ import { useNavigate } from "react-router-dom";
 import Photo from "../../../assets/Photo.png";
 import { Item } from "./style";
 
-const CardItem = ({ item, user }: any) => {
+const CardItem = ({ ad, user }: any) => {
   const navigate = useNavigate();
   return (
     <Item>
       <div className="div-img">
-        <img src={item.images[0]} alt="" />
+        {/* <img src={ad.images[0]} alt="" /> */}
         <img
-          src={Photo}
+          src={ad.images[0]}
           alt={
-            item.model
+            ad.model
           }
-          onClick={() => navigate(`/dashboard/${item.id}`)}
+          onClick={() => navigate(`/dashboard/${ad.id}`)}
         />
       </div>
       <div className="div-info">
         <p className="info-title">
-          {item.brand} - {item.model}
+          {ad.brand} - {ad.model}
         </p>
-        <p className="info-text">{item.description}</p>
+        <p className="info-text">{ad.description}</p>
       </div>
       <div className="div-user">
         <p className="user-initials">{`${user.firstname[0]}${user.lastname[0]}`}</p>
@@ -28,10 +28,10 @@ const CardItem = ({ item, user }: any) => {
       </div>
       <div className="div-extra">
         <div className="extra-tags">
-          <p>{item.kms}KM</p>
-          <p>{item.year}</p>
+          <p>{ad.kms}KM</p>
+          <p>{ad.year}</p>
         </div>
-        <p>{item.price}</p>
+        <p>{ad.price}</p>
       </div>
     </Item>
   );

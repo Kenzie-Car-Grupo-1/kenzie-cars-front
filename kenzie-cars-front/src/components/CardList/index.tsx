@@ -8,7 +8,7 @@ const CardList = () => {
   return (
     <List>
       {ads.length && ads.map((ad) => (
-        <CardItem key={ad.id} item={ad} user={user}/>
+        <CardItem key={ad.id} ad={ad} user={user}/>
       ))}
     </List>
   );
