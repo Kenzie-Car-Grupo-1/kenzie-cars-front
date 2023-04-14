@@ -24,7 +24,6 @@ const CarDetails = (id: any) => {
   const { RequestCarByID, car } = useCars();
 
   useEffect(() => {
-    console.log(id);
     RequestCarByID(id.id);
   }, []);
   return (
