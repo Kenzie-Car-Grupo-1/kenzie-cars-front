@@ -8,9 +8,12 @@ import arrayFilter from "../../components/Filter/database";
 import Footer from "../../components/Footer";
 import PaginationBar from "../../components/paginationBar";
 import { StyledDiv } from "./style";
+import { useModal } from "../../context/modal.context";
+import ModalCreateAd from "../../components/modals/modalCreateAd";
 
 const Dashboard = () => {
   const [isVisibleFilter, setIsVisibleFilter] = useState(true);
+  const { setOpenModalCreateAd, openModalCreateAd } = useModal();
   return (
     <>
       <Header />
@@ -29,6 +32,13 @@ const Dashboard = () => {
       />
 
       <Footer />
+      <div>
+        <button onClick={() => setOpenModalCreateAd(true)}>
+          Mostrar Modal
+        </button>
+      </div>
+
+      {openModalCreateAd && <ModalCreateAd />}
     </>
   );
 };
