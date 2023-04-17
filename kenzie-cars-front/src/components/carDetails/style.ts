@@ -238,7 +238,7 @@ export const StyledDivImageAndDetails = styled.div`
   max-width: 700px;
 
   @media (min-width: 700px) {
-    /* padding: 40px 0px; */
+    padding-top: 40px;
     margin-bottom: 57px;
   }
 `;
@@ -250,5 +250,6 @@ export const StyledDivPicturesAndUser = styled.div`
 
   @media (min-width: 700px) {
     min-height: 755px;
+    padding-top: 10px;
   }
 `;
