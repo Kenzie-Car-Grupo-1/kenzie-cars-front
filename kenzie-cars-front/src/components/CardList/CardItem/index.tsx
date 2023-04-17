@@ -7,9 +7,8 @@ const CardItem = ({ item, user }: any) => {
   return (
     <Item>
       <div className="div-img">
-        {/* <img src={item.images[0]} alt="" /> */}
         <img
-          src={Photo}
+          src={item.images[0].url}
           alt={item.model}
           onClick={() => navigate(`/dashboard/${item.id}`)}
         />

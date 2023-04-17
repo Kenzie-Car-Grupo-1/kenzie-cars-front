@@ -15,12 +15,11 @@ export const List = styled.ul`
     margin-top: 60px;
 
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
+    align-items: start;
     gap: 72px 48px;
     margin-bottom: 224px;
 
     position: static;
-    right: 0;
   }
 `;
