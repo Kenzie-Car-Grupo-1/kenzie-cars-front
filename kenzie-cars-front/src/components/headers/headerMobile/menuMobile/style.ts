@@ -9,9 +9,9 @@ export const StyledNavMobile = styled(motion.nav)`
 
   width: 100%;
 
-  position: fixed;
+  position: absolute;
   top: 80px;
-  z-index: 2;
+  z-index: 1;
 
   background: var(--grey9);
 
