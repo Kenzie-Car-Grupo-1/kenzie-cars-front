@@ -6,12 +6,14 @@ interface IInputAutoCompleteProps {
   options: string[];
   onSelect: (value: string) => void;
   isLoading: boolean;
+  placeholder: string;
 }
 
 const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
   options,
   onSelect,
   isLoading,
+  placeholder,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>(options);
@@ -41,15 +43,16 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
   }
 
   return (
-    <StyledDivAutoComplete >
+    <StyledDivAutoComplete>
       <Input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        placeholder="Digite a marca do veículo"
+        placeholder={placeholder}
       />
       {showOptions &&
-        inputValue.length > 0 && ( // exibe as opções somente quando a variável showOptions for verdadeira e o input tiver mais de 0 caracteres
+        inputValue.length > 0 &&
+        filteredOptions.length > 0 && ( // exibe as opções somente quando a variável showOptions for verdadeira e o input tiver mais de 0 caracteres
           <ul>
             {filteredOptions.map((option, index) => (
               <li key={index} onClick={() => handleOptionClick(option)}>
