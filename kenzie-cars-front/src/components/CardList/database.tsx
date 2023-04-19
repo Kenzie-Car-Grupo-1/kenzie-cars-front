@@ -107,6 +107,42 @@ export const items = [
     year: 2019,
     price: "R$00.000,00",
   },
+  {
+    id: 13,
+    brand: "Maserati",
+    model: "Ghibli",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    kms: 0,
+    year: 2019,
+    price: "R$00.000,00",
+  },
+  {
+    id: 14,
+    brand: "Maserati",
+    model: "Ghibli",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    kms: 0,
+    year: 2019,
+    price: "R$00.000,00",
+  },
+  {
+    id: 15,
+    brand: "Maserati",
+    model: "Ghibli",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    kms: 0,
+    year: 2019,
+    price: "R$00.000,00",
+  },
+  {
+    id: 16,
+    brand: "Maserati",
+    model: "Ghibli",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    kms: 0,
+    year: 2019,
+    price: "R$00.000,00",
+  },
 ];
 
 export const user = {

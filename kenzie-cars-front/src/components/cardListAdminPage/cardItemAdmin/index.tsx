@@ -51,7 +51,7 @@ const CardItemAdminPage = ({ item }: any) => {
           borderColor="var(--grey0)"
           backgroundColorHover="var(--brand2)"
           borderColorHover="var(--brand1)"
-          fontColorHover="var(--brand2)"
+          fontColorHover="var(--grey0)"
         >
           Editar
         </Button>
@@ -62,7 +62,8 @@ const CardItemAdminPage = ({ item }: any) => {
           borderColor="var(--grey0)"
           backgroundColorHover="var(--brand2)"
           borderColorHover="var(--brand1)"
-          fontColorHover="var(--brand2)"
+          fontColorHover="var(--grey0)"
+          onClick={() => navigate(`/dashboard/${item.id}`)}
         >
           Ver detalhes
         </Button>

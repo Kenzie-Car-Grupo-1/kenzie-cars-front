@@ -1,47 +1,53 @@
-import { Bar } from './../paginationBar/style';
+import styled from "styled-components";
 
-const PaginationBarAdmin = () => {
-    const {allAds, currentPage, setCurrentPage} = useCars();
-    const totalPageNumber = Math.ceil(allAds / 12);
-  
-    function addPage() {
-      if (currentPage < totalPageNumber && currentPage >= 1) {
-        setCurrentPage(currentPage + 1);
-      }
-    }
-  
-    function decreasePage() {
-      if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);
-      }
-    }
-  
-    return (
+export const BarAdmin = styled.div`
+  width: 100%;
+  height: 150px;
 
-    )
-    // {totalPageNumber == 1 ? (
-    //         <Bar>
-    //       <div className="div-pages">
-    //         <p className="current-page">{currentPage}&nbsp;</p>
-    //         <p className="next-page">de {totalPageNumber}&nbsp;</p>
-    //       </div>
-    //     ) : (
-    //       <>
-    //         <Link onClick={decreasePage} to={""}>
-    //           {"<"} Anterior
-    //         </Link>
-    //         <div className="div-pages">
-    //           <p className="current-page">&nbsp;{currentPage}&nbsp;</p>
-    //           <p className="next-page">de {totalPageNumber}&nbsp;</p>
-    //         </div>
-    //         <Link onClick={addPage} to={""}>
-    //           Seguinte {">"}
-    //         </Link>
-    //       </>
-    //       </Bar>
-    //     )}
-    // );
-  };
-  
-  
-  export default PaginationBarAdmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: var(--brand2);
+  }
+
+  @media (min-width: 1024px) {
+    width: 100%;
+    height: 66px;
+
+    flex-direction: row;
+    justify-content: center;
+    padding: 80px 0;
+
+    a {
+      margin: 0 51px;
+    }
+  }
+`;
+
+export const StyledDivPages = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px 0;
+
+  .current-page .next-page {
+      font-family: var(--font-family-1);
+      font-weight: var(--font-weight-2);
+      font-size: var(--text-size-5);
+    }
+
+    .current-page {
+      color: var(--grey3);
+    }
+
+    .next-page {
+      color: var(--grey4);
+    }
+`;
+
+// export const
+// export const

@@ -1,5 +1,5 @@
 import { items } from "../CardList/database";
-import CardItemAdminPage from "./cardItemAdminPage";
+import CardItemAdminPage from "./cardItemAdmin";
 import { List } from "./style";
 
 const CardListAdminPage = () => {

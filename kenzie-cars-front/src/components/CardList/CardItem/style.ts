@@ -16,13 +16,11 @@ export const Item = styled.li`
     img {
       width: 100%;
       height: 100%;
-      /* max-width: 262px; */
-      max-height: 150px;
       margin: 0 auto;
 
       justify-content: center;
-      align-items: center;
-      background-size: cover;
+      align-items: end;
+      object-fit: contain;
     }
   }
 
