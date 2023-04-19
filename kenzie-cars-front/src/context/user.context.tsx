@@ -52,39 +52,39 @@ interface IUserLogin {
 }
 
 const mockedSalesman = {
-  "createdAt": "2023-04-19T17:45:13.827Z",
-  "updatedAt": "2023-04-19T17:45:13.827Z",
-  "id": "832d3c5c-067b-4f5f-a916-422d309995ec",
-  "firstname": "Antonio",
-  "lastname": "Neto",
-  "email": "antonio@mail.com",
-  "cpf": "33322211100",
-  "contact": "92000220023",
-  "isWhatsapp": true,
-  "birthdate": "25/08/1976",
-  "description": "Vendedor de carros",
-  "isSalesman": true,
-  "address": [
-		{
-			"createdAt": "2023-04-19T17:45:14.147Z",
-			"updatedAt": "2023-04-19T17:45:14.147Z",
-			"id": "9509e612-fbdc-41d1-baf8-768e6e30d9c5",
-			"street": "rua one",
-			"number": "899",
-			"cep": "90340340",
-			"city": "Brasilia",
-			"state": "oregon",
-			"complement": "ap 202"
-		}
-	],
-}
+  createdAt: "2023-04-19T17:45:13.827Z",
+  updatedAt: "2023-04-19T17:45:13.827Z",
+  id: "832d3c5c-067b-4f5f-a916-422d309995ec",
+  firstname: "Antonio",
+  lastname: "Neto",
+  email: "antonio@mail.com",
+  cpf: "33322211100",
+  contact: "92000220023",
+  isWhatsapp: true,
+  birthdate: "25/08/1976",
+  description: "Vendedor de carros",
+  isSalesman: true,
+  address: [
+    {
+      createdAt: "2023-04-19T17:45:14.147Z",
+      updatedAt: "2023-04-19T17:45:14.147Z",
+      id: "9509e612-fbdc-41d1-baf8-768e6e30d9c5",
+      street: "rua one",
+      number: "899",
+      cep: "90340340",
+      city: "Brasilia",
+      state: "oregon",
+      complement: "ap 202",
+    },
+  ],
+};
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [user, setUser] = useState(mockedSalesman); //{} as IUser
-  const [salesman, setSalesman] = useState({} as IUser); 
+  const [user, setUser] = useState({} as IUser);
+  const [salesman, setSalesman] = useState({} as IUser);
   const [salesmanAds, setSalesmanAds] = useState([]);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const UserProvider = ({ children }: IUserProps) => {
         try {
           baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
           const user = await baseUrl.get(`/users/${id}`);
-          console.log(user.data)
+          console.log(user.data);
           setUser(user.data);
           localStorage.setItem("token", user.data.token);
           localStorage.setItem("id", user.data.user.id);
@@ -112,6 +112,9 @@ export const UserProvider = ({ children }: IUserProps) => {
   const LoginUser = async (data: IUserLogin) => {
     const user = await baseUrl.post("/session", data);
     setUser(user.data);
+    if (user.data.isSalesman) {
+      setSalesmanAds(user.data.cars);
+    }
     localStorage.setItem("token", user.data.token);
     localStorage.setItem("id", user.data.user.id);
   };

@@ -5,7 +5,6 @@ import {
   TagInitials,
 } from "./style";
 import Button from "../Button";
-import PaginationBar from "../paginationBar";
 import ModalCreateAd from "../modals/modalCreateAd";
 import { useState } from "react";
 import { useModal } from "../../context/modal.context";
