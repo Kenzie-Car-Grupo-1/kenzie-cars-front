@@ -35,6 +35,5 @@ export const StyledInput = styled.input<IInputStyledProps>`
   &:disabled {
     background-color: #ced4da;
     color: #ffffff;
-    cursor: not-allowed;
   }
 `;
