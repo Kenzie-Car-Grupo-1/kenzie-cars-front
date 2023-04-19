@@ -11,8 +11,10 @@ import { ICar } from "./cars.context";
 interface IUserContext {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  GetSalesmanById: (id: string) => Promise<void>;
+  GetSalesmanById: (id: string | null) => Promise<void>;
   salesman: IUser;
+  LoginUser: (data: IUserLogin) => Promise<void>;
+  user: IUser;
 }
 
 interface IUserProps {
@@ -24,7 +26,6 @@ export interface IUser {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
   cpf: string;
   contact: string;
   isWhatsapp: boolean;
@@ -32,7 +33,7 @@ export interface IUser {
   description: string;
   isSalesman: boolean;
   address: IAddress[];
-  cars: ICar[];
+  // cars: ICar[];
 }
 
 interface IAddress {
@@ -45,6 +46,39 @@ interface IAddress {
   complement: string;
 }
 
+interface IUserLogin {
+  email: string;
+  password: string;
+}
+
+const mockedSalesman = {
+  createdAt: "2023-04-19T17:45:13.827Z",
+  updatedAt: "2023-04-19T17:45:13.827Z",
+  id: "832d3c5c-067b-4f5f-a916-422d309995ec",
+  firstname: "Antonio",
+  lastname: "Neto",
+  email: "antonio@mail.com",
+  cpf: "33322211100",
+  contact: "92000220023",
+  isWhatsapp: true,
+  birthdate: "25/08/1976",
+  description: "Vendedor de carros",
+  isSalesman: true,
+  address: [
+    {
+      createdAt: "2023-04-19T17:45:14.147Z",
+      updatedAt: "2023-04-19T17:45:14.147Z",
+      id: "9509e612-fbdc-41d1-baf8-768e6e30d9c5",
+      street: "rua one",
+      number: "899",
+      cep: "90340340",
+      city: "Brasilia",
+      state: "oregon",
+      complement: "ap 202",
+    },
+  ],
+};
+
 const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProps) => {
@@ -54,17 +88,18 @@ export const UserProvider = ({ children }: IUserProps) => {
   const [salesmanAds, setSalesmanAds] = useState([]);
 
   useEffect(() => {
-    const LoadInfoUser = async () => {
-      const token = localStorage.getItem("@token: Kenzie-Cars");
-      const id = localStorage.getItem("@id: Kenzie-Cars");
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
 
+    const LoadInfoUser = async () => {
       if (token) {
         try {
           baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
-          const user = await baseUrl.get<IUser>(`/users/${id}`);
+          const user = await baseUrl.get(`/users/${id}`);
+          console.log(user.data);
           setUser(user.data);
-          // localStorage.setItem("@token: Kenzie-Cars", user.data.token);
-          // localStorage.setItem("@id: Kenzie-Cars", user.data.);
+          localStorage.setItem("token", user.data.token);
+          localStorage.setItem("id", user.data.user.id);
         } catch (error) {
           localStorage.clear();
           console.error(error);
@@ -74,16 +109,21 @@ export const UserProvider = ({ children }: IUserProps) => {
     };
   }, []);
 
-  const LoginUser = async (data: any) => {
+  const LoginUser = async (data: IUserLogin) => {
     const user = await baseUrl.post("/session", data);
     setUser(user.data);
+    if (user.data.isSalesman) {
+      setSalesmanAds(user.data.cars);
+    }
+    localStorage.setItem("token", user.data.token);
+    localStorage.setItem("id", user.data.user.id);
   };
 
-  const GetSalesmanById = async (id: string) => {
+  const GetSalesmanById = async (id: string | null) => {
     try {
-      const user = await baseUrl.get(`/users/${id}`);
-      console.log(user.data);
-      setSalesman(user.data);
+      const salesman = await baseUrl.get(`/users/${id}`);
+      console.log(salesman.data);
+      setSalesman(salesman.data);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +131,14 @@ export const UserProvider = ({ children }: IUserProps) => {
 
   return (
     <UserContext.Provider
-      value={{ currentPage, setCurrentPage, GetSalesmanById, salesman }}
+      value={{
+        currentPage,
+        setCurrentPage,
+        GetSalesmanById,
+        salesman,
+        LoginUser,
+        user,
+      }}
     >
       {children}
     </UserContext.Provider>
