@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const MenuDesktop = () => {
   const [openMenuDesk, setOpenMenuDesk] = useState(false);
-  const loggedUserId = localStorage.getItem("@id");
+  const loggedUserId = localStorage.getItem("id");
   const navigate = useNavigate();
   return (
     <>
@@ -25,9 +25,7 @@ const MenuDesktop = () => {
             >
               <button>Editar Perfil</button>
               <button>Editar endereço</button>
-              <button 
-              onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}
-              >
+              <button onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}>
                 Meus Anúncios
               </button>
               <button>Sair</button>
