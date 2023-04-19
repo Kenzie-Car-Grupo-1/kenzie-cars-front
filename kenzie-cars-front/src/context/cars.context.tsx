@@ -8,6 +8,7 @@ import {
 import { baseUrl } from "../service/axios";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
+import { IUser } from "./user.context";
 
 interface ICarsContext {
   RequestCarByID: (id: string) => Promise<void>;
@@ -18,19 +19,33 @@ interface ICarsContext {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   allAds: number;
+  UpdateCarById: (data: ICar, id: string) => Promise<void>;
 }
 
 interface ICarsProps {
   children: ReactNode;
 }
 
-interface ICar {
+export interface ICar {
   id: string;
   brand: string;
   color: string;
   description: string;
   fuel_type: string;
   images: IImage[];
+  kms: number;
+  model: string;
+  price: string;
+  year: string;
+  user: IUser;
+}
+
+interface ICarRequest {
+  brand: string;
+  color: string;
+  description: string;
+  fuel_type: string;
+  images: string[];
   kms: number;
   model: string;
   price: string;
@@ -65,11 +80,21 @@ export const CarsProvider = ({ children }: ICarsProps) => {
 
   const RequestCarByID = async (id: string) => {
     try {
-      const res = await baseUrl.get(`/cars/${id}`);
+      const res = await baseUrl
+      .get(`/cars/${id}`);
       console.log(res.data);
       setCar(res.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const UpdateCarById = async (data: ICar, id: string) => {
+    try {
+      const car = await baseUrl.patch(`/cars/${id}`, data);
+      setCar(car.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -83,8 +108,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       } catch (error) {
         console.error(error);
       }
-    };
-    LoadAds();
+    }
+    LoadAds()
   }, [currentPage]);
 
   const RegisterCarAd = async (data: ICarRequest, token: string) => {
@@ -104,16 +129,27 @@ export const CarsProvider = ({ children }: ICarsProps) => {
 
   return (
     <CarsContext.Provider
+     
       value={{
+       
         RequestCarByID,
         RegisterCarAd,
+       
         setCarId,
+       
         car,
+       
         ads,
+       
         currentPage,
+       
         setCurrentPage,
+       
         allAds,
+     ,
+        UpdateCarById,
       }}
+    
     >
       {children}
     </CarsContext.Provider>

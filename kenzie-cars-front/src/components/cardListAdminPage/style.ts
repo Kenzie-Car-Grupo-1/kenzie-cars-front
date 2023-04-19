@@ -11,15 +11,12 @@ export const List = styled.ul`
   gap: 12px;
 
   @media (min-width: 1024px) {
-    width: 80%;
-    margin-top: 60px;
-
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: start;
-    gap: 72px 48px;
-    margin-bottom: 82px;
 
-    position: static;
+    gap: 72px 48px;
+    margin-top: 60px;
+    margin-bottom: 82px;
   }
 `;

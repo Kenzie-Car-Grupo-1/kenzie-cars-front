@@ -88,12 +88,13 @@ const CarDetails = (id: any) => {
           </StyleBoxPictures>
         </StyledCarPictures>
         <StyledUserProfile>
-          <TagUserInitials firstName="Rafael" lastName="Quadros" uuid="2" />
-          <h1>Rafael Quadros</h1>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's
-          </p>
+          <TagUserInitials
+            firstName={car.user.firstname}
+            lastName={car.user.lastname}
+            uuid="2"
+          />
+          <h1>{`${car.user.firstname} ${car.user.lastname}`}</h1>
+          <p>{car.user.description}</p>
 
           <Button buttonSize="big" backgroundColor="var(--grey1)">
             Ver todos anuncios

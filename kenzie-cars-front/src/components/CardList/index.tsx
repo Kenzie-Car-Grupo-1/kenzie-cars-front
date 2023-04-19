@@ -7,7 +7,7 @@ const CardList = () => {
   const { ads } = useCars();
   return (
     <List>
-      {ads.length && ads.map((ad) => (
+      {ads.length > 0 && ads.map((ad) => (
         <CardItem key={ad.id} item={ad} user={user}/>
       ))}
     </List>
