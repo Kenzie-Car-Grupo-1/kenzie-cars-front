@@ -52,18 +52,6 @@ interface ICarRequest {
   year: string;
 }
 
-interface ICarRequest {
-  brand: string;
-  color: string;
-  description: string;
-  fuel_type: string;
-  images: string[];
-  kms: number;
-  model: string;
-  price: string;
-  year: string;
-}
-
 interface IImage {
   id: string;
   url: string;
@@ -80,8 +68,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
 
   const RequestCarByID = async (id: string) => {
     try {
-      const res = await baseUrl
-      .get(`/cars/${id}`);
+      const res = await baseUrl.get(`/cars/${id}`);
       console.log(res.data);
       setCar(res.data);
     } catch (error) {
@@ -108,8 +95,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       } catch (error) {
         console.error(error);
       }
-    }
-    LoadAds()
+    };
+    LoadAds();
   }, [currentPage]);
 
   const RegisterCarAd = async (data: ICarRequest, token: string) => {
@@ -129,27 +116,17 @@ export const CarsProvider = ({ children }: ICarsProps) => {
 
   return (
     <CarsContext.Provider
-     
       value={{
-       
         RequestCarByID,
         RegisterCarAd,
-       
         setCarId,
-       
         car,
-       
         ads,
-       
         currentPage,
-       
         setCurrentPage,
-       
         allAds,
-     ,
         UpdateCarById,
       }}
-    
     >
       {children}
     </CarsContext.Provider>
