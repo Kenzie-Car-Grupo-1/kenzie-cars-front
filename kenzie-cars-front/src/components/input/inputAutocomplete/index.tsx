@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import Input from "..";
+import React, { useRef, useState } from "react";
 import { StyledDivAutoComplete } from "./style";
+import { UseFormRegisterReturn } from "react-hook-form";
+import Input from "..";
 
 interface IInputAutoCompleteProps {
   options: string[];
   onSelect: (value: string) => void;
   isLoading: boolean;
   placeholder: string;
+  register: UseFormRegisterReturn<"model" | "brand">;
 }
 
 const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
@@ -14,13 +16,18 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
   onSelect,
   isLoading,
   placeholder,
+  register,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>(options);
   const [showOptions, setShowOptions] = useState(false); // nova variável de estado para controlar a exibição das opções
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    const { onChange, ...registerOptions } = register;
+
     setInputValue(inputValue);
 
     const filteredOptions = options.filter(
@@ -47,8 +54,11 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
       <Input
         type="text"
         value={inputValue}
-        onChange={handleInputChange}
         placeholder={placeholder}
+        // ref={inputRef}
+        {...register}
+        onChange={handleInputChange}
+        autoComplete="off"
       />
       {showOptions &&
         inputValue.length > 0 &&
