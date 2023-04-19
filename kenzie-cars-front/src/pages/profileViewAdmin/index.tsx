@@ -1,13 +1,13 @@
-import React from "react";
 import Header from "../../components/headers";
-import { StyleBox} from "../detailCar/style";
+import { StyleBox } from "../detailCar/style";
 import CardAdvertiser from "../../components/cardAdvertiser";
 import { StyledDivBackground } from "../../components/cardAdvertiser/style";
 import { StyledAdsListDiv } from "./style";
 import Footer from "../../components/Footer";
-import CardList from "../../components/CardList";
+import CardListAdminPage from "../../components/cardListAdminPage";
+import PaginationBarAdmin from "../../components/paginationBarAdmin";
 
-const ProfileViewUser = () => {
+const ProfileViewAdmin = () => {
   return (
     <>
       <Header />
@@ -16,13 +16,12 @@ const ProfileViewUser = () => {
         <CardAdvertiser />
       </StyleBox>
       <StyledAdsListDiv>
-        <p>Anúncios</p>
-        {/* <ul></ul> */}
-        <CardList />
+        <CardListAdminPage />
+        <PaginationBarAdmin />
       </StyledAdsListDiv>
       <Footer />
     </>
   );
 };
 
-export default ProfileViewUser;
+export default ProfileViewAdmin;

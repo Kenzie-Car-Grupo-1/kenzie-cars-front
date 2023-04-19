@@ -48,6 +48,7 @@ export const Bar = styled.div`
     flex-direction: row;
     justify-content: center;
     padding: 80px 0;
+    margin-bottom: 80px;
 
     button {
       display: none;

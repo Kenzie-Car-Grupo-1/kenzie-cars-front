@@ -3,23 +3,24 @@ import styled from "styled-components";
 export const Item = styled.li`
   cursor: pointer;
   width: 312px;
+  max-width: 312px;
 
   .div-img {
     display: flex;
     height: 152px;
+    width: 312px;
 
     background-color: var(--grey7);
     border: 2px solid var(--grey7);
 
     img {
-      width: auto;
-      height: auto;
-      max-width: 262px;
-      max-height: 150px;
+      width: 100%;
+      height: 100%;
       margin: 0 auto;
 
       justify-content: center;
-      align-items: center;
+      align-items: end;
+      object-fit: contain;
     }
   }
 

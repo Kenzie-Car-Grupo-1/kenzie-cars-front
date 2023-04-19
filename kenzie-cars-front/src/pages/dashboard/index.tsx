@@ -30,7 +30,6 @@ const Dashboard = () => {
         isVisibleFilter={isVisibleFilter}
         setIsVisibleFilter={setIsVisibleFilter}
       />
-
       <Footer />
       <div>
         <button onClick={() => setOpenModalCreateAd(true)}>

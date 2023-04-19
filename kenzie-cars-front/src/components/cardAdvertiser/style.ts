@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const StyledAdvertiserCard = styled.div`
   width: 95%;
   max-width: 440px;
-  height: 397px;
+  height: 461px;
 
   background: var(--grey10);
   border-radius: 4px;
   margin-top: 65px;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 
@@ -23,12 +23,14 @@ export const StyledAdvertiserCard = styled.div`
     font-size: var(--text-size-7);
     line-height: 28px;
     color: var(--grey2);
+
     margin-top: 24px;
+    margin-bottom: 16px;
   }
 
   @media (min-width: 700px) {
     max-width: 1240px;
-    height: 327px;
+    height: 406px;
 
     .advertiser-bio {
       width: 100%;
