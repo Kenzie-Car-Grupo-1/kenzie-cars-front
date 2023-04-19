@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <div className="App">
-        {/* <Routers /> */}
-        <ProfileViewAdmin />
+        <Routers />
+        {/* <ProfileViewAdmin /> */}
       </div>
       {openModalImageCar && <ModalDetailCar />}
     </>

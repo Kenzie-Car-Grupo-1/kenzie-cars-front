@@ -3,6 +3,7 @@ import { Item } from "../../CardList/cardItem/style";
 import Photo from "../../../assets/Photo.png";
 import Button from "../../Button";
 import { StyledButtonsDiv } from "./style";
+import ModalCreateAd from "../../modals/modalCreateAd";
 
 const CardItemAdminPage = ({ item }: any) => {
   // const item = {
@@ -22,12 +23,10 @@ const CardItemAdminPage = ({ item }: any) => {
         <img
           src={Photo}
           alt={item.model}
-          onClick={() => navigate(`/dashboard/${item.id}`)}
         />
         {/* <img
             src={item.images[0].url}
             alt={item.model}
-            onClick={() => navigate(`/dashboard/${item.id}`)}
           /> */}
       </div>
       <div className="div-info">

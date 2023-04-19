@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { baseUrl } from "../service/axios";
 
 interface ICarsContext {
@@ -9,13 +15,14 @@ interface ICarsContext {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   allAds: number;
+  UpdateCarById: (data: ICar, id: string) => Promise<void>;
 }
 
 interface ICarsProps {
   children: ReactNode;
 }
 
-interface ICar {
+export interface ICar {
   id: string;
   brand: string;
   color: string;
@@ -43,7 +50,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [allAds, setAllAds] = useState(0);
 
   const RequestCarByID = async (id: string) => {
-    baseUrl.get(`/cars/${id}`)
+    baseUrl
+      .get(`/cars/${id}`)
       .then((res: any) => {
         console.log(res.data);
         setCar(res.data);
@@ -51,22 +59,42 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       .catch((err: any) => console.log(err));
   };
 
+  const UpdateCarById = async (data: ICar, id: string) => {
+    try {
+      const car = await baseUrl.patch(`/cars/${id}`, data);
+      setCar(car.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     async function LoadAds() {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
-        console.log(cars.data)
+        console.log(cars.data);
         setAds(cars.data.result);
-        setAllAds(cars.data.howManyFetched)
+        setAllAds(cars.data.howManyFetched);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
-    LoadAds()
+    LoadAds();
   }, [currentPage]);
 
   return (
-    <CarsContext.Provider value={{ RequestCarByID, setCarId, car, ads, currentPage, setCurrentPage, allAds }}>
+    <CarsContext.Provider
+      value={{
+        RequestCarByID,
+        setCarId,
+        car,
+        ads,
+        currentPage,
+        setCurrentPage,
+        allAds,
+        UpdateCarById,
+      }}
+    >
       {children}
     </CarsContext.Provider>
   );

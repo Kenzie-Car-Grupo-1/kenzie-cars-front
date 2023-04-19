@@ -6,6 +6,6 @@ export const StyledAdsListDiv = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  padding: 80px 0;
+  padding-top: 80px;
   background-color: var(--grey8);
 `;

@@ -2,9 +2,12 @@ import Button from "../../../Button";
 import { StyledDivUser, StyledMenuDesktop, StyledNavDesktop } from "./style";
 import LogoUserEx from "../../../../assets/Frame 4.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MenuDesktop = () => {
   const [openMenuDesk, setOpenMenuDesk] = useState(false);
+  const loggedUserId = localStorage.getItem("@id");
+  const navigate = useNavigate();
   return (
     <>
       {localStorage.token ? (
@@ -22,7 +25,11 @@ const MenuDesktop = () => {
             >
               <button>Editar Perfil</button>
               <button>Editar endereço</button>
-              <button>Meus Anúncios</button>
+              <button 
+              onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}
+              >
+                Meus Anúncios
+              </button>
               <button>Sair</button>
             </StyledMenuDesktop>
           )}

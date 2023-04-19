@@ -19,7 +19,7 @@ export const BarAdmin = styled.div`
 
     flex-direction: row;
     justify-content: center;
-    padding: 80px 0;
+    padding: 100px 0;
 
     a {
       margin: 0 51px;
