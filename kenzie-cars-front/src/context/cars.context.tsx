@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { baseUrl } from "../service/axios";
+import { IUser } from "./user.context";
 
 interface ICarsContext {
   RequestCarByID: (id: string) => Promise<void>;
@@ -33,6 +34,7 @@ export interface ICar {
   model: string;
   price: string;
   year: string;
+  user: IUser;
 }
 
 interface IImage {
