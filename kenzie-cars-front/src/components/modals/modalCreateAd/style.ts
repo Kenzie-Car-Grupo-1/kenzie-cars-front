@@ -1,0 +1,157 @@
+import styled from "styled-components";
+
+export const StyledDivContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* definir a altura para ocupar toda a tela */
+  padding: 20px 5px;
+  /* adicionar um margin-top para centralizar na tela */
+  position: fixed;
+  gap: 24px;
+`;
+
+export const StyledFormCreateAd = styled.form`
+  width: 100%;
+  height: 100%;
+  max-width: 520px;
+
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 18px 16px;
+  margin: 0px 1px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: scroll;
+
+  /* Adicione a propriedade z-index para garantir que o modal fique em cima de outros elementos */
+  z-index: 9999;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h3 {
+    font-family: var(--font-family-1);
+    font-weight: var(--font-weight-3);
+    font-size: var(--text-size-7);
+    color: var(--grey1);
+    line-height: 20px;
+  }
+
+  h4 {
+    font-family: var(--font-family-3);
+    font-weight: var(--font-weight-3);
+    font-size: var(--text-size-8);
+    line-height: 24px;
+    color: #000000;
+    margin-top: 55px;
+  }
+  label {
+    margin-top: 24px;
+    font-family: var(--font-family-1);
+    font-weight: var(--font-weight-3);
+    font-size: var(--text-size-8);
+    color: var(--grey1);
+    line-height: 17px;
+  }
+
+  input {
+    padding: 0px 16px;
+    font-size: var(--text-size-8);
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+
+  span {
+    height: 4px;
+    font-size: 12px;
+    color: var(--alert-1);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  select {
+    padding: 0px 16px;
+    font-size: var(--text-size-8);
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    height: 48px;
+    border: 1.5px solid #e9ecef;
+    background-color: var(--grey9);
+    color: var(--grey3);
+
+    option {
+      color: var(--grey1);
+    }
+
+    &:focus:valid {
+      outline: none;
+      border: 1.5px solid var(--brand2);
+    }
+
+    .div-colum {
+      display: flex;
+      justify-content: space-between;
+      /* margin-top: 24px; */
+
+      div {
+        width: 46%;
+      }
+    }
+  }
+  textarea {
+    width: 100%;
+    height: 128px;
+    font-family: var(--font-family-3);
+    font-weight: var(--font-weight-4);
+    font-size: var(--text-size-8);
+    line-height: 26px;
+    padding: 13px 16px;
+    border: 1.5px solid #e9ecef;
+    resize: none;
+    border-radius: 4px;
+    background-color: var(--grey9);
+    margin-top: 8px;
+
+    &:hover {
+      background-color: var(--grey8);
+    }
+
+    &::placeholder {
+      vertical-align: top;
+      color: var(--grey3);
+      font-size: var(--text-size-8);
+    }
+
+    &:focus:valid {
+      outline: none;
+      border: 1.5px solid #5126ea;
+    }
+  }
+  .div-button {
+    margin-top: 42px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      width: 126px;
+      height: 48px;
+
+      &:disabled {
+        background-color: var(--brand3);
+        color: var(--brand4);
+      }
+    }
+
+    .button-create {
+      width: 193px;
+    }
+  }
+`;

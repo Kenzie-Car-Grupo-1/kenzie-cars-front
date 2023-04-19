@@ -5,6 +5,8 @@ interface IModalContext {
   setOpenModalImageCar: React.Dispatch<React.SetStateAction<boolean>>;
   imgForModal: string;
   setImgForModal: React.Dispatch<React.SetStateAction<string>>;
+  openModalCreateAd: boolean;
+  setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IModalProps {
@@ -16,6 +18,7 @@ const ModalContext = createContext<IModalContext>({} as IModalContext);
 export const ModalProvider = ({ children }: IModalProps) => {
   const [openModalImageCar, setOpenModalImageCar] = useState(false);
   const [imgForModal, setImgForModal] = useState("");
+  const [openModalCreateAd, setOpenModalCreateAd] = useState(false);
 
   return (
     <ModalContext.Provider
@@ -24,6 +27,8 @@ export const ModalProvider = ({ children }: IModalProps) => {
         setOpenModalImageCar,
         imgForModal,
         setImgForModal,
+        openModalCreateAd,
+        setOpenModalCreateAd,
       }}
     >
       {children}
