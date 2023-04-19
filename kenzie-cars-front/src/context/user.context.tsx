@@ -19,7 +19,7 @@ interface IUserProps {
   children: ReactNode;
 }
 
-interface IUser {
+export interface IUser {
   id: string;
   firstname: string;
   lastname: string;
