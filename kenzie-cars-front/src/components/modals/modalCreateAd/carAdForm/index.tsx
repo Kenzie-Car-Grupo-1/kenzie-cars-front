@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Icons from "../../../../service/icons";
 import { StyledButtonClose } from "../../style";
 import { StyledFormCreateAd } from "../style";
@@ -7,9 +7,10 @@ import InputAutoComplete from "../../../input/inputAutocomplete";
 import Input from "../../../input";
 import Button from "../../../Button";
 import { useModal } from "../../../../context/modal.context";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import carAdSchema from "../../../../validation/adCar.validation";
+import { useCars } from "../../../../context/cars.context";
 
 interface ICar {
   id?: string;
@@ -32,7 +33,8 @@ interface IRegisterCarAd {
   color: string;
   price: string;
   description: string;
-  image: string;
+  image?: string;
+  images: string[];
 }
 
 interface IInput {
@@ -61,37 +63,46 @@ const CardAdForm = () => {
     price: "",
   });
 
-  const [inputs, setInputs] = useState<IInput[]>([
-    { type: "text", name: "input-1" },
-    { type: "text", name: "input-2" },
-  ]);
+  const { RegisterCarAd } = useCars();
 
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<IRegisterCarAd>({
     resolver: yupResolver(carAdSchema),
+    defaultValues: {
+      images: [" ", " "],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray<
+    string,
+    keyof IRegisterCarAd
+  >({
+    control,
+    name: "images",
+    max: 5, // set the maximum number of fields to 5
   });
 
   const onSubmit = (data: IRegisterCarAd) => {
-    reset();
-    console.log(car);
+    const updatedData = { ...data }; // create a copy of the original data object
+    const { image, images } = updatedData;
 
-    console.log(data);
-  };
-
-  const addInput = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault();
-    if (inputs.length < 6) {
-      const newInput = {
-        type: "url",
-        name: `input-${inputs.length + 1}`,
-      };
-
-      setInputs([...inputs, newInput]);
+    if (image) {
+      const updatedImages = [image, ...images.filter((img) => img !== "")];
+      updatedData.images = updatedImages;
     }
+
+    delete updatedData.image;
+
+    RegisterCarAd(
+      data,
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODE5MTUwNTksImV4cCI6MTY4MjAwMTQ1OSwic3ViIjoiZjIwOTIzZDEtZDNjYS00MDFkLWI4MTktYjU3YzY4ZTFhNWFlIn0.B0x-tDsw6Baxv8K0xa6UuGTG1M1pqofB8zJu02fODco"
+    );
+    reset();
   };
 
   const fetchBrands = async () => {
@@ -216,11 +227,11 @@ const CardAdForm = () => {
             }}
           >
             <option value="">Escolha</option>
-            <option value="1">Flex</option>
-            <option value="2">Híbrido</option>
-            <option value="3">Elétrico</option>
-            <option value="4">Gasolina</option>
-            <option value="5">GNV</option>
+            <option value="Flex">Flex</option>
+            <option value="Híbrido">Híbrido</option>
+            <option value="Elétrico">Elétrico</option>
+            <option value="Gasolina">Gasolina</option>
+            <option value="GNV">GNV</option>
           </select>
           <span> {errors.fuel_type?.message} </span>
         </div>
@@ -270,35 +281,45 @@ const CardAdForm = () => {
         {...register("description")}
       />
       <span> {errors.description?.message} </span>
+
       <label htmlFor="">Imagem da capa</label>
+      <Input
+        id="image"
+        placeholder="http://image.com"
+        type="url"
+        {...register("image")}
+      />
+      {errors.image && <span>{errors.image.message}</span>}
 
-      <Input placeholder="http://image.com" type="url" {...register("image")} />
-      <span> {errors.image?.message} </span>
-      {inputs.map((input, index) => (
-        <>
-          <label key={"label" + index} htmlFor="">{` ${
-            index + 1
-          }ª imagem da galeria`}</label>
+      {fields.map((field, index) => (
+        <div key={field.id}>
+          <label>{` ${index + 1}ª imagem da galeria`}</label>
           <Input
-            key={index}
             placeholder="http://image.com"
-            type={input.type}
-            name={input.name}
+            type="url"
+            {...register(`images.${index}`, {
+              pattern: {
+                value: /^(ftp|http|https):\/\/[^ "]+$/,
+                message: "Deve ser um URL válido",
+              },
+            })}
           />
-        </>
+          {errors.images && <span>{errors.images.message}</span>}
+        </div>
       ))}
-
       <Button
         buttonSize="medium"
         backgroundColor="var(--brand4)"
         fontColor="var(--brand1)"
         fontColorHover="white"
         backgroundColorHover="var(--brand2)"
-        onClick={addInput}
-        disabled={inputs.length >= 6}
+        type="button"
+        onClick={() => append(" ")}
+        disabled={fields.length == 5}
       >
         Adicionar campo para imagem da galeria
       </Button>
+
       <div className="div-button">
         <Button
           type="button"

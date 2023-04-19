@@ -1,8 +1,17 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { baseUrl } from "../service/axios";
+import { toast } from "react-toastify";
+import { AxiosResponse } from "axios";
 
 interface ICarsContext {
   RequestCarByID: (id: string) => Promise<void>;
+  RegisterCarAd: (data: ICarRequest, token: string) => Promise<void>;
   setCarId: React.Dispatch<React.SetStateAction<string>>;
   car: ICar;
   ads: ICar[];
@@ -28,6 +37,18 @@ interface ICar {
   year: string;
 }
 
+interface ICarRequest {
+  brand: string;
+  color: string;
+  description: string;
+  fuel_type: string;
+  images: string[];
+  kms: number;
+  model: string;
+  price: string;
+  year: string;
+}
+
 interface IImage {
   id: string;
   url: string;
@@ -38,35 +59,62 @@ const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 export const CarsProvider = ({ children }: ICarsProps) => {
   const [carId, setCarId] = useState("");
   const [car, setCar] = useState({} as ICar);
-  const [ads, setAds] = useState([]);
+  const [ads, setAds] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
 
   const RequestCarByID = async (id: string) => {
-    baseUrl.get(`/cars/${id}`)
-      .then((res: any) => {
-        console.log(res.data);
-        setCar(res.data);
-      })
-      .catch((err: any) => console.log(err));
+    try {
+      const res = await baseUrl.get(`/cars/${id}`);
+      console.log(res.data);
+      setCar(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    async function LoadAds() {
+    const LoadAds = async () => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
-        console.log(cars.data)
+        console.log(cars.data);
         setAds(cars.data.result);
-        setAllAds(cars.data.howManyFetched)
+        setAllAds(cars.data.howManyFetched);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    LoadAds()
+    };
+    LoadAds();
   }, [currentPage]);
 
+  const RegisterCarAd = async (data: ICarRequest, token: string) => {
+    try {
+      const res = await baseUrl.post<ICar>("/cars", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res.data);
+      setAds([...ads, res.data]);
+      toast.success("Anúncio criado com sucesso");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <CarsContext.Provider value={{ RequestCarByID, setCarId, car, ads, currentPage, setCurrentPage, allAds }}>
+    <CarsContext.Provider
+      value={{
+        RequestCarByID,
+        RegisterCarAd,
+        setCarId,
+        car,
+        ads,
+        currentPage,
+        setCurrentPage,
+        allAds,
+      }}
+    >
       {children}
     </CarsContext.Provider>
   );
