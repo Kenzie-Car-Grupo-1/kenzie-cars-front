@@ -27,7 +27,6 @@ const Dashboard = () => {
         isVisibleFilter={isVisibleFilter}
         setIsVisibleFilter={setIsVisibleFilter}
       />
-
       <Footer />
     </>
   );

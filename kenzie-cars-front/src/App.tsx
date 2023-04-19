@@ -1,6 +1,6 @@
 import ModalDetailCar from "./components/modals/modalDetailImage";
 import { useModal } from "./context/modal.context";
-import ProfileViewUser from "./pages/profileViewUser";
+import ProfileViewAdmin from "./pages/profileViewAdmin";
 import Routers from "./routes/index.router";
 
 function App() {
@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <div className="App">
-        <Routers />
-        {/* <ProfileViewUser /> */}
+        {/* <Routers /> */}
+        <ProfileViewAdmin />
       </div>
       {openModalImageCar && <ModalDetailCar />}
     </>

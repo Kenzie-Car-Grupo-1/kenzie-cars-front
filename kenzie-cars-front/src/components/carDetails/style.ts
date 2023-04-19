@@ -10,7 +10,7 @@ export const StyledCarDetails = styled.div`
   height: 240px;
   max-height: 240px;
 
-  background: #fdfdfd;
+  background: var(--grey10);
 
   border-radius: 4px;
 

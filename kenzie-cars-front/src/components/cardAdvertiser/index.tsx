@@ -1,4 +1,3 @@
-import React from "react";
 import {
   StyledAdvertiserCard,
   StyledCardDiv,
@@ -6,6 +5,7 @@ import {
   TagInitials,
 } from "./style";
 import Button from "../Button";
+import PaginationBar from "../paginationBar";
 
 const CardAdvertiser = () => {
   const advertiser = {
@@ -27,6 +27,19 @@ const CardAdvertiser = () => {
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s
       </p>
+      <StyledCardDiv>
+        <Button
+          backgroundColor="var(--white-fixed)"
+          buttonSize="big"
+          fontColor="var(--brand1)"
+          borderColor="var(--brand1)"
+          backgroundColorHover="var(--brand4)"
+          borderColorHover="var(--brand1)"
+          fontColorHover="var(--brand1)"
+        >
+          Criar anúncio
+        </Button>
+      </StyledCardDiv>
     </StyledAdvertiserCard>
   );
 };
