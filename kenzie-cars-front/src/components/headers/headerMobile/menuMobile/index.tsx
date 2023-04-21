@@ -1,3 +1,4 @@
+import Button from "../../../Button";
 import { StyledNavMobile } from "./style";
 import { AnimatePresence } from "framer-motion";
 
@@ -18,10 +19,10 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
               >
-                <button>Editar Perfil</button>
-                <button>Editar endereço</button>
-                <button>Meus Anúncios</button>
-                <button>Sair</button>
+                <button className="btn-login grey">Editar Perfil</button>
+                <button className="btn-login grey">Editar endereço</button>
+                <button className="btn-login grey">Meus Anúncios</button>
+                <button className="btn-login grey">Sair</button>
               </StyledNavMobile>
             )
           : open && (
@@ -31,8 +32,23 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
               >
-                <button> Fazer login</button>
-                <button> Cadastrar</button>
+                <Button
+                  buttonSize="medium"
+                  fontColor="var(--grey2)"
+                  className="btn-login"
+                >
+                  {" "}
+                  Fazer login
+                </Button>
+                <Button
+                  buttonSize="medium"
+                  borderColor="var(--grey4)"
+                  fontColor="#0B0D0D"
+                  backgroundColorHover="#0B0D0D"
+                  fontColorHover="white"
+                >
+                  Cadastrar
+                </Button>
               </StyledNavMobile>
             )}
       </AnimatePresence>

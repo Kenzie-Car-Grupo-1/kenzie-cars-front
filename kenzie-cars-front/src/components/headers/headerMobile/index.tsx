@@ -12,10 +12,17 @@ const HeaderMobile = () => {
         <StyledLogo>
           <img src={Logo} alt="" />
         </StyledLogo>
-        <Icons.Menu
-          color="var(--grey1)"
-          onClick={() => setOpenMobile(!openMobile)}
-        />
+        {!openMobile ? (
+          <Icons.Menu
+            color="var(--grey1)"
+            onClick={() => setOpenMobile(!openMobile)}
+          />
+        ) : (
+          <Icons.Close
+            color="var(--grey1)"
+            onClick={() => setOpenMobile(!openMobile)}
+          />
+        )}
       </StyledHeaderMobile>
 
       <MenuMobile open={openMobile} type={localStorage.token ? true : false} />

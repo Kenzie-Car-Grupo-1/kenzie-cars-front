@@ -25,7 +25,9 @@ const MenuDesktop = () => {
             >
               <button>Editar Perfil</button>
               <button>Editar endereço</button>
-              <button onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}>
+              <button
+                onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}
+              >
                 Meus Anúncios
               </button>
               <button>Sair</button>
@@ -35,20 +37,23 @@ const MenuDesktop = () => {
       ) : (
         <StyledNavDesktop width="300px">
           <Button
-            buttonSize="medium"
+            buttonSize="big"
             backgroundColor="white"
-            fontColor="var(--grey4)"
+            fontColor="#0B0D0D"
             fontColorHover="var(--grey0)"
             borderColorHover="1.5px solid var(--grey4)"
+            borderColor="1px solid var(--grey4)"
           >
             Fazer Login
           </Button>
           <Button
-            buttonSize="medium"
+            buttonSize="big"
             backgroundColor="white"
-            fontColor="var(--grey4)"
-            fontColorHover="var(--grey0)"
+            fontColor="#0B0D0D"
+            fontColorHover="white"
             borderColorHover="1.5px solid var(--grey4)"
+            borderColor="var(--grey4)"
+            backgroundColorHover="#0B0D0D"
           >
             Cadastrar
           </Button>

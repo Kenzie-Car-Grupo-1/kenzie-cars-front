@@ -6,6 +6,7 @@ export const StyledCarDetails = styled.div`
   z-index: 1;
 
   width: 95%;
+
   max-width: 750px;
   height: 240px;
   max-height: 240px;
@@ -122,6 +123,7 @@ export const StyledCarPictures = styled.div`
   width: 95%;
   max-width: 440px;
   min-height: max-content;
+  /* min-height: 377px; */
 
   background: #fdfdfd;
 
@@ -138,6 +140,10 @@ export const StyledCarPictures = styled.div`
   padding: 10px;
 
   position: relative;
+
+  @media (min-width: 700px) {
+    margin-top: 0px;
+  }
 
   h1 {
     font-family: "Lexend";
@@ -174,6 +180,7 @@ export const StyleBoxPictures = styled.div`
 
   img {
     max-width: 95%;
+    
   }
 `;
 
@@ -240,6 +247,7 @@ export const StyledDivImageAndDetails = styled.div`
   @media (min-width: 700px) {
     padding-top: 40px;
     margin-bottom: 57px;
+    width: 65%;
   }
 `;
 export const StyledDivPicturesAndUser = styled.div`
@@ -250,6 +258,10 @@ export const StyledDivPicturesAndUser = styled.div`
 
   @media (min-width: 700px) {
     min-height: 755px;
-    padding-top: 10px;
+    margin-top: 40px;
+    width: 30%;
+
+    position: sticky;
+    top: 20px;
   }
 `;

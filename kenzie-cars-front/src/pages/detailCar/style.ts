@@ -13,8 +13,7 @@ export const StyleBox = styled.div`
   @media (min-width: 700px) {
     display: flex;
     flex-direction: row;
-
-    max-height: max-content;
+    align-items: flex-start;
 
     background-color: var(--grey8);
   }

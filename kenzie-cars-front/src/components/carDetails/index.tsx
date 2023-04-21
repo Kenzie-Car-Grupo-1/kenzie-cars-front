@@ -14,18 +14,23 @@ import user from "../../assets/Frame 4.png";
 import { useModal } from "../../context/modal.context";
 import TagUserInitials from "../tagInitials";
 import CarImage from "../carImage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCars } from "../../context/cars.context";
 import { StyledBoxImage, StyledBoxImageCar } from "../carImage/style";
+import Comments from "../comment";
+import comments from "../comment/database";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const CarDetails = (id: any) => {
   const navigate = useNavigate();
   const { setOpenModalImageCar, setImgForModal } = useModal();
   const { RequestCarByID, car } = useCars();
+  const isCommentsEnabled = useMediaQuery("(max-width: 700px)");
 
   useEffect(() => {
     RequestCarByID(id.id);
   }, []);
+
   return (
     <>
       <StyledDivImageAndDetails>
@@ -66,6 +71,7 @@ const CarDetails = (id: any) => {
           <h1>Description</h1>
           <p>{car.description}</p>
         </StyledCarDescription>
+        {!isCommentsEnabled && <Comments comments={comments} />}
       </StyledDivImageAndDetails>
       <StyledDivPicturesAndUser>
         <StyledCarPictures>
@@ -105,6 +111,7 @@ const CarDetails = (id: any) => {
           </Button>
         </StyledUserProfile>
       </StyledDivPicturesAndUser>
+      {isCommentsEnabled && <Comments comments={comments} />}
     </>
   );
 };
