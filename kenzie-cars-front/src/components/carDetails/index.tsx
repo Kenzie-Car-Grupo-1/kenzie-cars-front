@@ -43,8 +43,8 @@ const CarDetails = (id: any) => {
           <h1>{car.model}</h1>
           <div className="div-extra">
             <div className="extra-tags">
-              <p>{car.kms} KM</p>
               <p>{car.year}</p>
+              <p>{car.kms} KM</p>
             </div>
             <p>
               {Number(car.price).toLocaleString("pt-br", {
@@ -68,7 +68,7 @@ const CarDetails = (id: any) => {
           </Button>
         </StyledCarDetails>
         <StyledCarDescription>
-          <h1>Description</h1>
+          <h1>Descrição</h1>
           <p>{car.description}</p>
         </StyledCarDescription>
         {!isCommentsEnabled && <Comments comments={comments} />}

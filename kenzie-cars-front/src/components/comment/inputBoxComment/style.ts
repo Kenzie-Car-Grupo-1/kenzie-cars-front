@@ -16,6 +16,10 @@ export const StyledInputBoxComment = styled.div`
 
   max-width: 751px;
 
+  @media (min-width: 700px) {
+    padding: 44px 36px;
+  }
+
   .div-user {
     display: flex;
     margin-bottom: 16px;

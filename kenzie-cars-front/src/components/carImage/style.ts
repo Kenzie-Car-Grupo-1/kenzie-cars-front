@@ -11,6 +11,11 @@ export const StyledBoxImage = styled.div`
   /* justify-content: center; */
   flex-direction: column;
   align-items: center;
+  padding: 35px 0px;
+
+  @media (min-width: 700px) {
+    padding: 0px 0px;
+  }
 `;
 
 export const StyledBoxImageCar = styled.div`
