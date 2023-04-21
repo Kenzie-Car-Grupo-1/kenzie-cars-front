@@ -11,17 +11,16 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import carAdSchema from "../../../../validation/adCar.validation";
 import { useCars } from "../../../../context/cars.context";
+import * as yup from "yup";
+import SkeletonInput from "../../../skeleton/input";
 
-interface ICar {
+interface ICarApiKenzie {
   id?: string;
   name: string;
   brand: string;
-  year: string | undefined;
+  year: string;
   fuel: number;
   value: number;
-  km?: string;
-  color?: string;
-  price: string;
 }
 
 interface IRegisterCarAd {
@@ -29,7 +28,7 @@ interface IRegisterCarAd {
   model: string;
   year: string;
   fuel_type: string;
-  kms: number;
+  kms: number | null;
   color: string;
   price: string;
   description: string;
@@ -45,33 +44,35 @@ type ICardAdFormProps = {
   setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+interface IError {
+  [key: string]: string;
+}
+
 const CardAdForm = () => {
   const { setOpenModalCreateAd, openModalCreateAd } = useModal();
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string>("");
-  const [models, setModels] = useState<ICar[]>([]);
+  const [models, setModels] = useState<ICarApiKenzie[]>([]);
+  const [priceFipe, setPriceFipe] = useState<number>(0);
+  const [errors, setErrors] = useState<IError>({});
   const [loadingBrands, setLoadingBrands] = useState<boolean>(false);
   const [loadingModels, setLoadingModels] = useState<boolean>(false);
 
-  const [car, setCar] = useState<Omit<ICar, "id">>({
-    name: "",
+  const [car, setCar] = useState<Omit<IRegisterCarAd, "id">>({
     brand: "",
+    model: "",
     year: "",
-    fuel: 0,
-    value: 0,
-    km: "",
+    fuel_type: "",
     price: "",
+    kms: null,
+    color: "",
+    description: "",
+    images: [],
   });
 
   const { RegisterCarAd } = useCars();
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<IRegisterCarAd>({
+  const { register, reset, handleSubmit, control } = useForm<IRegisterCarAd>({
     resolver: yupResolver(carAdSchema),
     defaultValues: {
       images: [" ", " "],
@@ -87,22 +88,50 @@ const CardAdForm = () => {
     max: 5, // set the maximum number of fields to 5
   });
 
-  const onSubmit = (data: IRegisterCarAd) => {
-    const updatedData = { ...data }; // create a copy of the original data object
-    const { image, images } = updatedData;
+  const validateCarAd = async () => {
+    try {
+      await carAdSchema.validate(car, { abortEarly: false });
+      // Se chegou até aqui, o objeto car é válido
+      setErrors({});
+      return true;
+    } catch (err) {
+      const errors: IError = {};
 
-    if (image) {
-      const updatedImages = [image, ...images.filter((img) => img !== "")];
-      updatedData.images = updatedImages;
+      // Adiciona os erros de validação no objeto errors
+      if (err instanceof yup.ValidationError) {
+        err.inner.forEach((e) => {
+          errors[e.path] = e.message;
+        });
+      }
+      console.log(errors);
+
+      // Atualiza o estado dos erros com os novos erros
+      setErrors(errors);
+      return false;
     }
+  };
 
-    delete updatedData.image;
+  const onSubmit = async (data: IRegisterCarAd) => {
+    const result = await validateCarAd();
 
-    RegisterCarAd(
-      data,
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODE5MTUwNTksImV4cCI6MTY4MjAwMTQ1OSwic3ViIjoiZjIwOTIzZDEtZDNjYS00MDFkLWI4MTktYjU3YzY4ZTFhNWFlIn0.B0x-tDsw6Baxv8K0xa6UuGTG1M1pqofB8zJu02fODco"
-    );
-    reset();
+    if (result) {
+      const updatedData = { ...data }; // cria uma cópia do objeto de dados original
+      const { image, images } = updatedData;
+
+      if (image) {
+        const updatedImages = [image, ...images.filter((img) => img)]; // remove elementos vazios ou undefined do array
+        updatedData.images = updatedImages;
+      }
+
+      delete updatedData.image; // deleta a chave "image" do objeto
+
+      RegisterCarAd(
+        updatedData,
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODIwMjY2MTcsImV4cCI6MTY4MjExMzAxNywic3ViIjoiZjIwOTIzZDEtZDNjYS00MDFkLWI4MTktYjU3YzY4ZTFhNWFlIn0.TPi6-1KNxzu6Ocqiubv0QVSMcm6wiFesPPHzyvWlJWI"
+      );
+      // reset();
+      setOpenModalCreateAd(false);
+    }
   };
 
   const fetchBrands = async () => {
@@ -123,12 +152,15 @@ const CardAdForm = () => {
   };
 
   const fetchModels = async (brand: string) => {
+    const formattedOption = brand.toLocaleLowerCase();
+
     try {
       setLoadingModels(true);
 
       const response = await axios.get(
-        `https://kenzie-kars.herokuapp.com/cars?brand=${brand}`
+        `https://kenzie-kars.herokuapp.com/cars?brand=${formattedOption}`
       );
+
       const models = response.data;
 
       setModels(models);
@@ -143,31 +175,79 @@ const CardAdForm = () => {
     fetchBrands();
   }, []);
 
-  const updateCar = (updatedProperties: ICar) => {
-    setCar((prevCar) => ({ ...prevCar, ...updatedProperties }));
+  const updateCar = (updatedProperties: ICarApiKenzie) => {
+    const carUpdate: Partial<IRegisterCarAd> = {
+      brand:
+        updatedProperties.brand.charAt(0).toUpperCase() +
+        updatedProperties.brand.slice(1),
+      model:
+        updatedProperties.name.charAt(0).toUpperCase() +
+        updatedProperties.name.slice(1),
+      year: updatedProperties.year,
+    };
+
+    if (updatedProperties.fuel == 1) {
+      carUpdate.fuel_type = "Flex";
+    }
+
+    if (updatedProperties.fuel == 2) {
+      carUpdate.fuel_type = "Híbrido";
+    }
+
+    if (updatedProperties.fuel == 3) {
+      carUpdate.fuel_type = "Elétrico";
+    }
+
+    setPriceFipe(updatedProperties.value);
+
+    setCar((prevCar) => ({ ...prevCar, ...carUpdate }));
   };
 
-  const findCar = (nameCar: string): ICar | undefined => {
-    const car = models.find((car) => car.name === nameCar);
+  const findCar = (nameCar: string): ICarApiKenzie | undefined => {
+    const car = models.find((car) => car.name === nameCar.toLocaleLowerCase());
     return car;
   };
 
-  const arrayOptions = (arrayObjects: ICar[]): string[] => {
-    const arrayOptions = arrayObjects.map((model: ICar) => model.name);
+  const arrayOptions = (arrayObjects: ICarApiKenzie[]): string[] => {
+    const arrayOptions = arrayObjects.map((model: ICarApiKenzie) => model.name);
     return arrayOptions;
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = event.target;
-    setCar({ ...car, [name]: value });
+
+    // verifica se o nome do campo começa com "images"
+    if (name.startsWith("images")) {
+      // extrai o índice do campo de imagens
+      const index = Number(name.split(".")[1]);
+
+      // cria uma cópia do array images atual
+      const newImages = [...car.images];
+
+      // atualiza apenas o item correspondente em images
+      newImages[index] = value;
+
+      // atualiza o estado do car com as novas imagens
+      setCar({ ...car, images: newImages });
+    } else {
+      setCar({ ...car, [name]: value });
+    }
   };
 
   return (
-    <StyledFormCreateAd onSubmit={handleSubmit(onSubmit)}>
+    // <StyledFormCreateAd onSubmit={handleSubmit(onSubmit)}>
+    <StyledFormCreateAd
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit(car);
+      }}
+    >
       <div className="title">
-        <h3>Criar núncio</h3>
+        <h3>Criar anúncio</h3>
         <StyledButtonClose
           type="button"
           onClick={() => setOpenModalCreateAd(false)}
@@ -184,15 +264,17 @@ const CardAdForm = () => {
             onSelect={(value: string) => {
               setSelectedBrand(value);
               fetchModels(value);
+              setCar({ ...car, brand: value });
             }}
             isLoading={loadingBrands}
             placeholder="Digite a marca do veículo"
-            register={register("brand")}
+            setCar={setCar}
+            fieldName={"brand"}
           />
-          <span> {errors.brand?.message} </span>
+          <span> {errors.brand} </span>
         </>
       ) : (
-        <p>Carregando marcas...</p>
+        <SkeletonInput />
       )}
       <label htmlFor="">Modelo</label>
       <InputAutoComplete
@@ -202,29 +284,35 @@ const CardAdForm = () => {
         }}
         isLoading={loadingModels}
         placeholder="Digite o modelo do veículo"
-        register={register("model")}
+        setCar={setCar}
+        fieldName={"model"}
       />
-      <span> {errors.model?.message} </span>
+      <span> {errors.model} </span>
       <div className="div-colum">
         <div>
           <label htmlFor="">Ano</label>
           <Input
-            {...register("year")}
+            // {...register("year")}
+            defaultValue={car.year}
+            name="year"
             onChange={handleChange}
             placeholder="Ano do veículo"
           />
-          <span> {errors.year?.message} </span>
+          <span> {errors.year} </span>
         </div>
         <div>
           <label htmlFor="">Combustível</label>
           <select
-            {...register("fuel_type")}
-            onChange={(event) => {
-              setCar((prevState) => ({
-                ...prevState,
-                fuel: Number(event.target.value),
-              }));
-            }}
+            name="fuel_type"
+            value={car.fuel_type}
+            onChange={handleChange}
+            // {...register("fuel_type")}
+            // onChange={(event) => {
+            //   setCar((prevState) => ({
+            //     ...prevState,
+            //     fuel_type: event.target.value,
+            //   }));
+            // }}
           >
             <option value="">Escolha</option>
             <option value="Flex">Flex</option>
@@ -233,23 +321,30 @@ const CardAdForm = () => {
             <option value="Gasolina">Gasolina</option>
             <option value="GNV">GNV</option>
           </select>
-          <span> {errors.fuel_type?.message} </span>
+          <span> {errors.fuel_type} </span>
         </div>
       </div>
       <div className="div-colum">
         <div>
           <label htmlFor="">Quilometragem</label>
-          <Input placeholder="Quilometragem do veículo" {...register("kms")} />
-          <span> {errors.kms?.message} </span>
+          <Input
+            placeholder="Quilometragem do veículo"
+            onChange={handleChange}
+            // {...register("kms")}
+            name="kms"
+          />
+          <span> {errors.kms} </span>
         </div>
         <div>
           <label htmlFor="">Cor</label>
           <Input
             value={car.color}
             placeholder="Cor do veículo"
-            {...register("color")}
+            onChange={handleChange}
+            // {...register("color")}
+            name="color"
           />
-          <span> {errors.color?.message} </span>
+          <span> {errors.color} </span>
         </div>
       </div>
       <div className="div-colum">
@@ -257,7 +352,7 @@ const CardAdForm = () => {
           <label htmlFor="">Preço tabela FIPE</label>
           <Input
             disabled
-            value={`R$ ${car.value.toLocaleString("pt-BR", {
+            value={`R$ ${priceFipe.toLocaleString("pt-BR", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}`}
@@ -268,28 +363,34 @@ const CardAdForm = () => {
         <div>
           <label htmlFor="">Preço</label>
           <Input
+            value={car.price}
             id="price"
             placeholder="Preço do veículo"
-            {...register("price")}
+            onChange={handleChange}
+            name="price"
           />
-          <span> {errors.price?.message} </span>
+          <span> {errors.price} </span>
         </div>
       </div>
       <label htmlFor="">Descrição</label>
       <textarea
         placeholder="Descreva seu anúncio aqui.."
-        {...register("description")}
+        onChange={handleChange}
+        // {...register("description")}
+        name="description"
       />
-      <span> {errors.description?.message} </span>
+      <span> {errors.description} </span>
 
       <label htmlFor="">Imagem da capa</label>
       <Input
         id="image"
         placeholder="http://image.com"
         type="url"
-        {...register("image")}
+        // {...register("image")}
+        name="image"
+        onChange={handleChange}
       />
-      {errors.image && <span>{errors.image.message}</span>}
+      {errors.image && <span>{errors.image}</span>}
 
       {fields.map((field, index) => (
         <div key={field.id}>
@@ -297,14 +398,10 @@ const CardAdForm = () => {
           <Input
             placeholder="http://image.com"
             type="url"
-            {...register(`images.${index}`, {
-              pattern: {
-                value: /^(ftp|http|https):\/\/[^ "]+$/,
-                message: "Deve ser um URL válido",
-              },
-            })}
+            onChange={handleChange}
+            name={`images.${index}`}
           />
-          {errors.images && <span>{errors.images.message}</span>}
+          {errors.images && <span>{errors.images}</span>}
         </div>
       ))}
       <Button

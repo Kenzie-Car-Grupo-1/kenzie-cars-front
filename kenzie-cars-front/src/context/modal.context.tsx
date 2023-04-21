@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface IModalContext {
   openModalImageCar: boolean;
@@ -19,6 +25,14 @@ export const ModalProvider = ({ children }: IModalProps) => {
   const [openModalImageCar, setOpenModalImageCar] = useState(false);
   const [imgForModal, setImgForModal] = useState("");
   const [openModalCreateAd, setOpenModalCreateAd] = useState(false);
+
+  useEffect(() => {
+    if (openModalCreateAd) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openModalCreateAd]);
 
   return (
     <ModalContext.Provider

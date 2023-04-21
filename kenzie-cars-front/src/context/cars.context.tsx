@@ -46,7 +46,7 @@ interface ICarRequest {
   description: string;
   fuel_type: string;
   images: string[];
-  kms: number;
+  kms: number | null;
   model: string;
   price: string;
   year: string;
@@ -107,10 +107,11 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         },
       });
       console.log(res.data);
-      setAds([...ads, res.data]);
-      toast.success("Anúncio criado com sucesso");
+      setAds([res.data, ...ads]);
+      toast.success("Criado com sucesso!");
     } catch (error) {
       console.log(error);
+      toast.error("Erro!");
     }
   };
 
