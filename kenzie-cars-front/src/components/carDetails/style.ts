@@ -192,10 +192,14 @@ export const StyleBoxPictures = styled.div`
     border-radius: 4px;
 
     background-color: var(--grey6);
+    &:hover {
+      background-color: var(--brand1);
+    }
   }
 
   img {
     max-width: 95%;
+    cursor: pointer;
   }
 `;
 
@@ -247,6 +251,15 @@ export const StyledUserProfile = styled.div`
 
     color: #495057;
     text-align: center;
+  }
+
+  button {
+    padding: 14px 5px;
+    font-size: 14px;
+    @media (min-width: 768px) {
+      padding: 14px 20px;
+      font-size: 16px;
+    }
   }
 `;
 
