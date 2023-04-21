@@ -9,6 +9,7 @@ import { baseUrl } from "../service/axios";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
 import { IUser } from "./user.context";
+import { useModal } from "./modal.context";
 
 interface ICarsContext {
   RequestCarByID: (id: string) => Promise<void>;
@@ -65,6 +66,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [ads, setAds] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
+  const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
 
   const RequestCarByID = async (id: string) => {
     try {
@@ -108,10 +110,11 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       });
       console.log(res.data);
       setAds([res.data, ...ads]);
-      toast.success("Criado com sucesso!");
+      setOpenModalCreateAd(false);
+      setOpenModalSucess(true);
     } catch (error) {
-      console.log(error);
-      toast.error("Erro!");
+      console.error(error);
+      toast.error("Houve um erro, tente novamente!");
     }
   };
 

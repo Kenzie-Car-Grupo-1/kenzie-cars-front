@@ -9,11 +9,13 @@ import ModalCreateAd from "../modals/modalCreateAd";
 import { useState } from "react";
 import { useModal } from "../../context/modal.context";
 import { useUser } from "../../context/user.context";
+import ModalSucess from "../modals/modalSucess";
 
 const CardAdvertiser = () => {
   // const { user } = useUser();
   // console.log(user)
-  const { openModalCreateAd, setOpenModalCreateAd } = useModal();
+  const { openModalCreateAd, setOpenModalCreateAd, openModalSucess } =
+    useModal();
   const user = {
     createdAt: "2023-04-19T17:45:13.827Z",
     updatedAt: "2023-04-19T17:45:13.827Z",
@@ -39,9 +41,7 @@ const CardAdvertiser = () => {
           <p>{`${user.firstname} ${user.lastname}`}</p>
           <span>Anunciante</span>
         </StyledCardInfo>
-        <p className="advertiser-bio">
-          {user.description}
-        </p>
+        <p className="advertiser-bio">{user.description}</p>
         <StyledCardDiv>
           <Button
             backgroundColor="var(--white-fixed)"
@@ -58,6 +58,13 @@ const CardAdvertiser = () => {
         </StyledCardDiv>
       </StyledAdvertiserCard>
       {openModalCreateAd && <ModalCreateAd />}
+      {openModalSucess && (
+        <ModalSucess
+          tittle="Sucesso"
+          message="Seu anúncio foi criado com sucesso!"
+          messageDetail="Agora você poderá ver seus negócios crescendo em grande escala. "
+        />
+      )}
     </>
   );
 };

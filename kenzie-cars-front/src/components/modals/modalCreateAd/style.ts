@@ -7,7 +7,7 @@ export const StyledDivContent = styled.div`
   height: 100vh; /* definir a altura para ocupar toda a tela */
   padding: 20px 5px;
   /* adicionar um margin-top para centralizar na tela */
-  position: fixed;
+  /* position: fixed; */
   gap: 24px;
 `;
 
@@ -19,6 +19,7 @@ export const StyledFormCreateAd = styled.form`
   background: #ffffff;
   border-radius: 8px;
   padding: 18px 16px;
+  padding-right: 8px;
   margin: 0px 1px;
   position: relative;
   top: 50%;
@@ -32,6 +33,11 @@ export const StyledFormCreateAd = styled.form`
   .title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    button {
+      position: static;
+    }
   }
 
   h3 {
@@ -68,11 +74,11 @@ export const StyledFormCreateAd = styled.form`
   }
 
   span {
-    height: 4px;
+    height: 16px;
     font-size: 12px;
     color: var(--alert-1);
     display: block;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 
   select {
@@ -118,6 +124,7 @@ export const StyledFormCreateAd = styled.form`
     border-radius: 4px;
     background-color: var(--grey9);
     margin-top: 8px;
+    margin-bottom: 10px;
 
     &:hover {
       background-color: var(--grey8);
@@ -134,6 +141,9 @@ export const StyledFormCreateAd = styled.form`
       border: 1.5px solid #5126ea;
     }
   }
+  .add-input {
+    margin-top: 10px;
+  }
   .div-button {
     margin-top: 42px;
     display: flex;
@@ -141,7 +151,6 @@ export const StyledFormCreateAd = styled.form`
     gap: 10px;
 
     button {
-      width: 126px;
       height: 48px;
 
       &:disabled {
@@ -151,7 +160,8 @@ export const StyledFormCreateAd = styled.form`
     }
 
     .button-create {
-      width: 193px;
+      width: 100%;
+      max-width: 193px;
     }
   }
 `;

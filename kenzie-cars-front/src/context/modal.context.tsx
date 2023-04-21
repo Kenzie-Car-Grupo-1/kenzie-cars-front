@@ -13,6 +13,8 @@ interface IModalContext {
   setImgForModal: React.Dispatch<React.SetStateAction<string>>;
   openModalCreateAd: boolean;
   setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalSucess: boolean;
+  setOpenModalSucess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IModalProps {
@@ -25,6 +27,7 @@ export const ModalProvider = ({ children }: IModalProps) => {
   const [openModalImageCar, setOpenModalImageCar] = useState(false);
   const [imgForModal, setImgForModal] = useState("");
   const [openModalCreateAd, setOpenModalCreateAd] = useState(false);
+  const [openModalSucess, setOpenModalSucess] = useState(false);
 
   useEffect(() => {
     if (openModalCreateAd) {
@@ -43,6 +46,8 @@ export const ModalProvider = ({ children }: IModalProps) => {
         setImgForModal,
         openModalCreateAd,
         setOpenModalCreateAd,
+        openModalSucess,
+        setOpenModalSucess,
       }}
     >
       {children}

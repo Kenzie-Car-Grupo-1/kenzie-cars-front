@@ -49,7 +49,8 @@ interface IError {
 }
 
 const CardAdForm = () => {
-  const { setOpenModalCreateAd, openModalCreateAd } = useModal();
+  const { setOpenModalCreateAd, openModalCreateAd, setOpenModalSucess } =
+    useModal();
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [models, setModels] = useState<ICarApiKenzie[]>([]);
@@ -88,6 +89,16 @@ const CardAdForm = () => {
     max: 5, // set the maximum number of fields to 5
   });
 
+  const isFormValid =
+    car.brand &&
+    car.model &&
+    car.year &&
+    car.fuel_type &&
+    car.price &&
+    car.kms !== null &&
+    car.color &&
+    car.description;
+
   const validateCarAd = async () => {
     try {
       await carAdSchema.validate(car, { abortEarly: false });
@@ -125,12 +136,10 @@ const CardAdForm = () => {
 
       delete updatedData.image; // deleta a chave "image" do objeto
 
-      RegisterCarAd(
+      await RegisterCarAd(
         updatedData,
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODIwMjY2MTcsImV4cCI6MTY4MjExMzAxNywic3ViIjoiZjIwOTIzZDEtZDNjYS00MDFkLWI4MTktYjU3YzY4ZTFhNWFlIn0.TPi6-1KNxzu6Ocqiubv0QVSMcm6wiFesPPHzyvWlJWI"
       );
-      // reset();
-      setOpenModalCreateAd(false);
     }
   };
 
@@ -405,6 +414,7 @@ const CardAdForm = () => {
         </div>
       ))}
       <Button
+        className="add-input"
         buttonSize="medium"
         backgroundColor="var(--brand4)"
         fontColor="var(--brand1)"
@@ -428,7 +438,12 @@ const CardAdForm = () => {
         >
           Cancelar
         </Button>
-        <Button className="button-create" buttonSize="big" type="submit">
+        <Button
+          className="button-create"
+          disabled={!isFormValid}
+          buttonSize="big"
+          type="submit"
+        >
           Criar anúncio
         </Button>
       </div>

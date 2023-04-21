@@ -16,6 +16,7 @@ export const StyledHeaderMobile = styled.div`
 
   img {
     margin-left: 20px;
+    cursor: pointer;
   }
   svg {
     margin-right: 20px;
@@ -26,8 +27,16 @@ export const StyledHeaderMobile = styled.div`
   }
 `;
 
-export const StyledLogo = styled.div`
+export const StyledLogo = styled.button`
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
+
+  background-color: transparent;
+  border: none;
+  width: max-content;
+
+  img {
+    cursor: pointer;
+  }
 `;
