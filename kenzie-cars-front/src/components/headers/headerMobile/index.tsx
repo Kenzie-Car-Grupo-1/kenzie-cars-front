@@ -3,13 +3,15 @@ import Logo from "../../../assets/Motors shop.png";
 import MenuMobile from "./menuMobile";
 import Icons from "../../../service/icons";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeaderMobile = () => {
   const [openMobile, setOpenMobile] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <StyledHeaderMobile>
-        <StyledLogo>
+        <StyledLogo onClick={() => navigate("/dashboard")}>
           <img src={Logo} alt="" />
         </StyledLogo>
         {!openMobile ? (

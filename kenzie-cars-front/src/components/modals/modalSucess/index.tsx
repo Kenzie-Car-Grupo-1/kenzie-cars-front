@@ -10,7 +10,7 @@ interface IModalSucessProps {
 }
 
 const ModalSucess = ({ tittle, message, messageDetail }: IModalSucessProps) => {
-  const { setOpenModalSucess } = useModal();
+  const { setOpenModalSucess, openModalSucess } = useModal();
   return (
     <StyleBackgroundModal>
       <StyledModalSucess>
@@ -18,7 +18,7 @@ const ModalSucess = ({ tittle, message, messageDetail }: IModalSucessProps) => {
           <h3>{tittle}</h3>
           <StyledButtonClose
             type="button"
-            onClick={() => setOpenModalSucess(false)}
+            onClick={() => setOpenModalSucess(!openModalSucess)}
           >
             <Icons.Close />
           </StyledButtonClose>
