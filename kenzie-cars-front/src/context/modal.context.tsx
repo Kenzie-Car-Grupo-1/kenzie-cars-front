@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface IModalContext {
   openModalImageCar: boolean;
@@ -7,6 +13,8 @@ interface IModalContext {
   setImgForModal: React.Dispatch<React.SetStateAction<string>>;
   openModalCreateAd: boolean;
   setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalSucess: boolean;
+  setOpenModalSucess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IModalProps {
@@ -19,6 +27,15 @@ export const ModalProvider = ({ children }: IModalProps) => {
   const [openModalImageCar, setOpenModalImageCar] = useState(false);
   const [imgForModal, setImgForModal] = useState("");
   const [openModalCreateAd, setOpenModalCreateAd] = useState(false);
+  const [openModalSucess, setOpenModalSucess] = useState(false);
+
+  useEffect(() => {
+    if (openModalCreateAd) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openModalCreateAd]);
 
   return (
     <ModalContext.Provider
@@ -29,6 +46,8 @@ export const ModalProvider = ({ children }: IModalProps) => {
         setImgForModal,
         openModalCreateAd,
         setOpenModalCreateAd,
+        openModalSucess,
+        setOpenModalSucess,
       }}
     >
       {children}

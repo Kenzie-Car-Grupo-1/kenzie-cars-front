@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const StyledCarDetails = styled.div`
-  position: relative;
   bottom: 10px;
   z-index: 1;
 
   width: 95%;
+
   max-width: 750px;
   height: 240px;
   max-height: 240px;
@@ -22,6 +22,9 @@ export const StyledCarDetails = styled.div`
   text-align: center;
 
   padding: 25px;
+  margin-top: 17px;
+  position: relative;
+  top: -34px;
 
   h1 {
     font-family: "Lexend";
@@ -31,6 +34,7 @@ export const StyledCarDetails = styled.div`
     line-height: 25px;
 
     color: var(--grey1);
+    align-self: flex-start;
   }
 
   .div-extra {
@@ -40,9 +44,9 @@ export const StyledCarDetails = styled.div`
 
     .extra-tags {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
 
-      width: 112px;
+      width: 100%;
 
       p {
         font-family: var(--font-family-3);
@@ -55,7 +59,9 @@ export const StyledCarDetails = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50px;
+        /* width: 50px; */
+        padding: 4px 8px;
+        margin-right: 12px;
       }
     }
 
@@ -69,6 +75,10 @@ export const StyledCarDetails = styled.div`
   @media (min-width: 700px) {
     bottom: 0;
     margin-top: 15px;
+    align-items: flex-start;
+    height: 239.39px;
+    padding: 44px 44px 28px 44px;
+    position: static;
   }
 `;
 
@@ -89,7 +99,8 @@ export const StyledCarDescription = styled.div`
 
   padding: 25px;
 
-  position: relative;
+  /* position: relative; */
+  margin-top: -15px;
 
   h1 {
     font-family: "Lexend";
@@ -114,7 +125,8 @@ export const StyledCarDescription = styled.div`
   }
 
   @media (min-width: 700px) {
-    margin-top: 15px;
+    margin-top: 40px;
+    padding: 44px 36px;
   }
 `;
 
@@ -122,6 +134,7 @@ export const StyledCarPictures = styled.div`
   width: 95%;
   max-width: 440px;
   min-height: max-content;
+  /* min-height: 377px; */
 
   background: #fdfdfd;
 
@@ -135,9 +148,18 @@ export const StyledCarPictures = styled.div`
   flex-direction: column;
   gap: 10px;
 
-  padding: 10px;
+  padding: 44px 24px;
 
   position: relative;
+
+  @media (min-width: 700px) {
+    margin-top: 0px;
+    padding: 44px 12px;
+  }
+
+  @media (min-width: 958px) {
+    padding: 44px 36px;
+  }
 
   h1 {
     font-family: "Lexend";
@@ -155,7 +177,7 @@ export const StyledCarPictures = styled.div`
 
 export const StyleBoxPictures = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 5px;
 
@@ -170,10 +192,14 @@ export const StyleBoxPictures = styled.div`
     border-radius: 4px;
 
     background-color: var(--grey6);
+    &:hover {
+      background-color: var(--brand1);
+    }
   }
 
   img {
     max-width: 95%;
+    cursor: pointer;
   }
 `;
 
@@ -226,6 +252,15 @@ export const StyledUserProfile = styled.div`
     color: #495057;
     text-align: center;
   }
+
+  button {
+    padding: 14px 5px;
+    font-size: 14px;
+    @media (min-width: 768px) {
+      padding: 14px 20px;
+      font-size: 16px;
+    }
+  }
 `;
 
 export const StyledDivImageAndDetails = styled.div`
@@ -240,6 +275,7 @@ export const StyledDivImageAndDetails = styled.div`
   @media (min-width: 700px) {
     padding-top: 40px;
     margin-bottom: 57px;
+    width: 65%;
   }
 `;
 export const StyledDivPicturesAndUser = styled.div`
@@ -250,6 +286,10 @@ export const StyledDivPicturesAndUser = styled.div`
 
   @media (min-width: 700px) {
     min-height: 755px;
-    padding-top: 10px;
+    margin-top: 40px;
+    width: 30%;
+
+    position: sticky;
+    top: 20px;
   }
 `;

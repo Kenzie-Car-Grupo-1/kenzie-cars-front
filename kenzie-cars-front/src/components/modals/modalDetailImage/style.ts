@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const StyledImageCarModal = styled.div`
   width: 100%;
   max-width: 520px;
-  height: 300px;
-  max-height: 300px;
+  height: 400px;
 
   background: #ffffff;
   border-radius: 8px;
@@ -13,8 +12,9 @@ export const StyledImageCarModal = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 30px;
 
-  padding: 10px;
+  padding: 20px 10px;
 
   margin: 0px 10px;
 
@@ -22,6 +22,10 @@ export const StyledImageCarModal = styled.div`
 
   position: relative;
   top: 40px;
+
+  @media (min-width: 700) {
+    padding: 18px 24px;
+  }
 
   h1 {
     font-family: "Lexend";
@@ -44,13 +48,15 @@ export const StyledImageCarModal = styled.div`
 
     background: #e9ecef;
     border-radius: 4px;
+    justify-content: center;
   }
 
   img {
     size: cover;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     border-radius: 4px;
+    
   }
 
   @media (min-width: 700px) {

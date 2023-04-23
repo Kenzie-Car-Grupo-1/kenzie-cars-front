@@ -13,7 +13,7 @@ import ModalCreateAd from "../../components/modals/modalCreateAd";
 
 const Dashboard = () => {
   const [isVisibleFilter, setIsVisibleFilter] = useState(true);
-  const { setOpenModalCreateAd, openModalCreateAd } = useModal();
+
   return (
     <>
       <Header />
@@ -31,13 +31,6 @@ const Dashboard = () => {
         setIsVisibleFilter={setIsVisibleFilter}
       />
       <Footer />
-      <div>
-        <button onClick={() => setOpenModalCreateAd(true)}>
-          Mostrar Modal
-        </button>
-      </div>
-
-      {openModalCreateAd && <ModalCreateAd />}
     </>
   );
 };

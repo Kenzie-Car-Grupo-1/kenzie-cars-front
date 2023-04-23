@@ -14,12 +14,19 @@ export const List = styled.ul`
     width: 80%;
     margin-top: 60px;
 
-    flex-wrap: wrap;
+    /* flex-wrap: wrap;
     justify-content: space-between;
-    align-items: start;
+    align-items: start; */
     gap: 72px 48px;
     margin-bottom: 82px;
 
     position: static;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-column-gap: 40px;
+    grid-row-gap: 90px;
+    grid-area: auto;
+    justify-items: center;
   }
 `;

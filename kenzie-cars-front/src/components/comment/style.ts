@@ -22,6 +22,10 @@ export const StyledComment = styled.div`
 
   max-width: 751px;
 
+  @media (min-width: 700px) {
+    padding: 44px 36px;
+  }
+
   h3 {
     font-family: var(--font-family-1);
     font-weight: var(--font-weight-2);
