@@ -8,7 +8,8 @@ import {
 import { baseUrl } from "../service/axios";
 import { ICar } from "./cars.context";
 import { useNavigate } from "react-router-dom";
-import { error } from "console";
+import { useModal } from "./modal.context";
+import { toast } from "react-toastify";
 
 interface IUserContext {
   currentPage: number;
@@ -17,6 +18,7 @@ interface IUserContext {
   salesman: IUser;
   LoginUser: (data: IUserLogin) => Promise<void>;
   user: IUser;
+  registerNewUser: (data: IUserRegister) => Promise<void>;
 }
 
 interface IUserProps {
@@ -34,7 +36,7 @@ interface IUserRegister {
   birthdate: string;
   description: string;
   isSalesman: boolean;
-  address: IAddress[];
+  address: Omit<IAddress, "id">;
 }
 
 export interface IUser {
@@ -48,7 +50,7 @@ export interface IUser {
   birthdate: string;
   description: string;
   isSalesman: boolean;
-  address: IAddress[];
+  address: IAddress;
   // cars: ICar[];
 }
 
@@ -103,6 +105,7 @@ export const UserProvider = ({ children }: IUserProps) => {
   const [salesman, setSalesman] = useState({} as IUser);
   const [salesmanAds, setSalesmanAds] = useState([]);
   const navigate = useNavigate();
+  const { setOpenModalSucess, openModalSucess } = useModal();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -136,12 +139,13 @@ export const UserProvider = ({ children }: IUserProps) => {
     localStorage.setItem("id", user.data.user.id);
   };
 
-  const registerUser = async (data: IUserRegister) => {
-    const user = await baseUrl.post("/users");
-
+  const registerNewUser = async (data: IUserRegister): Promise<void> => {
     try {
-      navigate("/login");
-    } catch {
+      const res = await baseUrl.post<IUserRegister>("/users", data);
+      setOpenModalSucess(!openModalSucess);
+      console.log(res);
+    } catch (error) {
+      toast.error("Não foi possivel criar sua conta! Tente novamente");
       console.log(error);
     }
   };
@@ -165,6 +169,7 @@ export const UserProvider = ({ children }: IUserProps) => {
         salesman,
         LoginUser,
         user,
+        registerNewUser,
       }}
     >
       {children}

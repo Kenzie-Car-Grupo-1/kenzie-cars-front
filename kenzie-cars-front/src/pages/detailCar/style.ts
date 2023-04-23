@@ -4,16 +4,14 @@ export const StyleBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-
-  position: relative;
+  padding: 52px 16px;
 
   background-color: var(--grey8);
 
   @media (min-width: 700px) {
+    /* height: calc(100vh - 80px - 140px); */
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
 
     background-color: var(--grey8);
   }
@@ -25,10 +23,10 @@ export const StyledDivBackground = styled.div`
   z-index: 0;
 
   @media (min-width: 700px) {
-    width: 100%;
+    /* width: 100%;
     display: flex;
     flex-direction: row;
     min-height: 482px;
-    background-color: var(--brand1);
+    background-color: var(--brand1); */
   }
 `;

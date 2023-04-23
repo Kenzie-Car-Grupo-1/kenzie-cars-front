@@ -74,4 +74,9 @@ export const StyledModalSucess = styled.div`
 
     color: #495057;
   }
+
+  button {
+    max-width: 150px;
+    margin-top: 20px;
+  }
 `;
