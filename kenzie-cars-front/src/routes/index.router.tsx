@@ -3,6 +3,7 @@ import Dashboard from "../pages/dashboard";
 import DetailCar from "../pages/detailCar";
 import Login from "../pages/login";
 import ProfileViewAdmin from "../pages/profileViewAdmin";
+import Register from "../pages/register";
 
 const Routers = () => {
   return (
@@ -12,6 +13,7 @@ const Routers = () => {
       <Route path="/dashboard/:carId" element={<DetailCar />} />
       <Route path="/dashboard/:userId/ads" element={<ProfileViewAdmin />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 };
