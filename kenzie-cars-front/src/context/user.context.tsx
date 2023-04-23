@@ -7,6 +7,8 @@ import {
 } from "react";
 import { baseUrl } from "../service/axios";
 import { ICar } from "./cars.context";
+import { useNavigate } from "react-router-dom";
+import { error } from "console";
 
 interface IUserContext {
   currentPage: number;
@@ -19,6 +21,20 @@ interface IUserContext {
 
 interface IUserProps {
   children: ReactNode;
+}
+
+interface IUserRegister {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  cpf: string;
+  contact: string;
+  isWhatsapp: boolean;
+  birthdate: string;
+  description: string;
+  isSalesman: boolean;
+  address: IAddress[];
 }
 
 export interface IUser {
@@ -86,6 +102,7 @@ export const UserProvider = ({ children }: IUserProps) => {
   const [user, setUser] = useState({} as IUser);
   const [salesman, setSalesman] = useState({} as IUser);
   const [salesmanAds, setSalesmanAds] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -109,7 +126,7 @@ export const UserProvider = ({ children }: IUserProps) => {
     };
   }, []);
 
-  const LoginUser = async (data: IUserLogin) => {
+  const LoginUser = async (data: IUserLogin): Promise<void> => {
     const user = await baseUrl.post("/session", data);
     setUser(user.data);
     if (user.data.isSalesman) {
@@ -117,6 +134,16 @@ export const UserProvider = ({ children }: IUserProps) => {
     }
     localStorage.setItem("token", user.data.token);
     localStorage.setItem("id", user.data.user.id);
+  };
+
+  const registerUser = async (data: IUserRegister) => {
+    const user = await baseUrl.post("/users");
+
+    try {
+      navigate("/login");
+    } catch {
+      console.log(error);
+    }
   };
 
   const GetSalesmanById = async (id: string | null) => {
