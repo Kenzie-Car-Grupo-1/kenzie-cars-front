@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import Footer from "../../components/footer";
 import Header from "../../components/headers";
@@ -19,6 +19,10 @@ interface IResetPassword {
   passwordMatch: string;
 }
 
+interface IResetPasswordRequest {
+  password: string;
+}
+
 const resetPasswordSchema = yup.object().shape({
   password: yup.string().required("Senha obrigatória"),
   passwordMatch: yup
@@ -30,6 +34,7 @@ const resetPasswordSchema = yup.object().shape({
 const ResetPasswordToken = () => {
   const navigate = useNavigate();
   const { setOpenModalSucess, openModalSucess } = useModal();
+  const { tokenReset } = useParams();
 
   const {
     register,
@@ -40,25 +45,30 @@ const ResetPasswordToken = () => {
     resolver: yupResolver(resetPasswordSchema),
   });
 
-  // const resetPassword = async (data: IResetPassword) => {
-  //   console.log(data);
+  const resetPassword = async (
+    data: IResetPasswordRequest,
+    resetToken: string
+  ) => {
+    console.log(data);
 
-  //   try {
-  //     const res = await baseUrl.post<IResetPassword>(
-  //       "/users/resetPassword/",
-  //       data
-  //     );
-  //     setOpenModalSucess(true);
-  //   } catch (error: unknown) {
-  //     toast.error("Email não encontrado");
-  //     console.log(error);
-  //   }
-  // };
+    try {
+      const res = await baseUrl.patch<IResetPasswordRequest>(
+        `/users/resetPassword/${resetToken}`,
+        data
+      );
+      setOpenModalSucess(true);
+    } catch (error: unknown) {
+      toast.error("Aconteceu um erro, tente novamente");
+      console.log(error);
+    }
+  };
 
   const onSubmit = async ({ password }: IResetPassword) => {
-    console.log(password);
+    const data = {
+      password: password,
+    };
 
-    // await sendEmail(data);
+    await resetPassword(data, tokenReset!);
   };
 
   return (
@@ -102,9 +112,10 @@ const ResetPasswordToken = () => {
       <Footer />
       {openModalSucess && (
         <ModalSucess
-          tittle="Recuperação de senha"
-          message="Email enviado com sucesso !"
-          messageDetail="Verifique sua caixa de correio no email e siga as instruções para recuperar sua senha."
+          tittle="Alteração de senha"
+          message="Senha alterada com sucesso !"
+          messageDetail="Clique em login e utilize sua nova senha"
+          toLogin
         />
       )}
     </>

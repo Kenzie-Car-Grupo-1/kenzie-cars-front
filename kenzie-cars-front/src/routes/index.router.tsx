@@ -4,7 +4,7 @@ import DetailCar from "../pages/detailCar";
 import Login from "../pages/login";
 import ProfileViewAdmin from "../pages/profileViewAdmin";
 import Register from "../pages/register";
-import ResetPassword from "../pages/resetPasswordToken";
+import ResetPassword from "../pages/resetPassword";
 import ResetPasswordToken from "../pages/resetPasswordToken";
 
 const Routers = () => {
