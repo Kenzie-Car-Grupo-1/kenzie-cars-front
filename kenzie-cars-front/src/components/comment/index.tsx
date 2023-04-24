@@ -26,6 +26,7 @@ const Comments = ({ comments }: CommentsProps) => {
         <ul>
           {comments.map((comment, index) => (
             <CardComment
+              key={index}
               firstName={comment.user.firstName}
               lastName={comment.user.lastName}
               text={comment.text}

@@ -29,4 +29,8 @@ export const StyledDivAutoComplete = styled.div`
       color: var(--brand2);
     }
   }
+
+  .selected {
+    color: var(--brand2);
+  }
 `;

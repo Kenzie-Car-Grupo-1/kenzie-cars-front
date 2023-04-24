@@ -30,7 +30,7 @@ const Filter = ({
   return (
     <AnimatePresence>
       <StyledFilter
-        initial={{ x: "-100%" }}
+        initial={{ x: "-120%" }}
         animate={{ x: isVisibleFilter ? 0 : "-100%" }}
         transition={{ duration: 0.5 }}
       >

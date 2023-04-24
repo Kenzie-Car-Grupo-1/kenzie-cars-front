@@ -8,6 +8,7 @@ import CarDetails from "../../components/carDetails";
 import { StyleBox, StyledDivBackground } from "./style";
 import ModalDetailCar from "../../components/modals/modalDetailImage";
 import { useModal } from "../../context/modal.context";
+import Footer from "../../components/footer";
 
 const DetailCar = () => {
   const { carId } = useParams();
@@ -23,7 +24,7 @@ const DetailCar = () => {
         <StyledDivBackground />
         <CarDetails id={carId} />
       </StyleBox>
-      <Comments comments={comments} />
+      <Footer />
     </>
   );
 };

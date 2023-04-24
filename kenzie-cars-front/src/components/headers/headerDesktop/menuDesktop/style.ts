@@ -22,9 +22,13 @@ export const StyledMenuDesktop = styled(motion.div)`
   align-items: center;
   flex-direction: column;
 
+  background: #f8f9fa;
+  box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+
   width: 200px;
 
-  position: fixed;
+  position: absolute;
   top: 65px;
   z-index: 1;
 
@@ -36,6 +40,7 @@ export const StyledMenuDesktop = styled(motion.div)`
   button {
     width: 100%;
     border: none;
+    color: var(--grey2);
 
     background: var(--grey9);
 

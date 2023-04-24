@@ -7,7 +7,7 @@ const carAdSchema = yup.object().shape({
     .required("A marca é obrigatória"),
   model: yup
     .string()
-    .max(50, "O modelo deve ter no máximo 50 caracteres")
+    .max(50, "O modelo deve maxLength: 6ter no máximo 50 caracteres")
     .required("O modelo é obrigatório"),
   year: yup
     .string()
@@ -32,8 +32,12 @@ const carAdSchema = yup.object().shape({
     .required("A descrição é obrigatória"),
   image: yup
     .string()
-    .url("Deve ser um url de imagem")
-    .required("Imagem da capa obrigatório"),
+    .url("Deve ser um URL válido")
+    .required("A imagem da capa é obrigatória"),
+  images: yup
+    .array()
+    .of(yup.string().url("Deve ser um URL válido asas"))
+    .max(6, "A galeria deve ter no máximo 6 imagens"),
 });
 
 export default carAdSchema;

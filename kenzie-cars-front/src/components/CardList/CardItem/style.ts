@@ -17,10 +17,20 @@ export const Item = styled.li`
       width: 100%;
       height: 100%;
       margin: 0 auto;
+      scale: 0.95;
 
       justify-content: center;
       align-items: end;
       object-fit: contain;
+      transition: ease 0.5s;
+
+      &:hover {
+        scale: 1;
+      }
+    }
+
+    &:hover {
+      border: 2px solid var(--brand1);
     }
   }
 
@@ -58,19 +68,19 @@ export const Item = styled.li`
 
       align-items: center;
       justify-content: center;
-      
+
       font-family: var(--font-family-3);
       font-size: var(--text-size-8);
       font-weight: var(--font-weight-3);
       color: var(--white-fixed);
       background-color: var(--brand1);
     }
-    
+
     .user-fullname {
       font-family: var(--font-family-3);
       font-size: var(--text-size-8);
       font-weight: var(--font-weight-3);
-      
+
       display: flex;
       align-items: center;
     }

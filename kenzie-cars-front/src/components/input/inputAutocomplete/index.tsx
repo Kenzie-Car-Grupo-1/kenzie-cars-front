@@ -1,14 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyledDivAutoComplete } from "./style";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "..";
+import SkeletonInput from "../../skeleton/input";
+
+interface IRegisterCarAd {
+  brand: string;
+  model: string;
+  year: string;
+  fuel_type: string;
+  kms: number | null;
+  color: string;
+  price: string;
+  description: string;
+  image?: string;
+  images: string[];
+}
 
 interface IInputAutoCompleteProps {
   options: string[];
   onSelect: (value: string) => void;
   isLoading: boolean;
   placeholder: string;
-  register: UseFormRegisterReturn<"model" | "brand">;
+  setCar: React.Dispatch<React.SetStateAction<IRegisterCarAd>>;
+  fieldName: string; // nova prop para setar o valor do carro
 }
 
 const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
@@ -16,37 +31,59 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
   onSelect,
   isLoading,
   placeholder,
-  register,
+  setCar,
+  fieldName,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>(options);
-  const [showOptions, setShowOptions] = useState(false); // nova variável de estado para controlar a exibição das opções
+  const [showOptions, setShowOptions] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (filteredOptions.length == 0 && inputValue.length > 0) {
+      setCar((prevCar) => ({
+        ...prevCar,
+        [fieldName]: inputValue,
+      })); // seta o valor do carro para o valor atual do input
+    }
+  }, [showOptions, inputValue, setCar]);
+
+  useEffect(() => {
+    const closeOptions = () => setShowOptions(false);
+    document.addEventListener("click", closeOptions);
+
+    return () => {
+      document.removeEventListener("click", closeOptions);
+    };
+  }, []);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-    const { onChange, ...registerOptions } = register;
 
     setInputValue(inputValue);
 
     const filteredOptions = options.filter(
       (option) => option.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
     );
+
     setFilteredOptions(filteredOptions);
 
-    setShowOptions(true); // exibe as opções sempre que o usuário começa a digitar
+    setShowOptions(true);
   };
 
   const handleOptionClick = (option: string) => {
-    setInputValue(option);
+    const formattedOption = option.charAt(0).toUpperCase() + option.slice(1);
+    setInputValue(formattedOption);
     setFilteredOptions(options);
-    onSelect(option);
-    setShowOptions(false); // esconde as opções quando uma opção é selecionada
+    onSelect(formattedOption);
+    setShowOptions(false);
   };
 
   if (isLoading) {
-    return <div>Carregando marcas...</div>;
+    return <SkeletonInput />;
   }
 
   return (
@@ -55,22 +92,19 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
         type="text"
         value={inputValue}
         placeholder={placeholder}
-        // ref={inputRef}
-        {...register}
+        ref={inputRef}
         onChange={handleInputChange}
         autoComplete="off"
       />
-      {showOptions &&
-        inputValue.length > 0 &&
-        filteredOptions.length > 0 && ( // exibe as opções somente quando a variável showOptions for verdadeira e o input tiver mais de 0 caracteres
-          <ul>
-            {filteredOptions.map((option, index) => (
-              <li key={index} onClick={() => handleOptionClick(option)}>
-                {option}
-              </li>
-            ))}
-          </ul>
-        )}
+      {showOptions && inputValue.length > 0 && filteredOptions.length > 0 && (
+        <ul>
+          {filteredOptions.map((option, index) => (
+            <li key={index} onClick={() => handleOptionClick(option)}>
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
     </StyledDivAutoComplete>
   );
 };

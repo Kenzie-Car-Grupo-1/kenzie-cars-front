@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 export const StyledNavMobile = styled(motion.nav)`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
+  padding: 32px 12px;
 
   width: 100%;
 
@@ -14,10 +15,11 @@ export const StyledNavMobile = styled(motion.nav)`
   z-index: 1;
 
   background: var(--grey9);
+  box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 
   button {
     width: 100%;
-    border: none;
 
     background: var(--grey9);
 
@@ -27,9 +29,17 @@ export const StyledNavMobile = styled(motion.nav)`
     line-height: 28px;
     font-weight: 400;
     font-family: "Inter";
-    :hover {
-      background-color: var(--grey7);
-    }
+  }
+
+  .btn-login {
+    width: max-content;
+    margin-bottom: 30px;
+  }
+  .grey {
+    color: var(--grey2);
+    border: transparent;
+    margin-bottom: 0px;
+    font-size: 16px;
   }
 
   @media (min-width: 700px) {

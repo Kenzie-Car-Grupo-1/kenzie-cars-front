@@ -14,18 +14,23 @@ import user from "../../assets/Frame 4.png";
 import { useModal } from "../../context/modal.context";
 import TagUserInitials from "../tagInitials";
 import CarImage from "../carImage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCars } from "../../context/cars.context";
 import { StyledBoxImage, StyledBoxImageCar } from "../carImage/style";
+import Comments from "../comment";
+import comments from "../comment/database";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const CarDetails = (id: any) => {
   const navigate = useNavigate();
   const { setOpenModalImageCar, setImgForModal } = useModal();
   const { RequestCarByID, car } = useCars();
+  const isCommentsEnabled = useMediaQuery("(max-width: 700px)");
 
   useEffect(() => {
     RequestCarByID(id.id);
   }, []);
+
   return (
     <>
       <StyledDivImageAndDetails>
@@ -38,8 +43,8 @@ const CarDetails = (id: any) => {
           <h1>{car.model}</h1>
           <div className="div-extra">
             <div className="extra-tags">
-              <p>{car.kms} KM</p>
               <p>{car.year}</p>
+              <p>{car.kms} KM</p>
             </div>
             <p>
               {Number(car.price).toLocaleString("pt-br", {
@@ -63,9 +68,10 @@ const CarDetails = (id: any) => {
           </Button>
         </StyledCarDetails>
         <StyledCarDescription>
-          <h1>Description</h1>
+          <h1>Descrição</h1>
           <p>{car.description}</p>
         </StyledCarDescription>
+        {!isCommentsEnabled && <Comments comments={comments} />}
       </StyledDivImageAndDetails>
       <StyledDivPicturesAndUser>
         <StyledCarPictures>
@@ -88,19 +94,24 @@ const CarDetails = (id: any) => {
           </StyleBoxPictures>
         </StyledCarPictures>
         <StyledUserProfile>
-          <TagUserInitials
-            firstName={car.user.firstname}
-            lastName={car.user.lastname}
-            uuid="2"
-          />
-          <h1>{`${car.user.firstname} ${car.user.lastname}`}</h1>
-          <p>{car.user.description}</p>
+          {car.user && (
+            <>
+              <TagUserInitials
+                firstName={car.user.firstname}
+                lastName={car.user.lastname}
+                uuid="2"
+              />
+              <h1>{`${car.user.firstname} ${car.user.lastname}`}</h1>
+              <p>{car.user.description}</p>
+            </>
+          )}
 
           <Button buttonSize="big" backgroundColor="var(--grey1)">
             Ver todos anuncios
           </Button>
         </StyledUserProfile>
       </StyledDivPicturesAndUser>
+      {isCommentsEnabled && <Comments comments={comments} />}
     </>
   );
 };

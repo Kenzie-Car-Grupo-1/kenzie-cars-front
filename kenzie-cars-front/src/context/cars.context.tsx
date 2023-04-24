@@ -6,10 +6,14 @@ import {
   useState,
 } from "react";
 import { baseUrl } from "../service/axios";
+import { toast } from "react-toastify";
+import { AxiosResponse } from "axios";
 import { IUser } from "./user.context";
+import { useModal } from "./modal.context";
 
 interface ICarsContext {
   RequestCarByID: (id: string) => Promise<void>;
+  RegisterCarAd: (data: ICarRequest, token: string) => Promise<void>;
   setCarId: React.Dispatch<React.SetStateAction<string>>;
   car: ICar;
   ads: ICar[];
@@ -37,6 +41,18 @@ export interface ICar {
   user: IUser;
 }
 
+interface ICarRequest {
+  brand: string;
+  color: string;
+  description: string;
+  fuel_type: string;
+  images: string[];
+  kms: number | null;
+  model: string;
+  price: string;
+  year: string;
+}
+
 interface IImage {
   id: string;
   url: string;
@@ -47,18 +63,19 @@ const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 export const CarsProvider = ({ children }: ICarsProps) => {
   const [carId, setCarId] = useState("");
   const [car, setCar] = useState({} as ICar);
-  const [ads, setAds] = useState([]);
+  const [ads, setAds] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
+  const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
 
   const RequestCarByID = async (id: string) => {
-    baseUrl
-      .get(`/cars/${id}`)
-      .then((res: any) => {
-        console.log(res.data);
-        setCar(res.data);
-      })
-      .catch((err: any) => console.log(err));
+    try {
+      const res = await baseUrl.get(`/cars/${id}`);
+      console.log(res.data);
+      setCar(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const UpdateCarById = async (data: ICar, id: string) => {
@@ -71,7 +88,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   };
 
   useEffect(() => {
-    async function LoadAds() {
+    const LoadAds = async () => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
         console.log(cars.data);
@@ -80,14 +97,32 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     LoadAds();
   }, [currentPage]);
+
+  const RegisterCarAd = async (data: ICarRequest, token: string) => {
+    try {
+      const res = await baseUrl.post<ICar>("/cars", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res.data);
+      setAds([res.data, ...ads]);
+      setOpenModalCreateAd(false);
+      setOpenModalSucess(true);
+    } catch (error) {
+      console.error(error);
+      toast.error("Houve um erro, tente novamente!");
+    }
+  };
 
   return (
     <CarsContext.Provider
       value={{
         RequestCarByID,
+        RegisterCarAd,
         setCarId,
         car,
         ads,
