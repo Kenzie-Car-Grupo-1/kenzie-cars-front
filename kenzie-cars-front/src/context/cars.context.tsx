@@ -21,6 +21,8 @@ interface ICarsContext {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   allAds: number;
   UpdateCarById: (data: ICar, id: string) => Promise<void>;
+  GetCarsByUser: (id: string) => Promise<void>;
+  adsbyUser: ICar[];
 }
 
 interface ICarsProps {
@@ -64,6 +66,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [carId, setCarId] = useState("");
   const [car, setCar] = useState({} as ICar);
   const [ads, setAds] = useState<ICar[]>([]);
+  const [adsbyUser, setAdsbyUser] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
   const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
@@ -82,6 +85,16 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     try {
       const car = await baseUrl.patch(`/cars/${id}`, data);
       setCar(car.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const GetCarsByUser = async (id: string) => {
+    try {
+      const car = await baseUrl.get(`/users/${id}/cars`);
+      console.log("carros", car);
+      setAdsbyUser(car.data.result);
     } catch (error) {
       console.error(error);
     }
@@ -130,6 +143,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         setCurrentPage,
         allAds,
         UpdateCarById,
+        GetCarsByUser,
+        adsbyUser,
       }}
     >
       {children}
