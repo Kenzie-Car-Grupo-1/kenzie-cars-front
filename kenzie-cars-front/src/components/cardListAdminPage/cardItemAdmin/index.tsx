@@ -6,15 +6,6 @@ import { StyledButtonsDiv } from "./style";
 import ModalCreateAd from "../../modals/modalCreateAd";
 
 const CardItemAdminPage = ({ item }: any) => {
-  // const item = {
-  //   id: 1,
-  //   brand: "Maserati",
-  //   model: "Ghibli",
-  //   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  //   kms: 0,
-  //   year: 2019,
-  //   price: "R$00.000,00",
-  // };
   const navigate = useNavigate();
 
   return (

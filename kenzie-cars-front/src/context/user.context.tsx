@@ -19,6 +19,7 @@ interface IUserContext {
   LoginUser: (data: IUserLogin) => Promise<void>;
   user: IUser;
   registerNewUser: (data: IUserRegister) => Promise<void>;
+  salesmanAds: ICar[];
 }
 
 interface IUserProps {
@@ -51,6 +52,8 @@ export interface IUser {
   description: string;
   isSalesman: boolean;
   address: IAddress;
+  createdAt: string;
+  updatedAt: string;
   // cars: ICar[];
 }
 
@@ -130,9 +133,10 @@ export const UserProvider = ({ children }: IUserProps) => {
   const LoginUser = async (data: IUserLogin): Promise<void> => {
     try {
       const user = await baseUrl.post("/session", data);
-      setUser(user.data);
+      console.log('oioi', user.data)
+      setUser(user.data.user);
       if (user.data.isSalesman) {
-        setSalesmanAds(user.data.cars);
+        setSalesmanAds(user.data.user.cars);
       }
       localStorage.clear();
       localStorage.setItem("token", user.data.token);
@@ -175,6 +179,7 @@ export const UserProvider = ({ children }: IUserProps) => {
         LoginUser,
         user,
         registerNewUser,
+        salesmanAds,
       }}
     >
       {children}

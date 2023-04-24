@@ -1,5 +1,5 @@
 import { useCars } from "../../context/cars.context";
-import CardItem from "./CardItem";
+import CardItem from "./cardItem";
 import { List } from "./style";
 
 const CardList = () => {

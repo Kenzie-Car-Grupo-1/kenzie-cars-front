@@ -5,6 +5,7 @@ import TagUserInitials from "../../tagInitials";
 
 const CardItem = ({ item, user }: any) => {
   const navigate = useNavigate();
+  // console.log(user)
   return (
     <Item>
       <div className="div-img">
