@@ -1,12 +1,32 @@
 import styled from "styled-components";
 
+export const StyleBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: relative;
+
+  background-color: var(--grey8);
+
+  @media (min-width: 700px) {
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--grey8);
+
+    min-height: calc(100vh - 80px - 140px);
+  }
+`;
+
 export const StyledForm = styled.form`
   /* margin: 90px 0; */
   border-radius: 4px;
 
   background-color: white;
   padding: 44px 28px;
-  width: 100%;
+  width: 95%;
   max-width: 412px;
   display: flex;
 
@@ -17,6 +37,7 @@ export const StyledForm = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 40px 0px;
 
   @media (min-width: 760px) {
   }

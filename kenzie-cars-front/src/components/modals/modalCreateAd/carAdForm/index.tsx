@@ -13,6 +13,7 @@ import carAdSchema from "../../../../validation/adCar.validation";
 import { useCars } from "../../../../context/cars.context";
 import * as yup from "yup";
 import SkeletonInput from "../../../skeleton/input";
+import { useUser } from "../../../../context/user.context";
 
 interface ICarApiKenzie {
   id?: string;
@@ -58,6 +59,12 @@ const CardAdForm = () => {
   const [errors, setErrors] = useState<IError>({});
   const [loadingBrands, setLoadingBrands] = useState<boolean>(false);
   const [loadingModels, setLoadingModels] = useState<boolean>(false);
+  const [isToken, setIsToken] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsToken(token!);
+  }, []);
 
   const [car, setCar] = useState<Omit<IRegisterCarAd, "id">>({
     brand: "",
@@ -136,10 +143,7 @@ const CardAdForm = () => {
 
       delete updatedData.image; // deleta a chave "image" do objeto
 
-      await RegisterCarAd(
-        updatedData,
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODIwMjY2MTcsImV4cCI6MTY4MjExMzAxNywic3ViIjoiZjIwOTIzZDEtZDNjYS00MDFkLWI4MTktYjU3YzY4ZTFhNWFlIn0.TPi6-1KNxzu6Ocqiubv0QVSMcm6wiFesPPHzyvWlJWI"
-      );
+      await RegisterCarAd(updatedData, isToken);
     }
   };
 

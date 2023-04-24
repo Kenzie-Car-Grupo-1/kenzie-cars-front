@@ -2,8 +2,8 @@ import { useContext } from "react";
 import Button from "../../components/Button";
 import Header from "../../components/headers";
 import Input from "../../components/input";
-import { StyleBox } from "../detailCar/style";
-import { StyledForm } from "./style";
+
+import { StyledForm, StyleBox } from "./style";
 import { useUser } from "../../context/user.context";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,8 +30,9 @@ const Login = () => {
   });
 
   const onSubmit = async (data: ILoginRequest) => {
-    console.log(data);
-    await LoginUser(data);
+    try {
+      await LoginUser(data);
+    } catch (error) {}
   };
 
   return (

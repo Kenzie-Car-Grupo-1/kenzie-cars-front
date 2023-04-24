@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Photo from "../../../assets/Photo.png";
 import { Item } from "./style";
+import TagUserInitials from "../../tagInitials";
 
 const CardItem = ({ item, user }: any) => {
   const navigate = useNavigate();
@@ -19,8 +20,13 @@ const CardItem = ({ item, user }: any) => {
         </p>
         <p className="info-text">{item.description}</p>
       </div>
+
       <div className="div-user">
-        <p className="user-initials">{`${user.firstname[0]}${user.lastname[0]}`}</p>
+        <TagUserInitials
+          firstName={user.firstname}
+          lastName={user.lastname}
+          uuid={user.id}
+        />
         <p className="user-fullname">{`${user.firstname} ${user.lastname}`}</p>
       </div>
       <div className="div-extra">

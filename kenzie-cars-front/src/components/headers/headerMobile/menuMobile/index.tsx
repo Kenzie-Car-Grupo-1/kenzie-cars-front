@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../../Button";
 import { StyledNavMobile } from "./style";
 import { AnimatePresence } from "framer-motion";
@@ -8,6 +9,12 @@ interface IMenuMobile {
 }
 
 const MenuMobile = ({ open, type }: IMenuMobile) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -22,7 +29,9 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                 <button className="btn-login grey">Editar Perfil</button>
                 <button className="btn-login grey">Editar endereço</button>
                 <button className="btn-login grey">Meus Anúncios</button>
-                <button className="btn-login grey">Sair</button>
+                <button onClick={handleLogout} className="btn-login grey">
+                  Sair
+                </button>
               </StyledNavMobile>
             )
           : open && (
@@ -36,6 +45,7 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                   buttonSize="medium"
                   fontColor="var(--grey2)"
                   className="btn-login"
+                  onClick={() => navigate("/login")}
                 >
                   {" "}
                   Fazer login
@@ -46,6 +56,7 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                   fontColor="#0B0D0D"
                   backgroundColorHover="#0B0D0D"
                   fontColorHover="white"
+                  onClick={() => navigate("/register")}
                 >
                   Cadastrar
                 </Button>

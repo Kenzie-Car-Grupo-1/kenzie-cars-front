@@ -283,6 +283,7 @@ export const StyledDivPicturesAndUser = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
 
   @media (min-width: 700px) {
     min-height: 755px;

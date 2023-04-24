@@ -116,27 +116,32 @@ export const UserProvider = ({ children }: IUserProps) => {
         try {
           baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
           const user = await baseUrl.get(`/users/${id}`);
-          console.log(user.data);
           setUser(user.data);
-          localStorage.setItem("token", user.data.token);
-          localStorage.setItem("id", user.data.user.id);
         } catch (error) {
           localStorage.clear();
           console.error(error);
         }
       }
-      LoadInfoUser();
     };
+
+    LoadInfoUser();
   }, []);
 
   const LoginUser = async (data: IUserLogin): Promise<void> => {
-    const user = await baseUrl.post("/session", data);
-    setUser(user.data);
-    if (user.data.isSalesman) {
-      setSalesmanAds(user.data.cars);
+    try {
+      const user = await baseUrl.post("/session", data);
+      setUser(user.data);
+      if (user.data.isSalesman) {
+        setSalesmanAds(user.data.cars);
+      }
+      localStorage.clear();
+      localStorage.setItem("token", user.data.token);
+      localStorage.setItem("id", user.data.user.id);
+      toast.success("Login realizado com sucesso");
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error("Usuário ou senha inválido");
     }
-    localStorage.setItem("token", user.data.token);
-    localStorage.setItem("id", user.data.user.id);
   };
 
   const registerNewUser = async (data: IUserRegister): Promise<void> => {
