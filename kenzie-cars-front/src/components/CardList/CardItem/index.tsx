@@ -1,11 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import Photo from "../../../assets/Photo.png";
+import { Link, useNavigate } from "react-router-dom";
 import { Item } from "./style";
 import TagUserInitials from "../../tagInitials";
+import { useUser } from "../../../context/user.context";
+import { useEffect } from "react";
+import { useCars } from "../../../context/cars.context";
 
 const CardItem = ({ item, user }: any) => {
+  const { GetCarsByUser } = useCars();
   const navigate = useNavigate();
-  // console.log(user)
+
+  // useEffect(() => {
+  //   GetCarsByUser(user.id);
+  // }, []);
+
   return (
     <Item>
       <div className="div-img">
@@ -21,14 +28,17 @@ const CardItem = ({ item, user }: any) => {
         </p>
         <p className="info-text">{item.description}</p>
       </div>
-
       <div className="div-user">
         <TagUserInitials
           firstName={user.firstname}
           lastName={user.lastname}
           uuid={user.id}
         />
-        <p className="user-fullname">{`${user.firstname} ${user.lastname}`}</p>
+        <Link
+          to={`/dashboard/salesman/${user.id}`}
+          className="user-fullname"
+          onClick={() => GetCarsByUser(user.id)}
+        >{`${user.firstname} ${user.lastname}`}</Link>
       </div>
       <div className="div-extra">
         <div className="extra-tags">

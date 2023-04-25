@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Item } from "../../CardList/cardItem/style";
-import Photo from "../../../assets/Photo.png";
 import Button from "../../Button";
 import { StyledButtonsDiv } from "./style";
-import ModalCreateAd from "../../modals/modalCreateAd";
 
 const CardItemAdminPage = ({ item }: any) => {
   const navigate = useNavigate();
@@ -12,13 +10,9 @@ const CardItemAdminPage = ({ item }: any) => {
     <Item>
       <div className="div-img">
         <img
-          src={Photo}
-          alt={item.model}
-        />
-        {/* <img
             src={item.images[0].url}
             alt={item.model}
-          /> */}
+          />
       </div>
       <div className="div-info">
         <p className="info-title">

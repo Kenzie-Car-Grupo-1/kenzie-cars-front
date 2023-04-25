@@ -12,7 +12,6 @@ const CardListAdminPage = () => {
     GetCarsByUser(user.id);
   }, []);
 
-  console.log("oi", adsbyUser);
   return (
     <List>
       {adsbyUser.length > 0 &&
