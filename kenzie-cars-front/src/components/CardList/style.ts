@@ -28,5 +28,6 @@ export const List = styled.ul`
     grid-row-gap: 90px;
     grid-area: auto;
     justify-items: center;
+    height: max-content;
   }
 `;

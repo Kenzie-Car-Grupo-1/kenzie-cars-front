@@ -4,6 +4,9 @@ export const Item = styled.li`
   cursor: pointer;
   width: 312px;
   max-width: 312px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .div-img {
     display: flex;
@@ -115,5 +118,10 @@ export const Item = styled.li`
       font-size: var(--text-size-7);
       font-weight: var(--font-weight-3);
     }
+  }
+
+  .div-space {
+    display: flex;
+    flex-direction: column;
   }
 `;
