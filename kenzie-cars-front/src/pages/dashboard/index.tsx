@@ -4,7 +4,6 @@ import Header from "../../components/headers";
 import ImageInitial from "../../components/imageInitial";
 import CardList from "../../components/CardList";
 import Filter from "../../components/filter";
-import arrayFilter from "../../components/filter/database";
 import Footer from "../../components/footer";
 import PaginationBar from "../../components/paginationBar";
 import { StyledDiv } from "./style";
@@ -22,7 +21,6 @@ const Dashboard = () => {
         <Filter
           isVisibleFilter={isVisibleFilter}
           setIsVisibleFilter={setIsVisibleFilter}
-          arrayFilter={arrayFilter}
         />
         <CardList />
       </StyledDiv>
