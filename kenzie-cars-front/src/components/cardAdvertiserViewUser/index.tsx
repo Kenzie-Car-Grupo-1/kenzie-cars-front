@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useCars } from "../../context/cars.context";
 import { useUser } from "../../context/user.context";
 import {
   StyledCardDiv,
@@ -10,6 +8,7 @@ import { StyledAdvertiserCard } from "./style";
 
 const CardAdvertiserViewUser = () => {
   const { salesman } = useUser();
+  console.log('oi', salesman)
 
   return (
     <>

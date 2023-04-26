@@ -4,12 +4,21 @@ import { items } from "../CardList/database";
 import CardItemAdminPage from "./cardItemAdmin";
 import { List } from "./style";
 import { useUser } from "../../context/user.context";
+import { useParams } from "react-router-dom";
 
 const CardListAdminPage = () => {
   const { adsbyUser, GetCarsByUser } = useCars();
   const { user } = useUser();
+  const { salesmanId } = useParams();
+
   useEffect(() => {
-    GetCarsByUser(user.id);
+    (async () => {
+      try {
+        await GetCarsByUser(salesmanId!);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, []);
 
   return (

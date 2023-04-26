@@ -9,8 +9,6 @@ const CardListViewUser = () => {
   const { adsbyUser, GetCarsByUser } = useCars();
   const { GetSalesmanById, salesman } = useUser();
   const { salesmanId } = useParams();
-  // const [] = useState();
-
   const navigate = useNavigate();
 
   useEffect(() => {

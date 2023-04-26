@@ -135,6 +135,7 @@ export const UserProvider = ({ children }: IUserProps) => {
     try {
       const res = await baseUrl.get(`/users/${id}`);
       setSalesman(res.data);
+      console.log("olá", salesman)
     } catch (error) {
       console.error(error);
     }
