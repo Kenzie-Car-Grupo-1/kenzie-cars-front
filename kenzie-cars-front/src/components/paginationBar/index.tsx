@@ -16,11 +16,10 @@ const PaginationBar = ({
   const { allAds, currentPage, setCurrentPage, filteredAds, isFilterActive } =
     useCars();
   const adsCount = isFilterActive ? filteredAds.length : allAds;
-  // const totalPageNumber = Math.ceil(adsCount / 12);
-  const totalPageNumber = Math.ceil(allAds / 12);
+  // const allAds = Math.ceil(adsCount / 12);
 
   const addPage = () => {
-    if (currentPage < totalPageNumber && currentPage >= 1) {
+    if (currentPage < allAds && currentPage >= 1) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -41,10 +40,10 @@ const PaginationBar = ({
       >
         Filtros
       </Button>
-      {totalPageNumber === 1 ? (
+      {allAds === 1 ? (
         <div className="div-pages">
           <p className="current-page">{currentPage}&nbsp;</p>
-          <p className="next-page">de {totalPageNumber}&nbsp;</p>
+          <p className="next-page">de {allAds}&nbsp;</p>
         </div>
       ) : (
         <>
@@ -53,7 +52,7 @@ const PaginationBar = ({
           </Link>
           <div className="div-pages">
             <p className="current-page">&nbsp;{currentPage}&nbsp;</p>
-            <p className="next-page">de {totalPageNumber}&nbsp;</p>
+            <p className="next-page">de {allAds}&nbsp;</p>
           </div>
           <Link onClick={addPage} to={""}>
             Seguinte {">"}

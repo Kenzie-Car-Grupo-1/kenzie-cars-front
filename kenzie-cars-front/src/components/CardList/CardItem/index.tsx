@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import Photo from "../../../assets/Photo.png";
+import { Link, useNavigate } from "react-router-dom";
 import { Item } from "./style";
 import TagUserInitials from "../../tagInitials";
 
 const CardItem = ({ item, user }: any) => {
   const navigate = useNavigate();
-  // console.log(user)
+
   return (
     <Item>
       <div className="div-space">
@@ -30,7 +29,10 @@ const CardItem = ({ item, user }: any) => {
             lastName={user.lastname}
             uuid={user.id}
           />
-          <p className="user-fullname">{`${user.firstname} ${user.lastname}`}</p>
+          <Link
+            to={`/dashboard/salesman/${user.id}`}
+            className="user-fullname"
+          >{`${user.firstname} ${user.lastname}`}</Link>
         </div>
         <div className="div-extra">
           <div className="extra-tags">

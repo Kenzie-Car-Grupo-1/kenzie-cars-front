@@ -106,7 +106,11 @@ const CarDetails = (id: any) => {
             </>
           )}
 
-          <Button buttonSize="big" backgroundColor="var(--grey1)">
+          <Button
+            buttonSize="big"
+            backgroundColor="var(--grey1)"
+            onClick={() => navigate(`/dashboard/salesman/${id.id}`)}
+          >
             Ver todos anuncios
           </Button>
         </StyledUserProfile>

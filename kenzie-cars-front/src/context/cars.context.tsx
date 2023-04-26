@@ -109,7 +109,6 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const GetCarsByUser = async (id: string) => {
     try {
       const car = await baseUrl.get(`/users/${id}/cars`);
-      console.log("carros", car);
       setAdsbyUser(car.data.result);
     } catch (error) {
       console.error(error);
@@ -166,7 +165,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         `/cars?perPage=12&page=${currentPage}&${queryParams}`
       );
       setFilteredAds(cars.data.result);
-      setAllAds(cars.data.howManyFetched);
+      setAllAds(cars.data.amountPage);
       // setCurrentPage(1);
     } catch (error) {
       console.error(error);
