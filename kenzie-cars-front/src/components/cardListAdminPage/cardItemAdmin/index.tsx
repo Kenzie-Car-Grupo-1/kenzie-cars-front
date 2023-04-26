@@ -9,10 +9,7 @@ const CardItemAdminPage = ({ item }: any) => {
   return (
     <Item>
       <div className="div-img">
-        <img
-            src={item.images[0].url}
-            alt={item.model}
-          />
+        <img src={item.images[0].url} alt={item.model} />
       </div>
       <div className="div-info">
         <p className="info-title">
@@ -25,7 +22,12 @@ const CardItemAdminPage = ({ item }: any) => {
           <p>{item.kms}KM</p>
           <p>{item.year}</p>
         </div>
-        <p>{item.price}</p>
+        <p>
+          {Number(item.price).toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          })}{" "}
+        </p>
       </div>
       <StyledButtonsDiv>
         <Button

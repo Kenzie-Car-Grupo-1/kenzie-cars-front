@@ -26,6 +26,10 @@ export const StyledAdvertiserCard = styled.div`
 
     margin-top: 24px;
     margin-bottom: 16px;
+    
+    display: flex;
+    align-items: start;
+    width: 100%;
   }
 
   @media (min-width: 700px) {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const List = styled.ul`
   display: flex;
   padding: 0 25px;
-  margin-top: 72px;
+  margin-top: 63px;
   margin-bottom: 96px;
 
   position: relative;
