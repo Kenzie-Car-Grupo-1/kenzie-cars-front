@@ -26,6 +26,9 @@ interface ICarsContext {
   filteredAds: ICar[];
   setFilteredAds: React.Dispatch<React.SetStateAction<ICar[]>>;
   fetchModelsAPI: (brand: string) => Promise<IModelCar[]>;
+  setIsFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isFilterActive: boolean;
+  ListAdsFiltered: (queryParams: string) => Promise<void>;
 }
 
 interface IModelCar {
@@ -82,6 +85,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
   const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const RequestCarByID = async (id: string) => {
     try {
@@ -116,9 +120,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     const LoadAds = async () => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
-        console.log(cars.data);
         setAds(cars.data.result);
-        setAllAds(cars.data.howManyFetched);
+        // setAllAds(cars.data.howManyFetched);
       } catch (error) {
         console.error(error);
       }
@@ -133,7 +136,6 @@ export const CarsProvider = ({ children }: ICarsProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
       setAds([res.data, ...ads]);
       setOpenModalCreateAd(false);
       setOpenModalSucess(true);
@@ -158,6 +160,19 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     }
   };
 
+  const ListAdsFiltered = async (queryParams: string) => {
+    try {
+      const cars = await baseUrl.get(
+        `/cars?perPage=12&page=${currentPage}&${queryParams}`
+      );
+      setFilteredAds(cars.data.result);
+      setAllAds(cars.data.howManyFetched);
+      // setCurrentPage(1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <CarsContext.Provider
       value={{
@@ -175,6 +190,9 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         filteredAds,
         setFilteredAds,
         fetchModelsAPI,
+        isFilterActive,
+        setIsFilterActive,
+        ListAdsFiltered,
       }}
     >
       {children}

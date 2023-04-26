@@ -332,7 +332,8 @@ const CardAdForm = () => {
             <option value="Híbrido">Híbrido</option>
             <option value="Elétrico">Elétrico</option>
             <option value="Gasolina">Gasolina</option>
-            <option value="GNV">GNV</option>
+            <option value="Etanol">Etanol</option>
+            <option value="Diesel">Diesel</option>
           </select>
           <span> {errors.fuel_type} </span>
         </div>

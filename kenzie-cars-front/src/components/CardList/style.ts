@@ -27,7 +27,7 @@ export const List = styled.ul`
     grid-column-gap: 40px;
     grid-row-gap: 90px;
     grid-area: auto;
-    justify-items: center;
+    /* justify-items: center; */
     height: max-content;
   }
 `;

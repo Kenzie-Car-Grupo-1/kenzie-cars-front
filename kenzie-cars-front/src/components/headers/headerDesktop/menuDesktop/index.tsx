@@ -17,7 +17,6 @@ const MenuDesktop = () => {
 
   useEffect(() => {
     const name = user.firstname + " " + user.lastname;
-    console.log(user);
     setUserName(name);
     setIsLoading(false);
   }, [user]);
