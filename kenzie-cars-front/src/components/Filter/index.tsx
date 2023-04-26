@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import Button from "../Button";
 import Icons from "../../service/icons";
 import Input from "../input";
+import { ICar, useCars } from "../../context/cars.context";
 
 interface IFilterProps {
   isVisibleFilter: boolean;
@@ -59,7 +60,7 @@ const yearsInitials = [
   "2018",
   "2017",
   "2016",
-  "2015",
+  "< 2015",
 ];
 
 const fuelInitials = [
@@ -86,26 +87,58 @@ const initialFilters = {
 
 const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
   const isFilterEnabled = useMediaQuery("(max-width: 1024px)");
-  const [isBrandsInitials, setBrandsInitials] = useState(brandsInitials);
+  const {
+    ads,
+    setFilteredAds,
+    ListAdsFiltered,
+    fetchModelsAPI,
+    setIsFilterActive,
+    setCurrentPage,
+  } = useCars();
   const [isModelsInitials, setModelsInitials] = useState(modelsInitials);
-  const [isColorsInitials, setColorsInitials] = useState(colorsInitials);
-  const [isYearsInitials, setYearsInitials] = useState(yearsInitials);
-  const [isFuelInitials, setFuelInitials] = useState(fuelInitials);
-
   const [filters, setFilters] = useState(initialFilters);
 
-  // função para atualizar o estado de um filtro específico
-  const handleFilterChange = (section: string, value: string) => {
-    // atualiza o estado da seção selecionada
-    setFilters((prevState) => ({
-      ...prevState,
-      [section]: value,
-    }));
-  };
+  useEffect(() => {
+    const queryParams = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(filters)) {
+      if (value !== null) {
+        queryParams.append(key, value);
+      }
+    }
+
+    const queryString = queryParams.toString();
+    const newUrl = `${window.location.pathname}?${queryString}`;
+
+    window.history.replaceState({}, "", newUrl);
+
+    ListAdsFiltered(queryString);
+  }, [filters, ads]);
 
   useEffect(() => {
     setIsVisibleFilter(!isFilterEnabled);
   }, [isFilterEnabled, setIsVisibleFilter]);
+
+  const handleFilterClick = async (value: string, filter: string) => {
+    value = value.replace(/\s/g, "").replace("<", "");
+    const valueUp = value.charAt(0).toUpperCase() + value.slice(1);
+
+    setCurrentPage(1);
+    setFilters({ ...filters, [filter]: valueUp });
+
+    if (filter == "brand") {
+      const models = await fetchModelsAPI(value);
+      const nameModels = models.map((model) => model.name.split(" ")[0]);
+      const initialsCapitalized = nameModels.map(
+        (initial) => initial.charAt(0).toUpperCase() + initial.slice(1)
+      );
+      setModelsInitials([...new Set(initialsCapitalized)]);
+    }
+  };
+
+  const hasActiveFilter = Object.values(filters).some(
+    (value) => value !== null
+  );
 
   return (
     <AnimatePresence>
@@ -123,15 +156,17 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         <div>
           <h2>Marca</h2>
           <ul>
-            {!initialFilters.brand ? (
+            {!filters.brand ? (
               brandsInitials.map((brand, index) => (
                 <li key={index}>
-                  <button>{brand}</button>
+                  <button onClick={() => handleFilterClick(brand, "brand")}>
+                    {brand}
+                  </button>
                 </li>
               ))
             ) : (
               <li>
-                <button>{initialFilters.brand}</button>
+                <button>{filters.brand}</button>
               </li>
             )}
           </ul>
@@ -139,15 +174,21 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         <div>
           <h2>Modelo</h2>
           <ul>
-            {!initialFilters.model ? (
-              modelsInitials.map((brand, index) => (
+            {!filters.model ? (
+              isModelsInitials.map((model, index) => (
                 <li key={index}>
-                  <button>{brand}</button>
+                  <button
+                    onClick={() =>
+                      handleFilterClick(model.toLocaleLowerCase(), "model")
+                    }
+                  >
+                    {model}
+                  </button>
                 </li>
               ))
             ) : (
               <li>
-                <button>{initialFilters.model}</button>
+                <button>{filters.model}</button>
               </li>
             )}
           </ul>
@@ -155,15 +196,17 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         <div>
           <h2>Cor</h2>
           <ul>
-            {!initialFilters.color ? (
-              colorsInitials.map((brand, index) => (
+            {!filters.color ? (
+              colorsInitials.map((color, index) => (
                 <li key={index}>
-                  <button>{brand}</button>
+                  <button onClick={() => handleFilterClick(color, "color")}>
+                    {color}
+                  </button>
                 </li>
               ))
             ) : (
               <li>
-                <button>{initialFilters.color}</button>
+                <button>{filters.color}</button>
               </li>
             )}
           </ul>
@@ -171,15 +214,17 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         <div>
           <h2>Ano</h2>
           <ul>
-            {!initialFilters.year ? (
-              yearsInitials.map((brand, index) => (
+            {!filters.year ? (
+              yearsInitials.map((year, index) => (
                 <li key={index}>
-                  <button>{brand}</button>
+                  <button onClick={() => handleFilterClick(year, "year")}>
+                    {year}
+                  </button>
                 </li>
               ))
             ) : (
               <li>
-                <button>{initialFilters.year}</button>
+                <button>{filters.year}</button>
               </li>
             )}
           </ul>
@@ -187,28 +232,56 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         <div>
           <h2>Combustível</h2>
           <ul>
-            {!initialFilters.fuel_type ? (
-              fuelInitials.map((brand, index) => (
+            {!filters.fuel_type ? (
+              fuelInitials.map((fuel_type, index) => (
                 <li key={index}>
-                  <button>{brand}</button>
+                  <button
+                    onClick={() => handleFilterClick(fuel_type, "fuel_type")}
+                  >
+                    {fuel_type}
+                  </button>
                 </li>
               ))
             ) : (
               <li>
-                <button>{initialFilters.fuel_type}</button>
+                <button>{filters.fuel_type}</button>
               </li>
             )}
           </ul>
         </div>
         <h2>Km</h2>
         <div className="div-km">
-          <Input backgroundColor="var(--grey5)" placeholder="Mínimo" />
-          <Input backgroundColor="var(--grey5)" placeholder="Máximo" />
+          <Input
+            backgroundColor="var(--grey5)"
+            placeholder="Mínimo"
+            onChange={(event) =>
+              handleFilterClick(event.currentTarget.value, "min_kms")
+            }
+          />
+          <Input
+            backgroundColor="var(--grey5)"
+            placeholder="Máximo"
+            onChange={(event) =>
+              handleFilterClick(event.currentTarget.value, "max_kms")
+            }
+          />
         </div>
         <h2>Preço</h2>
         <div className="div-km">
-          <Input backgroundColor="var(--grey5)" placeholder="Mínimo" />
-          <Input backgroundColor="var(--grey5)" placeholder="Máximo" />
+          <Input
+            backgroundColor="var(--grey5)"
+            placeholder="Mínimo"
+            onChange={(event) =>
+              handleFilterClick(event.currentTarget.value, "min_price")
+            }
+          />
+          <Input
+            backgroundColor="var(--grey5)"
+            placeholder="Máximo"
+            onChange={(event) =>
+              handleFilterClick(event.currentTarget.value, "max_price")
+            }
+          />
         </div>
         <Button
           className="button"
@@ -219,6 +292,20 @@ const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
         >
           Ver anúncios
         </Button>
+        {hasActiveFilter && (
+          <Button
+            className="btn-filter"
+            buttonSize="big"
+            onClick={() => {
+              setFilters(initialFilters);
+              setIsFilterActive(false);
+              setModelsInitials(modelsInitials);
+              setCurrentPage(1);
+            }}
+          >
+            Limpar filtros
+          </Button>
+        )}
       </StyledFilter>
     </AnimatePresence>
   );

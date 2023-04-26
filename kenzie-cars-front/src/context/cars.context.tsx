@@ -7,7 +7,7 @@ import {
 } from "react";
 import { baseUrl } from "../service/axios";
 import { toast } from "react-toastify";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { IUser } from "./user.context";
 import { useModal } from "./modal.context";
 
@@ -23,6 +23,20 @@ interface ICarsContext {
   UpdateCarById: (data: ICar, id: string) => Promise<void>;
   GetCarsByUser: (id: string) => Promise<void>;
   adsbyUser: ICar[];
+  filteredAds: ICar[];
+  setFilteredAds: React.Dispatch<React.SetStateAction<ICar[]>>;
+  fetchModelsAPI: (brand: string) => Promise<IModelCar[]>;
+  setIsFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isFilterActive: boolean;
+  ListAdsFiltered: (queryParams: string) => Promise<void>;
+}
+
+interface IModelCar {
+  id: string;
+  name: string;
+  brand: string;
+  fuel: string;
+  value: string;
 }
 
 interface ICarsProps {
@@ -66,10 +80,12 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [carId, setCarId] = useState("");
   const [car, setCar] = useState({} as ICar);
   const [ads, setAds] = useState<ICar[]>([]);
+  const [filteredAds, setFilteredAds] = useState<ICar[]>([]);
   const [adsbyUser, setAdsbyUser] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
   const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const RequestCarByID = async (id: string) => {
     try {
@@ -104,9 +120,8 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     const LoadAds = async () => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
-        console.log(cars.data);
         setAds(cars.data.result);
-        setAllAds(cars.data.howManyFetched);
+        // setAllAds(cars.data.howManyFetched);
       } catch (error) {
         console.error(error);
       }
@@ -121,13 +136,40 @@ export const CarsProvider = ({ children }: ICarsProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
       setAds([res.data, ...ads]);
       setOpenModalCreateAd(false);
       setOpenModalSucess(true);
     } catch (error) {
       console.error(error);
       toast.error("Houve um erro, tente novamente!");
+    }
+  };
+
+  const fetchModelsAPI = async (brand: string) => {
+    const formattedOption = brand.toLocaleLowerCase();
+
+    try {
+      const response = await axios.get(
+        `https://kenzie-kars.herokuapp.com/cars?brand=${formattedOption}`
+      );
+
+      const models = response.data;
+      return models;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const ListAdsFiltered = async (queryParams: string) => {
+    try {
+      const cars = await baseUrl.get(
+        `/cars?perPage=12&page=${currentPage}&${queryParams}`
+      );
+      setFilteredAds(cars.data.result);
+      setAllAds(cars.data.howManyFetched);
+      // setCurrentPage(1);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -145,6 +187,12 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         UpdateCarById,
         GetCarsByUser,
         adsbyUser,
+        filteredAds,
+        setFilteredAds,
+        fetchModelsAPI,
+        isFilterActive,
+        setIsFilterActive,
+        ListAdsFiltered,
       }}
     >
       {children}
