@@ -55,6 +55,11 @@ export const Item = styled.li`
       font-size: var(--text-size-8);
       font-weight: var(--font-weight-4);
       color: var(--grey2);
+
+      height: 48px;
+      width: 312px;
+      display: flex;
+      align-items: center;
     }
   }
 

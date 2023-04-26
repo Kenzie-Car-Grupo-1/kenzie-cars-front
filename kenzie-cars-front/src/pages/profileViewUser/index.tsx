@@ -6,6 +6,7 @@ import Header from "../../components/headers";
 import PaginationBarAdmin from "../../components/paginationBarAdmin";
 import { StyleBox } from "../detailCar/style";
 import { StyledAdsListDiv } from "../profileViewAdmin/style";
+import { StyledAds } from "./style";
 
 const ProfileViewUser = () => {
     return (
@@ -16,6 +17,7 @@ const ProfileViewUser = () => {
           <CardAdvertiserViewUser />
         </StyleBox>
         <StyledAdsListDiv>
+          <StyledAds>Anúncios</StyledAds>
           <CardListViewUser />
           <PaginationBarAdmin />
         </StyledAdsListDiv>

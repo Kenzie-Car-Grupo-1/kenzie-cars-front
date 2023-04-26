@@ -8,7 +8,6 @@ import { StyledAdvertiserCard } from "./style";
 
 const CardAdvertiserViewUser = () => {
   const { salesman } = useUser();
-  console.log('oi', salesman)
 
   return (
     <>
