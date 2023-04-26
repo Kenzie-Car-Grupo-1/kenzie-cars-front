@@ -37,3 +37,16 @@ export const userRegisterSchema = yup.object().shape({
   isSalesman: yup.boolean().required("Campo obrigatório"),
   address: createAddressSchema,
 });
+
+export const userEditeProfileSchema = yup.object().shape({
+  firstname: yup.string().required("Campo obrigatório"),
+  lastname: yup.string().required("Campo obrigatório"),
+  email: yup
+    .string()
+    .email("Digite um email válido")
+    .required("Campo obrigatório"),
+  cpf: yup.string().required("Campo obrigatório"),
+  contact: yup.string().required("Campo obrigatório"),
+  birthdate: yup.string().required("Campo obrigatório"),
+  description: yup.string().required("Campo obrigatório"),
+});

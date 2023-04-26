@@ -20,6 +20,8 @@ interface IUserContext {
   user: IUser;
   registerNewUser: (data: IUserRegister) => Promise<void>;
   salesmanAds: ICar[];
+  EditeProfileUser: (data: any) => Promise<void>;
+  DeleteProfileUser: (data: any) => Promise<void>;
 }
 
 interface IUserProps {
@@ -80,7 +82,14 @@ export const UserProvider = ({ children }: IUserProps) => {
   const [salesman, setSalesman] = useState({} as IUser);
   const [salesmanAds, setSalesmanAds] = useState([]);
   const navigate = useNavigate();
-  const { setOpenModalSucess, openModalSucess } = useModal();
+  const {
+    setOpenModalSucess,
+    openModalSucess,
+    setOpenModalEditeProfile,
+    openModalEditeProfile,
+    setOpenModalDeleteProfile,
+    openModalDeleteProfile,
+  } = useModal();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -105,7 +114,7 @@ export const UserProvider = ({ children }: IUserProps) => {
   const LoginUser = async (data: IUserLogin): Promise<void> => {
     try {
       const user = await baseUrl.post("/session", data);
-      console.log(user.data)
+      console.log(user.data);
       setUser(user.data.user);
       if (user.data.isSalesman) {
         setSalesmanAds(user.data.user.cars);
@@ -135,9 +144,43 @@ export const UserProvider = ({ children }: IUserProps) => {
     try {
       const res = await baseUrl.get(`/users/${id}`);
       setSalesman(res.data);
-      console.log("olá", salesman)
+      console.log("olá", salesman);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const EditeProfileUser = async (data: any) => {
+    try {
+      const res = await baseUrl.patch<any>("/users", data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      });
+      setOpenModalEditeProfile(!openModalEditeProfile);
+      toast.success("Perfil editado com sucesso");
+      setUser(res.data);
+      console.log(res);
+    } catch (error) {
+      toast.error("Não foi possivel editar seu perfil");
+      console.log(error);
+    }
+  };
+
+  const DeleteProfileUser = async (data: any) => {
+    try {
+      const res = await baseUrl.delete<any>("/users", {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      });
+      setOpenModalDeleteProfile(!openModalDeleteProfile);
+      toast.success("Perfil deletado com sucesso");
+      setUser(res.data);
+      console.log(res);
+    } catch (error) {
+      toast.error("Não foi possivel deletar seu perfil");
+      console.log(error);
     }
   };
 
@@ -152,6 +195,8 @@ export const UserProvider = ({ children }: IUserProps) => {
         user,
         registerNewUser,
         salesmanAds,
+        EditeProfileUser,
+        DeleteProfileUser,
       }}
     >
       {children}
