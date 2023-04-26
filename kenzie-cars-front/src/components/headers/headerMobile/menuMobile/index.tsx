@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../Button";
 import { StyledNavMobile } from "./style";
 import { AnimatePresence } from "framer-motion";
+import { useModal } from "../../../../context/modal.context";
 
 interface IMenuMobile {
   open: boolean;
@@ -10,6 +11,7 @@ interface IMenuMobile {
 
 const MenuMobile = ({ open, type }: IMenuMobile) => {
   const navigate = useNavigate();
+  const { setOpenModalEditeProfile } = useModal();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -26,7 +28,12 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
               >
-                <button className="btn-login grey">Editar Perfil</button>
+                <button
+                  className="btn-login grey"
+                  onClick={() => setOpenModalEditeProfile(true)}
+                >
+                  Editar Perfil
+                </button>
                 <button className="btn-login grey">Editar endereço</button>
                 <button className="btn-login grey">Meus Anúncios</button>
                 <button onClick={handleLogout} className="btn-login grey">

@@ -15,6 +15,10 @@ interface IModalContext {
   setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
   openModalSucess: boolean;
   setOpenModalSucess: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalEditeProfile: boolean;
+  setOpenModalEditeProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalDeleteProfile: boolean;
+  setOpenModalDeleteProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IModalProps {
@@ -28,6 +32,8 @@ export const ModalProvider = ({ children }: IModalProps) => {
   const [imgForModal, setImgForModal] = useState("");
   const [openModalCreateAd, setOpenModalCreateAd] = useState(false);
   const [openModalSucess, setOpenModalSucess] = useState(false);
+  const [openModalEditeProfile, setOpenModalEditeProfile] = useState(false);
+  const [openModalDeleteProfile, setOpenModalDeleteProfile] = useState(false);
 
   useEffect(() => {
     if (openModalCreateAd) {
@@ -48,6 +54,10 @@ export const ModalProvider = ({ children }: IModalProps) => {
         setOpenModalCreateAd,
         openModalSucess,
         setOpenModalSucess,
+        openModalEditeProfile,
+        setOpenModalEditeProfile,
+        openModalDeleteProfile,
+        setOpenModalDeleteProfile,
       }}
     >
       {children}

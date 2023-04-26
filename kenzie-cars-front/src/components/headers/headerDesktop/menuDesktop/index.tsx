@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../context/user.context";
 import { TagInitials } from "../../../cardAdvertiser/style";
 import TagUserInitials from "../../../tagInitials";
+import { useModal } from "../../../../context/modal.context";
 
 const MenuDesktop = () => {
   const [openMenuDesk, setOpenMenuDesk] = useState(false);
@@ -13,6 +14,7 @@ const MenuDesktop = () => {
   const [isLoading, setIsLoading] = useState(true);
   const loggedUserId = localStorage.getItem("id");
   const { user } = useUser();
+  const { setOpenModalEditeProfile } = useModal();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,13 +53,17 @@ const MenuDesktop = () => {
               animate={{ opacity: "100%" }}
               exit={{ opacity: "0%" }}
             >
-              <button>Editar Perfil</button>
-              <button>Editar endereço</button>
-              <button
-                onClick={() => navigate(`/dashboard/ads/${loggedUserId}`)}
-              >
-                Meus Anúncios
+              <button onClick={() => setOpenModalEditeProfile(true)}>
+                Editar Perfil
               </button>
+              <button>Editar endereço</button>
+              {user.isSalesman === true && (
+                <button
+                  onClick={() => navigate(`/dashboard/ads/${loggedUserId}`)}
+                >
+                  Meus Anúncios
+                </button>
+              )}
               <button onClick={handleLogout}>Sair</button>
             </StyledMenuDesktop>
           )}

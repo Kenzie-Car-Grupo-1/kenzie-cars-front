@@ -5,9 +5,12 @@ import ProfileViewAdmin from "./pages/profileViewAdmin";
 import Routers from "./routes/index.router";
 import { FormProvider, useForm } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.css";
+import ModalEditeProfile from "./components/modals/modalEditeProfile";
+import ModalDeleteProfile from "./components/modals/modalDeleteProfile";
 
 function App() {
-  const { openModalImageCar } = useModal();
+  const { openModalImageCar, openModalEditeProfile, openModalDeleteProfile } =
+    useModal();
   const methods = useForm();
   return (
     <>
@@ -33,6 +36,8 @@ function App() {
         </FormProvider>
       </div>
       {openModalImageCar && <ModalDetailCar />}
+      {openModalEditeProfile && <ModalEditeProfile />}
+      {openModalDeleteProfile && <ModalDeleteProfile />}
     </>
   );
 }

@@ -12,10 +12,13 @@ const CardList = () => {
 
   return (
     <List>
-      {filteredAds.length > 0 &&
+      {filteredAds.length > 0 ? (
         filteredAds.map((ad) => (
           <CardItem key={ad.id} item={ad} user={ad.user} />
-        ))}
+        ))
+      ) : (
+        <h1>Ops, não temos nenhum carro desse modelo no momento...</h1>
+      )}
     </List>
   );
 };
