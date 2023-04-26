@@ -75,7 +75,15 @@ export const StyledFilter = styled(motion.div)`
   .button {
     margin-top: 26px;
     align-self: center;
-    width: 50%;
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .btn-filter {
+    width: 80%;
+    max-width: 400px;
+    margin-top: 26px;
+    align-self: center;
   }
 
   @media (min-width: 1024px) {
@@ -105,6 +113,10 @@ export const StyledFilter = styled(motion.div)`
           color: white;
         }
       }
+    }
+
+    button {
+      align-self: center;
     }
   }
 `;
