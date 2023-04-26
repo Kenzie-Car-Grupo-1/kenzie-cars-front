@@ -107,9 +107,9 @@ export const UserProvider = ({ children }: IUserProps) => {
       const user = await baseUrl.post("/session", data);
       console.log(user.data)
       setUser(user.data.user);
-      // if (user.data.isSalesman) {
-      //   setSalesmanAds(user.data.user.cars);
-      // }
+      if (user.data.isSalesman) {
+        setSalesmanAds(user.data.user.cars);
+      }
       localStorage.clear();
       localStorage.setItem("token", user.data.token);
       localStorage.setItem("id", user.data.user.id);
@@ -133,9 +133,8 @@ export const UserProvider = ({ children }: IUserProps) => {
 
   const GetSalesmanById = async (id: string | null) => {
     try {
-      const salesman = await baseUrl.get(`/users/${id}`);
-      console.log("aff", salesman.data);
-      setSalesman(salesman.data);
+      const res = await baseUrl.get(`/users/${id}`);
+      setSalesman(res.data);
     } catch (error) {
       console.error(error);
     }

@@ -86,6 +86,8 @@ export const Item = styled.li`
 
       display: flex;
       align-items: center;
+      text-decoration: none;
+      color: var(--grey2);
     }
   }
 

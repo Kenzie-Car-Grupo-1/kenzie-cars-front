@@ -14,7 +14,7 @@ const Routers = () => {
       <Route index element={<Dashboard />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/:carId" element={<DetailCar />} />
-      <Route path="/dashboard/:userId/ads" element={<ProfileViewAdmin />} />
+      <Route path="/dashboard/ads/:userId" element={<ProfileViewAdmin />} />
       <Route path="/dashboard/salesman/:salesmanId" element={<ProfileViewUser />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

@@ -93,7 +93,6 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const GetCarsByUser = async (id: string) => {
     try {
       const car = await baseUrl.get(`/users/${id}/cars`);
-      console.log("carros", car);
       setAdsbyUser(car.data.result);
     } catch (error) {
       console.error(error);

@@ -1,12 +1,14 @@
 import { Item } from "../../CardList/cardItem/style";
 import TagUserInitials from "../../tagInitials";
 import { StyledUserFullname } from "./style";
+import Photo from "../../../assets/Photo.png";
 
 const CardItemViewUser = ({ item, user }: any) => {
   return (
     <Item>
       <div className="div-img">
-        <img src={item.images[0].url} alt={item.model} />
+        {/* <img src={item.images[0].url} alt={item.model} /> */}
+        <img src={Photo} alt="" />
       </div>
       <div className="div-info">
         <p className="info-title">

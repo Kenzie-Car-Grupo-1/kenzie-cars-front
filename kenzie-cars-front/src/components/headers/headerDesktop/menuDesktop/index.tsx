@@ -55,7 +55,7 @@ const MenuDesktop = () => {
               <button>Editar Perfil</button>
               <button>Editar endereço</button>
               <button
-                onClick={() => navigate(`/dashboard/${loggedUserId}/ads`)}
+                onClick={() => navigate(`/dashboard/ads/${loggedUserId}`)}
               >
                 Meus Anúncios
               </button>

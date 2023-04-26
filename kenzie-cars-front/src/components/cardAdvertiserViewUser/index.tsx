@@ -10,10 +10,10 @@ import { StyledAdvertiserCard } from "./style";
 
 const CardAdvertiserViewUser = () => {
   const { salesman } = useUser();
-  console.log("s", salesman)
+
   return (
     <>
-      {salesman.firstname.length != undefined && (
+      {salesman.firstname != undefined && (
         <StyledAdvertiserCard>
           <StyledCardDiv>
             <TagInitials>{`${salesman.firstname[0]}${salesman.lastname[0]}`}</TagInitials>
