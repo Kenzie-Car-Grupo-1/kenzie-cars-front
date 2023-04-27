@@ -22,6 +22,7 @@ interface IUserContext {
   salesmanAds: ICar[];
   EditeProfileUser: (data: any) => Promise<void>;
   DeleteProfileUser: (data: any) => Promise<void>;
+  EditAddressUser: (data: any) => Promise<void>;
 }
 
 interface IUserProps {
@@ -53,13 +54,13 @@ export interface IUser {
   birthdate: string;
   description: string;
   isSalesman: boolean;
-  address: IAddress;
+  address: IAddress[];
   createdAt: string;
   updatedAt: string;
   // cars: ICar[];
 }
 
-interface IAddress {
+export interface IAddress {
   id: string;
   street: string;
   number: string;
@@ -89,6 +90,8 @@ export const UserProvider = ({ children }: IUserProps) => {
     openModalEditeProfile,
     setOpenModalDeleteProfile,
     openModalDeleteProfile,
+    setOpenModalEditAddress,
+    openModalEditAddress,
   } = useModal();
 
   useEffect(() => {
@@ -167,6 +170,27 @@ export const UserProvider = ({ children }: IUserProps) => {
     }
   };
 
+  const EditAddressUser = async (data: any) => {
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+
+    try {
+      baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
+      // const findUser = await baseUrl.get<any>(`/users/${id}`);
+      const res = await baseUrl.patch<any>(
+        `/address/${user.address[0].id}`,
+        data
+      );
+      console.log(res.data);
+      setOpenModalEditAddress(!openModalEditAddress);
+      toast.success("Endereço editado com sucesso");
+      setUser({ ...user, address: res.data });
+    } catch (error) {
+      toast.error("Não foi possível editar seu endereço");
+      console.error(error);
+    }
+  };
+
   const DeleteProfileUser = async (data: any) => {
     try {
       const res = await baseUrl.delete<any>("/users", {
@@ -197,6 +221,7 @@ export const UserProvider = ({ children }: IUserProps) => {
         salesmanAds,
         EditeProfileUser,
         DeleteProfileUser,
+        EditAddressUser,
       }}
     >
       {children}

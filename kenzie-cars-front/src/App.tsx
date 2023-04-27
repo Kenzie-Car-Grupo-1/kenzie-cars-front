@@ -7,10 +7,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.css";
 import ModalEditeProfile from "./components/modals/modalEditeProfile";
 import ModalDeleteProfile from "./components/modals/modalDeleteProfile";
+import ModalEditAddress from "./components/modals/modalEditAddress";
 
 function App() {
-  const { openModalImageCar, openModalEditeProfile, openModalDeleteProfile } =
-    useModal();
+  const {
+    openModalImageCar,
+    openModalEditeProfile,
+    openModalDeleteProfile,
+    openModalEditAddress,
+  } = useModal();
   const methods = useForm();
   return (
     <>
@@ -38,6 +43,7 @@ function App() {
       {openModalImageCar && <ModalDetailCar />}
       {openModalEditeProfile && <ModalEditeProfile />}
       {openModalDeleteProfile && <ModalDeleteProfile />}
+      {openModalEditAddress && <ModalEditAddress />}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   ReactNode,
   useContext,
@@ -19,6 +19,8 @@ interface IModalContext {
   setOpenModalEditeProfile: React.Dispatch<React.SetStateAction<boolean>>;
   openModalDeleteProfile: boolean;
   setOpenModalDeleteProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalEditAddress: boolean;
+  setOpenModalEditAddress: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IModalProps {
@@ -34,6 +36,7 @@ export const ModalProvider = ({ children }: IModalProps) => {
   const [openModalSucess, setOpenModalSucess] = useState(false);
   const [openModalEditeProfile, setOpenModalEditeProfile] = useState(false);
   const [openModalDeleteProfile, setOpenModalDeleteProfile] = useState(false);
+  const [openModalEditAddress, setOpenModalEditAddress] = useState(false);
 
   useEffect(() => {
     if (openModalCreateAd) {
@@ -58,6 +61,8 @@ export const ModalProvider = ({ children }: IModalProps) => {
         setOpenModalEditeProfile,
         openModalDeleteProfile,
         setOpenModalDeleteProfile,
+        openModalEditAddress,
+        setOpenModalEditAddress,
       }}
     >
       {children}
