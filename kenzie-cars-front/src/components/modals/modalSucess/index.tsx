@@ -23,7 +23,7 @@ const ModalSucess = ({
   return (
     <StyleBackgroundModal>
       <StyledModalSucess>
-        <div>
+        <div className="title">
           <h3>{tittle}</h3>
           <StyledButtonClose
             type="button"
@@ -36,7 +36,14 @@ const ModalSucess = ({
         <p>{messageDetail}</p>
 
         {toLogin && (
-          <Button buttonSize="medium" onClick={() => navigation("/login")}>
+          <Button
+          className="toLogin"
+            buttonSize="medium"
+            onClick={() => {
+              navigation("/login");
+              setOpenModalSucess(false);
+            }}
+          >
             Ir para o login
           </Button>
         )}

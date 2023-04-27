@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const StyleBackgroundModal = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+  /* padding: 10px; */
 
   display: flex;
   justify-content: center;
@@ -16,7 +16,7 @@ export const StyleBackgroundModal = styled(motion.div)`
   z-index: 100;
 
   background: rgba(0, 0, 0, 0.5);
-  form {
+  .form {
     margin-top: 20px;
 
     max-height: 90vh;

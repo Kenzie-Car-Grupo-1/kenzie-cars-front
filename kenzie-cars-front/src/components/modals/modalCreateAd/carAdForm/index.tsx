@@ -252,7 +252,6 @@ const CardAdForm = () => {
   };
 
   return (
-    // <StyledFormCreateAd onSubmit={handleSubmit(onSubmit)}>
     <StyledFormCreateAd
       onSubmit={(event) => {
         event.preventDefault();

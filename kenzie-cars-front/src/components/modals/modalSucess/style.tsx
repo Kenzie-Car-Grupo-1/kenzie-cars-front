@@ -6,7 +6,7 @@ export const StyledModalSucess = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 18px 24px 38px 24px;
+  padding: 18px 24px;
 
   width: 90%;
 
@@ -25,6 +25,19 @@ export const StyledModalSucess = styled.div`
 
     button {
       position: relative;
+    }
+
+    .title {
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      align-items: center;
+      flex-direction: row;
+
+      button {
+        position: static;
+      }
     }
   }
 
@@ -75,7 +88,7 @@ export const StyledModalSucess = styled.div`
     color: #495057;
   }
 
-  button {
+  .toLogin {
     max-width: 150px;
     margin-top: 20px;
   }

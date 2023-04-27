@@ -1,8 +1,8 @@
 import { useModal } from "../../../context/modal.context";
 import { useUser } from "../../../context/user.context";
-import { StyledForm } from "../../../pages/register/style";
+
 import Button from "../../Button";
-import { StyledEditeButtons } from "../modalEditeProfile/style";
+import { StyledEditeButtons, StyledFormModal } from "../modalEditeProfile/style";
 import { StyleBackgroundModal } from "../style";
 
 const ModalDeleteProfile = () => {
@@ -10,10 +10,10 @@ const ModalDeleteProfile = () => {
   const { DeleteProfileUser, user } = useUser();
   return (
     <StyleBackgroundModal>
-      <StyledForm>
+      <StyledFormModal>
         <div>
-          <h1>Tem certeza que deseja deletar sua conta?</h1>
-          <h2>Todos os seus anúncios e dados seram apagados permanentemente</h2>
+          <h3>Tem certeza que deseja deletar sua conta?</h3>
+          <h4>Todos os seus anúncios e dados seram apagados permanentemente</h4>
           <StyledEditeButtons>
             <Button
               buttonSize="medium"
@@ -40,7 +40,7 @@ const ModalDeleteProfile = () => {
             </Button>
           </StyledEditeButtons>
         </div>
-      </StyledForm>
+      </StyledFormModal>
     </StyleBackgroundModal>
   );
 };

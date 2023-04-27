@@ -5,7 +5,7 @@ export const StyledDivContent = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh; /* definir a altura para ocupar toda a tela */
-  padding: 20px 5px;
+  padding: 20px 0px;
   /* adicionar um margin-top para centralizar na tela */
   /* position: fixed; */
   gap: 24px;
@@ -18,9 +18,7 @@ export const StyledFormCreateAd = styled.form`
 
   background: #ffffff;
   border-radius: 8px;
-  padding: 18px 16px;
-  padding-right: 8px;
-  margin: 0px 1px;
+  padding: 24px 16px 24px 24px;
   position: relative;
   top: 50%;
   left: 50%;
@@ -54,7 +52,7 @@ export const StyledFormCreateAd = styled.form`
     font-size: var(--text-size-8);
     line-height: 24px;
     color: #000000;
-    margin-top: 55px;
+    margin-top: 32px;
   }
   label {
     margin-top: 24px;
