@@ -52,6 +52,11 @@ export const StyledForm = styled.form`
   }
   h1 {
     margin-bottom: 32px;
+    font-family: "Lexend";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
   }
 
   label {

@@ -1,10 +1,11 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const StyleBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 52px 16px;
+  /* padding: 52px 16px; */
 
   background-color: var(--grey8);
 
@@ -16,23 +17,18 @@ export const StyleBox = styled.div`
   }
 `;
 
-export const StyledForm = styled.form`
-  /* margin: 90px 0; */
+export const StyledFormRegister = styled(motion.form)`
   border-radius: 4px;
-
   background-color: white;
-  padding: 24px 16px 24px 24px;
   width: 100%;
   max-width: 412px;
+  padding: 44px 28px;
   display: flex;
-
-  /* height: 500px; */
-
-  /* width: 380px; */
-
-  display: flex;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: center;
   justify-content: center;
+  margin: 40px 0px;
 
   div {
     display: flex;
@@ -43,18 +39,37 @@ export const StyledForm = styled.form`
 
     /* width: 300px;
     height: 400px; */
-  }
+    .title {
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      align-items: center;
+      flex-direction: row;
 
-  .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-
-    button {
-      position: static;
+      button {
+        position: static;
+      }
     }
   }
+  h1 {
+    font-family: "Lexend";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  h2 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+  }
+
   h3 {
     font-family: var(--font-family-1);
     font-weight: var(--font-weight-3);
@@ -142,6 +157,7 @@ export const StyledForm = styled.form`
     margin-bottom: 24px;
   }
 `;
+
 export const BoxSection = styled.section`
   width: 100%;
   display: flex;

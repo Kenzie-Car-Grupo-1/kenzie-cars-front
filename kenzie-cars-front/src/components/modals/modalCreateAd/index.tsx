@@ -1,6 +1,6 @@
 import { StyleBackgroundModal, StyledButtonClose } from "../style";
 import CardAdForm from "./carAdForm";
-import { StyledDivContent, StyledFormCreateAd } from "./style";
+import { StyledDivContent } from "./style";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ModalCreateAd = () => {

@@ -3,12 +3,13 @@ import Button from "../../components/Button";
 import Footer from "../../components/footer";
 import Header from "../../components/headers";
 import Input from "../../components/input";
-import { BoxSection, StyledForm, StyleBox } from "./style";
+
 import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../validation/user.validation";
 import { useUser } from "../../context/user.context";
 import ModalSucess from "../../components/modals/modalSucess";
 import { useModal } from "../../context/modal.context";
+import { BoxSection, StyleBox, StyledFormRegister } from "./style";
 
 interface ICreateUserFormData {
   firstname: string;
@@ -45,7 +46,6 @@ const Register = () => {
   });
 
   const submit = async (data: ICreateUserFormData) => {
-   
     await registerNewUser(data);
   };
 
@@ -53,7 +53,7 @@ const Register = () => {
     <>
       <Header />
       <StyleBox>
-        <StyledForm onSubmit={handleSubmit(submit)}>
+        <StyledFormRegister onSubmit={handleSubmit(submit)}>
           <div>
             <h1>Cadastro</h1>
             <h2>Informações pessoais</h2>
@@ -197,7 +197,7 @@ const Register = () => {
               Finalizar cadastro
             </Button>
           </div>
-        </StyledForm>
+        </StyledFormRegister>
       </StyleBox>
       <Footer />
 
