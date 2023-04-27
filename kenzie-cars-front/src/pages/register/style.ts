@@ -21,7 +21,7 @@ export const StyledForm = styled.form`
   border-radius: 4px;
 
   background-color: white;
-  padding: 44px 28px;
+  padding: 24px 16px 24px 24px;
   width: 100%;
   max-width: 412px;
   display: flex;
@@ -39,23 +39,37 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    position: relative;
 
     /* width: 300px;
     height: 400px; */
   }
-  h1 {
-    margin-bottom: 32px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    button {
+      position: static;
+    }
+  }
+  h3 {
+    font-family: var(--font-family-1);
+    font-weight: var(--font-weight-3);
+    font-size: var(--text-size-7);
+    color: var(--grey1);
+    line-height: 20px;
   }
 
-  h2 {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
+  h4 {
+    font-family: var(--font-family-3);
+    font-weight: var(--font-weight-3);
+    font-size: var(--text-size-8);
     line-height: 24px;
-    /* identical to box height, or 171% */
-
     color: #000000;
+    margin-top: 32px;
     margin-bottom: 24px;
   }
 

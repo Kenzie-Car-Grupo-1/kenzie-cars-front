@@ -6,11 +6,22 @@ import {
 import Input from "../../input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { StyleBackgroundModal } from "../style";
+import { StyleBackgroundModal, StyledButtonClose } from "../style";
 import { useUser } from "../../../context/user.context";
 import { StyledEditeButtons } from "./style";
 import Button from "../../Button";
 import { useModal } from "../../../context/modal.context";
+import Icons from "../../../service/icons";
+
+interface IUpdateProfile {
+  firstname: string;
+  lastname: string;
+  email: string;
+  cpf: string;
+  contact: string;
+  birthdate: string;
+  description: string;
+}
 
 const ModalEditeProfile = () => {
   const { user, EditeProfileUser } = useUser();
@@ -24,7 +35,7 @@ const ModalEditeProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<IUpdateProfile>({
     resolver: yupResolver(userEditeProfileSchema),
   });
 
@@ -35,10 +46,18 @@ const ModalEditeProfile = () => {
   return (
     <StyleBackgroundModal>
       {user && (
-        <StyledForm onSubmit={handleSubmit(submit)}>
+        <StyledForm className="form" onSubmit={handleSubmit(submit)}>
           <div>
-            <h1>Editar Perfil</h1>
-            <h2>Informações pessoais</h2>
+            <div>
+              <h3>Editar Perfil</h3>
+              <StyledButtonClose
+                type="button"
+                onClick={() => setOpenModalEditeProfile(!openModalEditeProfile)}
+              >
+                <Icons.Close />
+              </StyledButtonClose>
+            </div>
+            <h4>Informações pessoais</h4>
 
             <label>Nome</label>
             <Input
@@ -46,9 +65,7 @@ const ModalEditeProfile = () => {
               {...register("firstname")}
               defaultValue={user.firstname}
             />
-            {errors && (
-              <span className="error">{!errors.firstname?.message}</span>
-            )}
+            <span className="error">{errors.firstname?.message}</span>
 
             <label>Sobrenome</label>
             <Input
@@ -56,9 +73,7 @@ const ModalEditeProfile = () => {
               {...register("lastname")}
               defaultValue={user.lastname}
             />
-            {errors && (
-              <span className="error">{!errors.lastname?.message}</span>
-            )}
+            <span className="error">{errors.lastname?.message}</span>
 
             <label>Email</label>
             <Input
@@ -66,7 +81,7 @@ const ModalEditeProfile = () => {
               {...register("email")}
               defaultValue={user.email}
             />
-            {errors && <span className="error">{!errors.email?.message}</span>}
+            <span className="error">{errors.email?.message}</span>
 
             <label>CPF</label>
             <Input
@@ -74,7 +89,7 @@ const ModalEditeProfile = () => {
               {...register("cpf")}
               defaultValue={user.cpf}
             />
-            {errors && <span className="error">{!errors.cpf?.message}</span>}
+            <span className="error">{errors.cpf?.message}</span>
 
             <label>Celular</label>
             <Input
@@ -82,9 +97,7 @@ const ModalEditeProfile = () => {
               {...register("contact")}
               defaultValue={user.contact}
             />
-            {errors && (
-              <span className="error">{!errors.contact?.message}</span>
-            )}
+            <span className="error">{errors.contact?.message}</span>
 
             <label>Data de nascimento</label>
             <Input
@@ -92,9 +105,7 @@ const ModalEditeProfile = () => {
               {...register("birthdate")}
               defaultValue={user.birthdate}
             />
-            {errors && (
-              <span className="error">{!errors.birthdate?.message}</span>
-            )}
+            <span className="error">{errors.birthdate?.message}</span>
 
             <label>Descrição</label>
             <Input
@@ -102,9 +113,7 @@ const ModalEditeProfile = () => {
               {...register("description")}
               defaultValue={user.description}
             />
-            {errors && (
-              <span className="error">{!errors.description?.message}</span>
-            )}
+            <span className="error">{errors.description?.message}</span>
 
             <StyledEditeButtons>
               <Button

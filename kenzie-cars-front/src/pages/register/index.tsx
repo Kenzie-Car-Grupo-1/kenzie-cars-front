@@ -45,7 +45,7 @@ const Register = () => {
   });
 
   const submit = async (data: ICreateUserFormData) => {
-    console.log(data);
+   
     await registerNewUser(data);
   };
 
@@ -153,7 +153,7 @@ const Register = () => {
                 <label className="radio-button-label">
                   <input
                     type="radio"
-                    value={true.toString()}
+                    value={false.toString()}
                     {...register("isSalesman")}
                   />
                   <span className="radio-button-text">Comprador</span>
@@ -163,7 +163,7 @@ const Register = () => {
                 <label className="radio-button-label">
                   <input
                     type="radio"
-                    value={false.toString()}
+                    value={true.toString()}
                     {...register("isSalesman")}
                   />
                   <span className="radio-button-text">Anunciante</span>

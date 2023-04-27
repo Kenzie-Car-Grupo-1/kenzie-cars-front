@@ -36,7 +36,13 @@ const ModalSucess = ({
         <p>{messageDetail}</p>
 
         {toLogin && (
-          <Button buttonSize="medium" onClick={() => navigation("/login")}>
+          <Button
+            buttonSize="medium"
+            onClick={() => {
+              navigation("/login");
+              setOpenModalSucess(false);
+            }}
+          >
             Ir para o login
           </Button>
         )}

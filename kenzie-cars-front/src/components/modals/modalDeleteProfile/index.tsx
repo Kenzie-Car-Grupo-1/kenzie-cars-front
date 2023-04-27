@@ -12,8 +12,8 @@ const ModalDeleteProfile = () => {
     <StyleBackgroundModal>
       <StyledForm>
         <div>
-          <h1>Tem certeza que deseja deletar sua conta?</h1>
-          <h2>Todos os seus anúncios e dados seram apagados permanentemente</h2>
+          <h2>Tem certeza que deseja deletar sua conta?</h2>
+          <h3>Todos os seus anúncios e dados seram apagados permanentemente</h3>
           <StyledEditeButtons>
             <Button
               buttonSize="medium"

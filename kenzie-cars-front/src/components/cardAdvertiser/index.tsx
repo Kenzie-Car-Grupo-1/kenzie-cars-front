@@ -6,7 +6,7 @@ import {
 } from "./style";
 import Button from "../Button";
 import ModalCreateAd from "../modals/modalCreateAd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useModal } from "../../context/modal.context";
 import { useUser } from "../../context/user.context";
 import ModalSucess from "../modals/modalSucess";
@@ -18,7 +18,7 @@ const CardAdvertiser = () => {
 
   return (
     <>
-      {user.firstname.length != undefined && (
+      {user && user.firstname && (
         <StyledAdvertiserCard>
           <StyledCardDiv>
             <TagInitials>{`${user.firstname[0]}${user.lastname[0]}`}</TagInitials>
