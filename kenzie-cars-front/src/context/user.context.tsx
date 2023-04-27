@@ -147,7 +147,6 @@ export const UserProvider = ({ children }: IUserProps) => {
     try {
       const res = await baseUrl.get(`/users/${id}`);
       setSalesman(res.data);
-      console.log("olá", salesman);
     } catch (error) {
       console.error(error);
     }
@@ -172,11 +171,9 @@ export const UserProvider = ({ children }: IUserProps) => {
 
   const EditAddressUser = async (data: any) => {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
-
+    console.log("oi", data)
     try {
       baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
-      // const findUser = await baseUrl.get<any>(`/users/${id}`);
       const res = await baseUrl.patch<any>(
         `/address/${user.address[0].id}`,
         data

@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import { useCars } from "../../context/cars.context";
-import { items } from "../CardList/database";
 import CardItemAdminPage from "./cardItemAdmin";
 import { List } from "./style";
-import { useUser } from "../../context/user.context";
 import { useParams } from "react-router-dom";
+import { useUser } from "../../context/user.context";
 
 const CardListAdminPage = () => {
-  const { adsbyUser, GetCarsByUser } = useCars();
-  const { user } = useUser();
+  const { adsbyUser, GetCarsByLoggedUser } = useCars();
+  const { GetSalesmanById } = useUser();
   const { salesmanId } = useParams();
 
   useEffect(() => {
     (async () => {
       try {
-        await GetCarsByUser(salesmanId!);
+        await GetCarsByLoggedUser();
+        await GetSalesmanById(salesmanId!);
       } catch (error) {
         console.error(error);
       }
-    })();
+    })()
   }, []);
 
   return (
