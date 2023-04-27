@@ -50,3 +50,12 @@ export const userEditeProfileSchema = yup.object().shape({
   birthdate: yup.string().required("Campo obrigatório"),
   description: yup.string().required("Campo obrigatório"),
 });
+
+export const userEditAddressSchema = yup.object().shape({
+  // street: yup.string().required("Campo obrigatório"),
+  // number: yup.string().required("Campo obrigatório"),
+  // cep: yup.string().required("Campo obrigatório"),
+  // city: yup.string().required("Campo obrigatório"),
+  // state: yup.string().required("Campo obrigatório"),
+  // complement: yup.string().required("Campo obrigatório"),
+});
