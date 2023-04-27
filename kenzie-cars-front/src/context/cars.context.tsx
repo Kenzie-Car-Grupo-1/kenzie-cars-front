@@ -29,7 +29,7 @@ interface ICarsContext {
   setIsFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
   isFilterActive: boolean;
   ListAdsFiltered: (queryParams: string) => Promise<void>;
-  GetCarsByLoggedUser: () => Promise<void>
+  GetCarsByLoggedUser: () => Promise<void>;
 }
 
 interface IModelCar {
@@ -108,13 +108,9 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   };
 
   const GetCarsByUser = async (id: string) => {
-    const token = localStorage.getItem("token");
-
     try {
-      baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
-      console.log('id', id)
       const car = await baseUrl.get(`/users/${id}/cars`);
-      console.log(car.data)
+      console.log(car.data);
       setAdsbyUser(car.data.result);
     } catch (error) {
       console.error(error);
@@ -125,9 +121,9 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     const id = localStorage.getItem("id");
 
     try {
-      console.log('id', id)
+      console.log("id", id);
       const car = await baseUrl.get(`/users/${id}/cars`);
-      console.log(car.data)
+      console.log(car.data);
       setAdsbyUser(car.data.result);
     } catch (error) {
       console.error(error);
@@ -154,6 +150,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      GetCarsByLoggedUser();
       setAds([res.data, ...ads]);
       setOpenModalCreateAd(false);
       setOpenModalSucess(true);
@@ -211,7 +208,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         isFilterActive,
         setIsFilterActive,
         ListAdsFiltered,
-        GetCarsByLoggedUser
+        GetCarsByLoggedUser,
       }}
     >
       {children}

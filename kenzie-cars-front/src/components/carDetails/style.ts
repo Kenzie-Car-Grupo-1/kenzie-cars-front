@@ -227,6 +227,8 @@ export const StyledUserProfile = styled.div`
   span {
     width: 77px;
     height: 77px;
+
+    font-size: 30px;
   }
 
   h1 {

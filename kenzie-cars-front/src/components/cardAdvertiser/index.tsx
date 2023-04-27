@@ -10,9 +10,12 @@ import { useEffect, useState } from "react";
 import { useModal } from "../../context/modal.context";
 import { useUser } from "../../context/user.context";
 import ModalSucess from "../modals/modalSucess";
+import TagUserInitials from "../tagInitials";
+import { useCars } from "../../context/cars.context";
 
 const CardAdvertiser = () => {
   const { user } = useUser();
+  const { car } = useCars();
   const { openModalCreateAd, setOpenModalCreateAd, openModalSucess } =
     useModal();
 
@@ -21,7 +24,11 @@ const CardAdvertiser = () => {
       {user && user.firstname && (
         <StyledAdvertiserCard>
           <StyledCardDiv>
-            <TagInitials>{`${user.firstname[0]}${user.lastname[0]}`}</TagInitials>
+            <TagUserInitials
+              firstName={user.firstname}
+              lastName={user.lastname}
+              uuid={user.id}
+            />
           </StyledCardDiv>
           <StyledCardInfo>
             <p>{`${user.firstname} ${user.lastname}`}</p>

@@ -75,6 +75,12 @@ export const StyledCardDiv = styled.div`
   align-items: start;
   justify-content: start;
   width: 100%;
+
+  span {
+    width: 104px;
+    height: 104px;
+    font-size: 36px;
+  }
 `;
 
 export const StyledCardInfo = styled.div`
