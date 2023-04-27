@@ -11,7 +11,11 @@ interface IMenuMobile {
 
 const MenuMobile = ({ open, type }: IMenuMobile) => {
   const navigate = useNavigate();
-  const { setOpenModalEditeProfile } = useModal();
+  const {
+    setOpenModalEditeProfile,
+    setOpenModalEditAddress,
+    openModalEditAddress,
+  } = useModal();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -34,7 +38,12 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
                 >
                   Editar Perfil
                 </button>
-                <button className="btn-login grey">Editar endereço</button>
+                <button
+                  className="btn-login grey"
+                  onClick={() => setOpenModalEditAddress(!openModalEditAddress)}
+                >
+                  Editar Endereço
+                </button>
                 <button className="btn-login grey">Meus Anúncios</button>
                 <button onClick={handleLogout} className="btn-login grey">
                   Sair

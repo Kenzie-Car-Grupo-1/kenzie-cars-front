@@ -14,7 +14,7 @@ const MenuDesktop = () => {
   const [isLoading, setIsLoading] = useState(true);
   const loggedUserId = localStorage.getItem("id");
   const { user } = useUser();
-  const { setOpenModalEditeProfile } = useModal();
+  const { setOpenModalEditeProfile, setOpenModalEditAddress, openModalEditAddress } = useModal();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +56,9 @@ const MenuDesktop = () => {
               <button onClick={() => setOpenModalEditeProfile(true)}>
                 Editar Perfil
               </button>
-              <button>Editar endereço</button>
+              <button onClick={() => setOpenModalEditAddress(!openModalEditAddress)}>
+                Editar Endereço
+              </button>
               {user.isSalesman === true && (
                 <button
                   onClick={() => navigate(`/dashboard/ads/${loggedUserId}`)}

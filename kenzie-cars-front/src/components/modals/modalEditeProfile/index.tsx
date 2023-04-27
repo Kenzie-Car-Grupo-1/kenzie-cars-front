@@ -41,7 +41,7 @@ const ModalEditeProfile = () => {
 
   const submit = async (data: any) => {
     console.log(data);
-    EditeProfileUser(data);
+    await EditeProfileUser(data);
   };
   return (
     <StyleBackgroundModal>
