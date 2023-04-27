@@ -171,7 +171,7 @@ export const UserProvider = ({ children }: IUserProps) => {
 
   const EditAddressUser = async (data: any) => {
     const token = localStorage.getItem("token");
-    console.log("oi", data)
+    console.log("oi", data);
     try {
       baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
       const res = await baseUrl.patch<any>(
@@ -181,7 +181,7 @@ export const UserProvider = ({ children }: IUserProps) => {
       console.log(res.data);
       setOpenModalEditAddress(!openModalEditAddress);
       toast.success("Endereço editado com sucesso");
-      setUser({ ...user, address: res.data });
+      setUser({ ...user, address: [res.data] });
     } catch (error) {
       toast.error("Não foi possível editar seu endereço");
       console.error(error);

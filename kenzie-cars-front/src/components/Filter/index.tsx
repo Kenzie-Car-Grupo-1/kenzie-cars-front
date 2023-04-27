@@ -86,7 +86,7 @@ const initialFilters = {
 };
 
 const Filter = ({ isVisibleFilter, setIsVisibleFilter }: IFilterProps) => {
-  const isFilterEnabled = useMediaQuery("(max-width: 1024px)");
+  const isFilterEnabled = useMediaQuery("(max-width: 1300px)");
   const {
     ads,
     setFilteredAds,

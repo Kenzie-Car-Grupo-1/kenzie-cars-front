@@ -9,12 +9,9 @@ import {
   StyledDivPicturesAndUser,
   StyledUserProfile,
 } from "./style";
-import carImg from "../../assets/06a5984f915f5060d7a5f3e0a5f7560d.png";
-import user from "../../assets/Frame 4.png";
 import { useModal } from "../../context/modal.context";
 import TagUserInitials from "../tagInitials";
-import CarImage from "../carImage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useCars } from "../../context/cars.context";
 import { StyledBoxImage, StyledBoxImageCar } from "../carImage/style";
 import Comments from "../comment";
@@ -28,7 +25,9 @@ const CarDetails = (id: any) => {
   const isCommentsEnabled = useMediaQuery("(max-width: 700px)");
 
   useEffect(() => {
-    RequestCarByID(id.id);
+    (async () => {
+      await RequestCarByID(id.id);
+    })();
   }, []);
 
   return (
@@ -99,7 +98,7 @@ const CarDetails = (id: any) => {
               <TagUserInitials
                 firstName={car.user.firstname}
                 lastName={car.user.lastname}
-                uuid="2"
+                uuid={car.user.id}
               />
               <h1>{`${car.user.firstname} ${car.user.lastname}`}</h1>
               <p>{car.user.description}</p>
@@ -109,7 +108,9 @@ const CarDetails = (id: any) => {
           <Button
             buttonSize="big"
             backgroundColor="var(--grey1)"
-            onClick={() => navigate(`/dashboard/salesman/${id.id}`)}
+            onClick={() =>
+              navigate(`/dashboard/salesman/${car && car.user.id}`)
+            }
           >
             Ver todos anuncios
           </Button>

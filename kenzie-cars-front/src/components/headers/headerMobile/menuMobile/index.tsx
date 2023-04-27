@@ -21,8 +21,8 @@ const MenuMobile = ({ open, type }: IMenuMobile) => {
   const loggedUserId = localStorage.getItem("id");
 
   const handleLogout = () => {
-    // navigate("/dashboard");
     localStorage.clear();
+    navigate("/dashboard");
   };
 
   return (
