@@ -14,10 +14,11 @@ const CardAdvertiserViewUser = () => {
   const { salesman, GetSalesmanById } = useUser();
   const { salesmanId } = useParams();
 
-  const { GetCarsByUser, car } = useCars();
+  // const { GetCarsByUser, car } = useCars();
   useEffect(() => {
     (async () => {
-      console.log(salesmanId);
+      // console.log("car", car);
+      // console.log("s", salesman);
       await GetSalesmanById(salesmanId!);
     })();
   }, []);
@@ -28,9 +29,9 @@ const CardAdvertiserViewUser = () => {
           <StyledCardDiv>
             {/* <TagInitials>{`${salesman.firstname[0]}${salesman.lastname[0]}`}</TagInitials> */}
             <TagUserInitials
-              firstName={car.user.firstname}
-              lastName={car.user.lastname}
-              uuid={car.user.id}
+              firstName={salesman.firstname}
+              lastName={salesman.lastname}
+              uuid={salesman.id}
             />
           </StyledCardDiv>
           <StyledCardInfo>
