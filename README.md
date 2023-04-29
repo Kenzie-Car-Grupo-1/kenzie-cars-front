@@ -31,6 +31,14 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 ### react-hook-from
 
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="(https://github.com/byPedroCruzDev)"><img src="https://avatars0.githubusercontent.com/u/8008023?v=4?s=100" width="100px;" alt="Pedro Cruz"/><br /><sub><b>Pedro Cruz</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
+      <tr/>
+    <tbody/>
+<table/>
 ### react-icons
 
 ### react-router-dom
