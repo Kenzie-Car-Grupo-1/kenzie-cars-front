@@ -47,8 +47,11 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 ## Contributors
 
 
+team that developed the project
+
+
 <table>
-  <tbody>
+  <tbody style="display: flex;">
     <tr display="flex">
       <td align="center"><a href="(https://github.com/rafaeldquadros)"><img src="https://avatars.githubusercontent.com/u/103122923?v=4" width="100px;" border-radius="40%" alt="Rafael Quadros"/><br /><sub><b>Rafael Quadros</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
       <tr/>
@@ -62,3 +65,8 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
       <td align="center"><a href="(https://github.com/naoeoneto)"><img src="https://avatars.githubusercontent.com/u/106770927?v=4" width="100px;" alt="Antonio Neto"/><br /><sub><b>Antonio Neto</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
     <tbody/>
 <table/>
+      
+      
+ ## LICENSE
+
+[MIT](LICENSE)
