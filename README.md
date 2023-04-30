@@ -21,25 +21,25 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 # Technologies used
 
-### axios
+#### axios
 
-### framer-motion
+#### framer-motion
 
-### react
+#### react
 
-### react-dom
+#### react-dom
 
-### react-hook-from
+#### react-hook-from
 
-### react-icons
+#### react-icons
 
-### react-router-dom
+#### react-router-dom
 
-### react-toastify
+#### react-toastify
 
-### styled-components
+#### styled-components
 
-### yup
+#### yup
 
 
 
