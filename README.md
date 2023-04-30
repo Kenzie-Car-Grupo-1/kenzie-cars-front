@@ -42,13 +42,15 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 ### yup
 
 
+
+
 ## Contributors
 
 
 <table>
   <tbody>
-    <tr align="center">
-      <td align="center"><a href="(https://github.com/rafaeldquadros)"><img src="https://avatars.githubusercontent.com/u/103122923?v=4" width="100px;" alt="Rafael Quadros"/><br /><sub><b>Rafael Quadros</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
+    <tr display="flex">
+      <td align="center"><a href="(https://github.com/rafaeldquadros)"><img src="https://avatars.githubusercontent.com/u/103122923?v=4" width="100px;" border-radius="40%" alt="Rafael Quadros"/><br /><sub><b>Rafael Quadros</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
       <tr/>
     <tr>
       <td align="center"><a href="(https://github.com/byPedroCruzDev)"><img src="https://avatars.githubusercontent.com/u/98105642?s=400&u=5c365b37eb6591c3fce4b780e43ebea842bcdba1&v=4" width="100px;" alt="Pedro Cruz"/><br /><sub><b>Pedro Cruz</b></sub></a><br /><a href="https://github.com/Kenzie-Car-Grupo-1/kenzie-cars-front/commits/develop" title="Code">💻</a></td>
