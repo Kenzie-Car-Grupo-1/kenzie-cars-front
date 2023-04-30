@@ -19,6 +19,18 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
+# Routes 
+
+#### /dashboard
+#### /deshboard/:carId
+#### /dashboard/ads/:userId
+#### /dashboard/salesman/:salesmanId
+#### /login
+#### /register
+#### /login/reset
+#### /login/reset/:tokenReset
+
+
 # Technologies used
 
 #### TypeScrip
