@@ -21,6 +21,10 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 # Technologies used
 
+#### TypeScrip
+
+#### JavaScript
+
 #### axios
 
 #### framer-motion
@@ -47,7 +51,7 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 ## Contributors
 
 
-team that developed the project
+Team that developed the project
 
 
 <table>
