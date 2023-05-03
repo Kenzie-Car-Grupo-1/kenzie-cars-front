@@ -41,7 +41,7 @@ export const Bar = styled.div`
     color: var(--brand2);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1300px) {
     width: 100%;
     height: 66px;
 

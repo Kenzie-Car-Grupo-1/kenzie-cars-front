@@ -2,13 +2,33 @@ import { useNavigate } from "react-router-dom";
 import { Item } from "../../CardList/cardItem/style";
 import Button from "../../Button";
 import { StyledButtonsDiv } from "./style";
+import { useModal } from "../../../context/modal.context";
+import ModalEditAd from "../../modals/modalEditAd";
+import { ICar, useCars } from "../../../context/cars.context";
 
-const CardItemAdminPage = ({ item }: any) => {
+interface ICardItemProps {
+  item: ICar;
+}
+
+const CardItemAdminPage = ({ item }: ICardItemProps) => {
   const navigate = useNavigate();
+  const { setOpenModalEditAd, openModalEditAd } = useModal();
+  const { setCarEdit } = useCars();
+
+  const handleClick = (item: ICar) => {
+    setCarEdit(item);
+    setOpenModalEditAd(!openModalEditAd);
+  };
 
   return (
     <Item>
       <div className="div-img">
+        {item.isPublished ? (
+          <span>Ativo</span>
+        ) : (
+          <span className="inactive">Inativo</span>
+        )}
+
         <img src={item.images[0].url} alt={item.model} />
       </div>
       <div className="div-info">
@@ -36,8 +56,9 @@ const CardItemAdminPage = ({ item }: any) => {
           fontColor="var(--grey0)"
           borderColor="var(--grey0)"
           backgroundColorHover="var(--brand2)"
-          borderColorHover="var(--brand1)"
+          borderColorHover="1.5px solid var(--brand1)"
           fontColorHover="var(--grey0)"
+          onClick={() => handleClick(item)}
         >
           Editar
         </Button>

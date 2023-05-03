@@ -86,7 +86,7 @@ export const StyledFilter = styled(motion.div)`
     align-self: center;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1300px) {
     width: max-content;
     max-width: 21%;
     position: relative;
