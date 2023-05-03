@@ -13,6 +13,7 @@ import Footer from "../../components/footer";
 const DetailCar = () => {
   const { carId } = useParams();
   const { openModalImageCar } = useModal();
+  
   useEffect(() => {
     console.log(carId);
   }, []);

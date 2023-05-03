@@ -135,7 +135,6 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
         setAds(cars.data.result);
-        // setAllAds(cars.data.howManyFetched);
       } catch (error) {
         console.error(error);
       }
