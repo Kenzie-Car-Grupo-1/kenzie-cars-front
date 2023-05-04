@@ -55,7 +55,6 @@ const CardComment = ({
           <span>{`• `}</span>
           <span>{`há ${days}`}</span>
         </p>
-        <Icons.Close />
       </div>
       <p>{text}</p>
     </StyledCardComment>
