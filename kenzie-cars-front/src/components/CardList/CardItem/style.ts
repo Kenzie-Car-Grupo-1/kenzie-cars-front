@@ -15,6 +15,25 @@ export const Item = styled.li`
 
     background-color: var(--grey7);
     border: 2px solid var(--grey7);
+    position: relative;
+
+    span {
+      font-family: "Inter";
+      position: absolute;
+      background-color: var(--brand1);
+      color: white;
+      padding: 8px;
+      top: 10px;
+      left: 16px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: ease-in 0.2s;
+      z-index: 10;
+    }
+
+    .inactive {
+      background-color: var(--grey4);
+    }
 
     img {
       width: 100%;
@@ -34,6 +53,10 @@ export const Item = styled.li`
 
     &:hover {
       border: 2px solid var(--brand1);
+      span {
+        color: transparent;
+        background-color: transparent;
+      }
     }
   }
 

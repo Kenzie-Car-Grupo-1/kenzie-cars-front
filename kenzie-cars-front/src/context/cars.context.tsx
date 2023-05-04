@@ -20,7 +20,7 @@ interface ICarsContext {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   allAds: number;
-  UpdateCarById: (data: ICar, id: string) => Promise<void>;
+  UpdateCarById: (data: ICarRequest, id: string) => Promise<void>;
   GetCarsByUser: (id: string) => Promise<void>;
   adsbyUser: ICar[];
   filteredAds: ICar[];
@@ -30,6 +30,9 @@ interface ICarsContext {
   isFilterActive: boolean;
   ListAdsFiltered: (queryParams: string) => Promise<void>;
   GetCarsByLoggedUser: () => Promise<void>;
+  carEdit: ICar;
+  setCarEdit: React.Dispatch<React.SetStateAction<ICar>>;
+  DeleteAd: (idAd: string) => Promise<void>;
 }
 
 interface IModelCar {
@@ -56,6 +59,8 @@ export interface ICar {
   price: string;
   year: string;
   user: IUser;
+  isWhatsapp?: boolean;
+  isPublished?: boolean;
 }
 
 interface ICarRequest {
@@ -68,6 +73,8 @@ interface ICarRequest {
   model: string;
   price: string;
   year: string;
+  isWhatsapp?: boolean;
+  isPublished?: boolean;
 }
 
 interface IImage {
@@ -85,25 +92,46 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const [adsbyUser, setAdsbyUser] = useState<ICar[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [allAds, setAllAds] = useState(0);
-  const { setOpenModalSucess, setOpenModalCreateAd } = useModal();
+  const {
+    setOpenModalSucess,
+    setOpenModalCreateAd,
+    openModalDeleteAd,
+    setOpenModalDeleteAd,
+    setOpenModalEditAd,
+    openModalEditAd,
+  } = useModal();
   const [isFilterActive, setIsFilterActive] = useState(false);
+  const [carEdit, setCarEdit] = useState({} as ICar);
 
   const RequestCarByID = async (id: string) => {
     try {
       const res = await baseUrl.get(`/cars/${id}`);
-      console.log(res.data);
+      // console.log(res.data);
       setCar(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const UpdateCarById = async (data: ICar, id: string) => {
+  const UpdateCarById = async (data: ICarRequest, id: string) => {
     try {
-      const car = await baseUrl.patch(`/cars/${id}`, data);
-      setCar(car.data);
+      const response = await baseUrl.patch(`/cars/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      });
+
+      const updatedAdIndex = adsbyUser.findIndex((ad) => ad.id === id);
+      const updatedAds = [...adsbyUser];
+      updatedAds[updatedAdIndex] = response.data;
+
+      setAdsbyUser(updatedAds);
+
+      setOpenModalEditAd(!openModalEditAd);
+      toast.success("Anúncio alterado com sucesso!");
     } catch (error) {
-      console.error(error);
+      toast.error("Houve um erro, tente novamente!");
+      console.log(error);
     }
   };
 
@@ -188,6 +216,25 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     }
   };
 
+  const DeleteAd = async (idAd: string) => {
+    try {
+      await baseUrl.delete(`/cars/${idAd}`),
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+        };
+      const updatedAds = adsbyUser.filter((ad) => ad.id !== idAd);
+      setAdsbyUser(updatedAds);
+      setOpenModalDeleteAd(!openModalDeleteAd);
+      setOpenModalEditAd(!openModalEditAd);
+      toast.success("Anúncio deletado com sucesso!");
+    } catch (error) {
+      toast.error("Houve um erro, tente novamente!");
+      console.log(error);
+    }
+  };
+
   return (
     <CarsContext.Provider
       value={{
@@ -209,6 +256,9 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         setIsFilterActive,
         ListAdsFiltered,
         GetCarsByLoggedUser,
+        carEdit,
+        setCarEdit,
+        DeleteAd,
       }}
     >
       {children}

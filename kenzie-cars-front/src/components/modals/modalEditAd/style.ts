@@ -162,43 +162,4 @@ export const StyledFormCreateAd = styled.form`
       max-width: 193px;
     }
   }
-
-  .div-radio {
-    display: flex;
-    width: 100%;
-    gap: 10px;
-    margin-top: 18px;
-    margin-bottom: 24px;
-
-    div {
-      width: 100%;
-    }
-
-    .radio-button-label input[type="radio"] {
-      display: none;
-    }
-
-    .radio-button-text {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 20px;
-      color: var(--grey0);
-      z-index: 5;
-      border: 1.5px solid var(--grey4);
-      border-radius: 4px;
-      padding: 10px 22px;
-      width: 100%;
-      text-align: center;
-      /* margin: 28px 0px 10px 0; */
-      height: auto;
-    }
-
-    .radio-button-label input[type="radio"]:checked ~ .radio-button-text {
-      background-color: var(--brand2);
-      color: white;
-      border-color: var(--brand2);
-    }
-  }
 `;

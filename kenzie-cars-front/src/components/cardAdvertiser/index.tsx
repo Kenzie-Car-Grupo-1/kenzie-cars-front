@@ -42,7 +42,7 @@ const CardAdvertiser = () => {
               fontColor="var(--brand1)"
               borderColor="var(--brand1)"
               backgroundColorHover="var(--brand4)"
-              borderColorHover="var(--brand1)"
+              borderColorHover="1.5px solid var(--brand1)"
               fontColorHover="var(--brand1)"
               onClick={() => setOpenModalCreateAd(!openModalCreateAd)}
             >
