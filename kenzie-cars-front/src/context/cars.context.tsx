@@ -56,6 +56,7 @@ export interface ICar {
   price: string;
   year: string;
   user: IUser;
+  comment?: any[];
 }
 
 interface ICarRequest {

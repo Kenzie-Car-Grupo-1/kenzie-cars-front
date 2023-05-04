@@ -21,7 +21,13 @@ const TagUserInitials = ({ firstName, lastName, uuid }: IPropsUserInitials) => {
   }
 
   return (
-    <StyledTag color={firstNumber}>{`${firstName[0]}${lastName[0]}`}</StyledTag>
+    <>
+      {firstName && (
+        <StyledTag
+          color={firstNumber}
+        >{`${firstName[0]}${lastName[0]}`}</StyledTag>
+      )}
+    </>
   );
 };
 

@@ -116,7 +116,7 @@ const CarDetails = (id: any) => {
           </Button>
         </StyledUserProfile>
       </StyledDivPicturesAndUser>
-      {isCommentsEnabled && <Comments comments={comments} />}
+      {car.comment && isCommentsEnabled && <Comments comments={car.comment} />}
     </>
   );
 };
