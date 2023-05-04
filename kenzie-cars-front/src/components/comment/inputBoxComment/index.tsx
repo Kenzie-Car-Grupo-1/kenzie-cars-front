@@ -4,12 +4,38 @@ import Button from "../../Button";
 import Input from "../../input";
 import TagUserInitials from "../../tagInitials";
 import { StyledInputBoxComment } from "./style";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  commentSchema,
+  userRegisterSchema,
+} from "../../../validation/user.validation";
+import { useParams } from "react-router-dom";
+import { useCars } from "../../../context/cars.context";
 
 const InputBoxComment = () => {
   const { user } = useUser();
+  const { CreateComment, RequestCarByID } = useCars();
+  const { carId } = useParams();
   useEffect(() => {
-    (async () => {})();
+    (async () => {
+      console.log(carId);
+    })();
   }, []);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(commentSchema),
+  });
+
+  const handleComment = (data: any) => {
+    console.log(data);
+    CreateComment(data, carId!);
+  };
+
   return (
     <>
       {user && (
@@ -26,43 +52,88 @@ const InputBoxComment = () => {
               </>
             )}
           </div>
-          <form className="div-input">
-            <textarea placeholder="Digite aqui ..." />
+          <form className="div-input" onSubmit={handleSubmit(handleComment)}>
+            <textarea
+              id="text"
+              placeholder="Digite aqui ..."
+              {...register("text")}
+            />
             {localStorage.token ? (
-              <Button buttonSize="medium">Comentar</Button>
+              <Button buttonSize="medium" type="submit">
+                Comentar
+              </Button>
             ) : (
               <Button buttonSize="medium" disabled>
                 Comentar
               </Button>
             )}
             <div className="div-buttons">
-              <Button
-                buttonSize="medium"
-                backgroundColor="var(--grey7)"
-                fontColor="#868E96"
-                backgroundColorHover="var(--brand2)"
-                fontColorHover="white"
-              >
-                Gostei Muito!
-              </Button>
-              <Button
-                buttonSize="medium"
-                backgroundColor="var(--grey7)"
-                fontColor="#868E96"
-                backgroundColorHover="var(--brand2)"
-                fontColorHover="white"
-              >
-                Incrível!
-              </Button>
-              <Button
-                buttonSize="medium"
-                backgroundColor="var(--grey7)"
-                fontColor="#868E96"
-                backgroundColorHover="var(--brand2)"
-                fontColorHover="white"
-              >
-                Recomendarei para meus amigos!
-              </Button>
+              {localStorage.token ? (
+                <>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                    onClick={() => handleComment({ text: "Gostei Muito!" })}
+                  >
+                    Gostei Muito!
+                  </Button>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                    onClick={() => handleComment({ text: "Incrível!" })}
+                  >
+                    Incrível!
+                  </Button>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                    onClick={() =>
+                      handleComment({ text: "Recomendarei para meus amigos!" })
+                    }
+                  >
+                    Recomendarei para meus amigos!
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                  >
+                    Gostei Muito!
+                  </Button>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                  >
+                    Incrível!
+                  </Button>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey7)"
+                    fontColor="#868E96"
+                    backgroundColorHover="var(--brand2)"
+                    fontColorHover="white"
+                  >
+                    Recomendarei para meus amigos!
+                  </Button>
+                </>
+              )}
             </div>
           </form>
         </StyledInputBoxComment>

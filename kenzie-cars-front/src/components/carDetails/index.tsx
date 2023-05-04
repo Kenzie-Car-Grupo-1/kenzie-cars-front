@@ -70,7 +70,7 @@ const CarDetails = (id: any) => {
           <h1>Descrição</h1>
           <p>{car.description}</p>
         </StyledCarDescription>
-        {!isCommentsEnabled && <Comments comments={comments} />}
+        {!isCommentsEnabled && <Comments comments={car.comment} />}
       </StyledDivImageAndDetails>
       <StyledDivPicturesAndUser>
         <StyledCarPictures>

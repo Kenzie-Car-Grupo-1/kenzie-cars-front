@@ -33,6 +33,7 @@ interface ICarsContext {
   carEdit: ICar;
   setCarEdit: React.Dispatch<React.SetStateAction<ICar>>;
   DeleteAd: (idAd: string) => Promise<void>;
+  CreateComment: (data: any, carId: string) => Promise<void>;
 }
 
 interface IModelCar {
@@ -236,6 +237,25 @@ export const CarsProvider = ({ children }: ICarsProps) => {
     }
   };
 
+  const CreateComment = async (data: any, carId: string) => {
+    try {
+      const res = await baseUrl.post<any>(`/comments/${carId}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      });
+      await RequestCarByID(carId);
+      console.log(res.data);
+      // GetCarsByLoggedUser();
+      // setAds([res.data, ...ads]);
+      // setOpenModalCreateAd(false);
+      // setOpenModalSucess(true);
+    } catch (error) {
+      console.error(error);
+      toast.error("Houve um erro, tente novamente!");
+    }
+  };
+
   return (
     <CarsContext.Provider
       value={{
@@ -260,6 +280,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
         carEdit,
         setCarEdit,
         DeleteAd,
+        CreateComment,
       }}
     >
       {children}
