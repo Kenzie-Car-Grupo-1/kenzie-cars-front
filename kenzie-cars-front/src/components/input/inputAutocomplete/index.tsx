@@ -24,6 +24,7 @@ interface IInputAutoCompleteProps {
   placeholder: string;
   setCar: React.Dispatch<React.SetStateAction<IRegisterCarAd>>;
   fieldName: string; // nova prop para setar o valor do carro
+  defaultValue?: string;
 }
 
 const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
@@ -33,6 +34,7 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
   placeholder,
   setCar,
   fieldName,
+  defaultValue,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>(options);
@@ -50,6 +52,15 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
       })); // seta o valor do carro para o valor atual do input
     }
   }, [showOptions, inputValue, setCar]);
+
+  useEffect(() => {
+    if (inputValue === "" && !defaultValue) {
+      setCar((prevCar) => ({
+        ...prevCar,
+        [fieldName]: "",
+      }));
+    }
+  }, [inputValue, fieldName, setCar]);
 
   useEffect(() => {
     const closeOptions = () => setShowOptions(false);
@@ -88,14 +99,27 @@ const InputAutoComplete: React.FC<IInputAutoCompleteProps> = ({
 
   return (
     <StyledDivAutoComplete>
-      <Input
-        type="text"
-        value={inputValue}
-        placeholder={placeholder}
-        ref={inputRef}
-        onChange={handleInputChange}
-        autoComplete="off"
-      />
+      {defaultValue ? (
+        <Input
+          type="text"
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          ref={inputRef}
+          onChange={handleInputChange}
+          autoComplete="off"
+          // value={defaultValue}
+        />
+      ) : (
+        <Input
+          type="text"
+          value={inputValue}
+          placeholder={placeholder}
+          ref={inputRef}
+          onChange={handleInputChange}
+          autoComplete="off"
+        />
+      )}
+
       {showOptions && inputValue.length > 0 && filteredOptions.length > 0 && (
         <ul>
           {filteredOptions.map((option, index) => (

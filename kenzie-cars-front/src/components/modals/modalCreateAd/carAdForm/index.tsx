@@ -10,7 +10,7 @@ import { useModal } from "../../../../context/modal.context";
 import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import carAdSchema from "../../../../validation/adCar.validation";
-import { useCars } from "../../../../context/cars.context";
+import { ICar, useCars } from "../../../../context/cars.context";
 import * as yup from "yup";
 import SkeletonInput from "../../../skeleton/input";
 import { useUser } from "../../../../context/user.context";
@@ -35,23 +35,31 @@ interface IRegisterCarAd {
   description: string;
   image?: string;
   images: string[];
+  isPublished?: boolean;
 }
 
 interface IInput {
   type: string;
   name: string;
 }
-type ICardAdFormProps = {
-  setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
-};
+interface ICardAdFormProps {
+  // setOpenModalCreateAd: React.Dispatch<React.SetStateAction<boolean>>;
+  carEdit?: ICar;
+}
 
 interface IError {
   [key: string]: string;
 }
 
-const CardAdForm = () => {
-  const { setOpenModalCreateAd, openModalCreateAd, setOpenModalSucess } =
-    useModal();
+const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
+  const {
+    setOpenModalCreateAd,
+    openModalCreateAd,
+    setOpenModalSucess,
+    setOpenModalEditAd,
+    setOpenModalDeleteAd,
+    openModalDeleteAd,
+  } = useModal();
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [models, setModels] = useState<ICarApiKenzie[]>([]);
@@ -78,19 +86,52 @@ const CardAdForm = () => {
     images: [],
   });
 
-  const { RegisterCarAd } = useCars();
+  useEffect(() => {
+    if (carEdit) {
+      setCar({
+        ...car,
+        brand: carEdit.brand,
+        model: carEdit.model,
+        year: carEdit.year,
+        fuel_type: carEdit.fuel_type,
+        price: carEdit.price,
+        kms: carEdit.kms,
+        color: carEdit.color,
+        description: carEdit.description,
+        images: carEdit.images.slice(1).map((image) => image.url),
+        image: carEdit.images[0].url,
+        isPublished: carEdit.isPublished,
+      });
+
+      fetchModels(carEdit.brand);
+    }
+  }, [carEdit]);
+
+  useEffect(() => {
+    if (carEdit) {
+      const findCar = models.find(
+        (car) =>
+          car.name.toLocaleLowerCase() === carEdit.model.toLocaleLowerCase()
+      );
+
+      if (findCar) {
+        setPriceFipe(findCar.value);
+      }
+    }
+  }, [models]);
+
+  const { RegisterCarAd, UpdateCarById } = useCars();
 
   const { register, reset, handleSubmit, control } = useForm<IRegisterCarAd>({
     resolver: yupResolver(carAdSchema),
     defaultValues: {
-      images: [" ", " "],
+      images: carEdit
+        ? carEdit.images.slice(1).map((image) => image.url)
+        : [" ", " "],
     },
   });
 
-  const { fields, append, remove } = useFieldArray<
-    string,
-    keyof IRegisterCarAd
-  >({
+  const { fields, append } = useFieldArray<string, keyof IRegisterCarAd>({
     control,
     name: "images",
     max: 5, // set the maximum number of fields to 5
@@ -143,7 +184,12 @@ const CardAdForm = () => {
 
       delete updatedData.image; // deleta a chave "image" do objeto
 
-      await RegisterCarAd(updatedData, isToken);
+      if (!carEdit) {
+        await RegisterCarAd(updatedData, isToken);
+      } else {
+        console.log(updatedData);
+        await UpdateCarById(updatedData, carEdit.id);
+      }
     }
   };
 
@@ -259,10 +305,13 @@ const CardAdForm = () => {
       }}
     >
       <div className="title">
-        <h3>Criar anúncio</h3>
+        {!carEdit ? <h3>Criar anúncio</h3> : <h3>Editar anúncio</h3>}
         <StyledButtonClose
           type="button"
-          onClick={() => setOpenModalCreateAd(false)}
+          onClick={() => {
+            setOpenModalCreateAd(false);
+            setOpenModalEditAd(false);
+          }}
         >
           <Icons.Close />
         </StyledButtonClose>
@@ -282,6 +331,7 @@ const CardAdForm = () => {
             placeholder="Digite a marca do veículo"
             setCar={setCar}
             fieldName={"brand"}
+            defaultValue={carEdit && carEdit.brand}
           />
           <span> {errors.brand} </span>
         </>
@@ -298,6 +348,7 @@ const CardAdForm = () => {
         placeholder="Digite o modelo do veículo"
         setCar={setCar}
         fieldName={"model"}
+        defaultValue={carEdit && carEdit.model}
       />
       <span> {errors.model} </span>
       <div className="div-colum">
@@ -305,7 +356,7 @@ const CardAdForm = () => {
           <label htmlFor="">Ano</label>
           <Input
             // {...register("year")}
-            defaultValue={car.year}
+            defaultValue={carEdit ? carEdit.year : car.year}
             name="year"
             onChange={handleChange}
             placeholder="Ano do veículo"
@@ -316,7 +367,7 @@ const CardAdForm = () => {
           <label htmlFor="">Combustível</label>
           <select
             name="fuel_type"
-            value={car.fuel_type}
+            value={carEdit ? carEdit.fuel_type : car.fuel_type}
             onChange={handleChange}
             // {...register("fuel_type")}
             // onChange={(event) => {
@@ -345,17 +396,19 @@ const CardAdForm = () => {
             onChange={handleChange}
             // {...register("kms")}
             name="kms"
+            defaultValue={carEdit ? carEdit.kms! : car.kms}
           />
           <span> {errors.kms} </span>
         </div>
         <div>
           <label htmlFor="">Cor</label>
           <Input
-            value={car.color}
+            // value={car.color}
             placeholder="Cor do veículo"
             onChange={handleChange}
             // {...register("color")}
             name="color"
+            defaultValue={carEdit ? carEdit.color! : car.color}
           />
           <span> {errors.color} </span>
         </div>
@@ -376,7 +429,7 @@ const CardAdForm = () => {
         <div>
           <label htmlFor="">Preço</label>
           <Input
-            value={car.price}
+            defaultValue={carEdit ? carEdit.price : car.price}
             id="price"
             placeholder="Preço do veículo"
             onChange={handleChange}
@@ -391,8 +444,46 @@ const CardAdForm = () => {
         onChange={handleChange}
         // {...register("description")}
         name="description"
+        defaultValue={carEdit ? carEdit.description : car.description}
       />
       <span> {errors.description} </span>
+
+      {carEdit && (
+        <>
+          <label>Publicado</label>
+          <div className="div-radio">
+            <div>
+              <label className="radio-button-label">
+                <input
+                  type="radio"
+                  value={true.toString()}
+                  defaultChecked={carEdit ? carEdit.isPublished : false}
+                  name="isPublished"
+                  onChange={handleChange}
+                  // {...register("isSalesman")}
+                />
+                <span className="radio-button-text">Sim</span>
+              </label>
+            </div>
+            <div>
+              <label className="radio-button-label">
+                <input
+                  type="radio"
+                  value={false.toString()}
+                  // defaultValue={!carEdit.isPublished!}
+                  name="isPublished"
+                  defaultChecked={carEdit ? !carEdit.isPublished : false}
+                  onChange={handleChange}
+                />
+                <span className="radio-button-text">Não</span>
+              </label>
+              <div>
+                {/* <span className="error">{errors.isSalesman?.message}</span> */}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       <label htmlFor="">Imagem da capa</label>
       <Input
@@ -402,21 +493,37 @@ const CardAdForm = () => {
         // {...register("image")}
         name="image"
         onChange={handleChange}
+        defaultValue={carEdit && carEdit.images[0].url}
       />
       {errors.image && <span>{errors.image}</span>}
 
-      {fields.map((field, index) => (
-        <div key={field.id}>
-          <label>{` ${index + 1}ª imagem da galeria`}</label>
-          <Input
-            placeholder="http://image.com"
-            type="url"
-            onChange={handleChange}
-            name={`images.${index}`}
-          />
-          {errors.images && <span>{errors.images}</span>}
-        </div>
-      ))}
+      {carEdit && carEdit.images.length > 1
+        ? fields.map((field, index) => (
+            <div key={field.id}>
+              <label>{` ${index + 1}ª imagem da galeria`}</label>
+              <Input
+                placeholder="http://image.com"
+                type="url"
+                onChange={handleChange}
+                name={`images.${index}`}
+                defaultValue={carEdit?.images && carEdit.images[index + 1]?.url}
+              />
+              {errors.images && <span>{errors.images}</span>}
+            </div>
+          ))
+        : fields.map((field, index) => (
+            <div key={field.id}>
+              <label>{` ${index + 1}ª imagem da galeria`}</label>
+              <Input
+                placeholder="http://image.com"
+                type="url"
+                onChange={handleChange}
+                name={`images.${index}`}
+              />
+              {errors.images && <span>{errors.images}</span>}
+            </div>
+          ))}
+
       <Button
         className="add-input"
         buttonSize="medium"
@@ -431,26 +538,52 @@ const CardAdForm = () => {
         Adicionar campo para imagem da galeria
       </Button>
 
-      <div className="div-button">
-        <Button
-          type="button"
-          buttonSize="big"
-          backgroundColor="var(--grey6)"
-          backgroundColorHover="var(--grey4)"
-          fontColor="var(--grey2)"
-          onClick={() => setOpenModalCreateAd(false)}
-        >
-          Cancelar
-        </Button>
-        <Button
-          className="button-create"
-          disabled={!isFormValid}
-          buttonSize="big"
-          type="submit"
-        >
-          Criar anúncio
-        </Button>
-      </div>
+      {!carEdit ? (
+        <div className="div-button">
+          <Button
+            type="button"
+            buttonSize="big"
+            backgroundColor="var(--grey6)"
+            backgroundColorHover="var(--grey4)"
+            fontColor="var(--grey2)"
+            onClick={() => {
+              setOpenModalCreateAd(false);
+              setOpenModalEditAd(false);
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            className="button-create"
+            disabled={!isFormValid}
+            buttonSize="big"
+            type="submit"
+          >
+            Criar anúncio
+          </Button>
+        </div>
+      ) : (
+        <div className="div-button">
+          <Button
+            buttonSize="big"
+            backgroundColor="var(--grey6)"
+            fontColor="var(--grey2)"
+            backgroundColorHover="var(--alert-2)"
+            fontColorHover="var(--alert-1)"
+            onClick={() => setOpenModalDeleteAd(!openModalDeleteAd)}
+          >
+            Excluir anúncio
+          </Button>
+          <Button
+            className="button-create"
+            // disabled={!isFormValid}
+            buttonSize="big"
+            type="submit"
+          >
+            Salvar Alterações
+          </Button>
+        </div>
+      )}
     </StyledFormCreateAd>
   );
 };

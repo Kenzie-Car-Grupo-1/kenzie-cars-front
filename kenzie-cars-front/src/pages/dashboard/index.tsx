@@ -4,7 +4,7 @@ import Header from "../../components/headers";
 import ImageInitial from "../../components/imageInitial";
 import CardList from "../../components/CardList";
 import Filter from "../../components/filter";
-import Footer from "../../components/footer";
+import Footer from "../../components/Footer";
 import PaginationBar from "../../components/paginationBar";
 import { StyledDiv } from "./style";
 import { useModal } from "../../context/modal.context";
