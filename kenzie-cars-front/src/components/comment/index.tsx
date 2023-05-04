@@ -18,22 +18,23 @@ interface CommentsProps {
   comments: Comment[];
 }
 
-const Comments = ({ comments }: CommentsProps) => {
+const Comments = ({ comments }: any) => {
   return (
     <StyledSection>
       <StyledComment>
         <h3>Comentários</h3>
         <ul>
-          {comments.map((comment, index) => (
-            <CardComment
-              key={index}
-              firstName={comment.user.firstName}
-              lastName={comment.user.lastName}
-              text={comment.text}
-              updateAt={comment.updatedAt}
-              idUser={comment.user.id}
-            />
-          ))}
+          {comments &&
+            comments.map((comment: any, index: any) => (
+              <CardComment
+                key={index}
+                firstName={comment.user.firstname}
+                lastName={comment.user.lastname}
+                text={comment.text}
+                updateAt={comment.updatedAt}
+                idUser={comment.user.id}
+              />
+            ))}
         </ul>
       </StyledComment>
 

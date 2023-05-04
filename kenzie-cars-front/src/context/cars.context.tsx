@@ -59,8 +59,9 @@ export interface ICar {
   price: string;
   year: string;
   user: IUser;
-  isWhatsapp?: boolean;
-  isPublished?: boolean;
+  comment?: any[];
+  // isWhatsapp?: boolean;
+  // isPublished?: boolean;
 }
 
 interface ICarRequest {
@@ -206,7 +207,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
   const ListAdsFiltered = async (queryParams: string) => {
     try {
       const cars = await baseUrl.get(
-        `/cars?perPage=12&page=${currentPage}&${queryParams}`
+        `/cars?perPage=12&page=${currentPage}&${queryParams}&isPublished=true`
       );
       setFilteredAds(cars.data.result);
       setAllAds(cars.data.amountPage);

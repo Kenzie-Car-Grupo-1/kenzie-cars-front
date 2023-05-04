@@ -104,6 +104,7 @@ export const UserProvider = ({ children }: IUserProps) => {
           baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
           const user = await baseUrl.get(`/users/${id}`);
           setUser(user.data);
+          console.log(user);
         } catch (error) {
           localStorage.clear();
           console.error(error);
