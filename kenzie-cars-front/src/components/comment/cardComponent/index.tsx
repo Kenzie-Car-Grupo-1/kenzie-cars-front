@@ -1,3 +1,4 @@
+import Icons from "../../../service/icons";
 import TagUserInitials from "../../tagInitials";
 import { StyledCardComment } from "./style";
 
@@ -54,6 +55,7 @@ const CardComment = ({
           <span>{`• `}</span>
           <span>{`há ${days}`}</span>
         </p>
+        <Icons.Close />
       </div>
       <p>{text}</p>
     </StyledCardComment>

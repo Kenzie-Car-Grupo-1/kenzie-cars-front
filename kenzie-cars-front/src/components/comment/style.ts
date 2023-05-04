@@ -5,6 +5,9 @@ export const StyledSection = styled.section`
   padding: 18px auto 42px auto;
   margin: 0 auto;
   padding-top: 18px;
+  @media (min-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const StyledComment = styled.div`
