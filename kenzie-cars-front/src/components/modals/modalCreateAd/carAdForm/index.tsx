@@ -187,6 +187,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
       if (!carEdit) {
         await RegisterCarAd(updatedData, isToken);
       } else {
+        console.log(updatedData);
         await UpdateCarById(updatedData, carEdit.id);
       }
     }
@@ -505,7 +506,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
                 type="url"
                 onChange={handleChange}
                 name={`images.${index}`}
-                defaultValue={carEdit.images[index + 1].url}
+                defaultValue={carEdit?.images && carEdit.images[index + 1]?.url}
               />
               {errors.images && <span>{errors.images}</span>}
             </div>
