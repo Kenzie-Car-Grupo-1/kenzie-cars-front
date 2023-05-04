@@ -59,3 +59,7 @@ export const userEditAddressSchema = yup.object().shape({
   state: yup.string().required("Campo obrigatório"),
   complement: yup.string().required("Campo obrigatório"),
 });
+
+export const commentSchema = yup.object().shape({
+  text: yup.string().required("Campo obrigatório"),
+});

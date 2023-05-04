@@ -1,6 +1,7 @@
 import { StyledComment, StyledSection } from "./style";
 import CardComment from "./cardComponent";
 import InputBoxComment from "./inputBoxComment";
+import { useEffect } from "react";
 
 interface Comment {
   text: string;

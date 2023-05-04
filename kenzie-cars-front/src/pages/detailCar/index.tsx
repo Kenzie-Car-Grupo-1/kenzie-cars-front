@@ -3,7 +3,7 @@ import Header from "../../components/headers";
 import CarDetails from "../../components/carDetails";
 import { StyleBox, StyledDivBackground } from "./style";
 
-import Footer from "../../components/Footer";
+import Footer from "../../components/footer";
 
 const DetailCar = () => {
   const { carId } = useParams();
