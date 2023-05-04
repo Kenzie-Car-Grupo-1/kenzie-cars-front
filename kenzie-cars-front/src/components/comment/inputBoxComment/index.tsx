@@ -1,21 +1,18 @@
 import { useEffect } from "react";
 import { useUser } from "../../../context/user.context";
 import Button from "../../Button";
-import Input from "../../input";
 import TagUserInitials from "../../tagInitials";
 import { StyledInputBoxComment } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  commentSchema,
-  userRegisterSchema,
-} from "../../../validation/user.validation";
+import { commentSchema } from "../../../validation/user.validation";
 import { useParams } from "react-router-dom";
 import { useCars } from "../../../context/cars.context";
+import Icons from "../../../service/icons";
 
 const InputBoxComment = () => {
   const { user } = useUser();
-  const { CreateComment, RequestCarByID } = useCars();
+  const { CreateComment } = useCars();
   const { carId } = useParams();
   useEffect(() => {
     (async () => {
@@ -32,7 +29,6 @@ const InputBoxComment = () => {
   });
 
   const handleComment = (data: any) => {
-    console.log(data);
     CreateComment(data, carId!);
   };
 
