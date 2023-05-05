@@ -23,7 +23,8 @@ export const StyledBoxImageCar = styled.div`
   min-height: calc(90% - 20px);
   /* min-height: 250px; */
   max-width: 750px;
-  max-height: 274px;
+  /* max-height: 274px; */
+  height: 355px;
 
   border-radius: 4px;
 
@@ -56,6 +57,6 @@ export const StyledBoxImageCar = styled.div`
   }
 
   @media (min-width: 700px) {
-    max-height: 355px;
+    height: 355px;
   }
 `;
