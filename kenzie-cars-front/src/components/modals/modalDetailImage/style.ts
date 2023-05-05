@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledImageCarModal = styled.div`
   width: 100%;
   max-width: 520px;
-  height: 400px;
+  height: 354px;
 
   background: #ffffff;
   border-radius: 8px;
@@ -16,7 +16,8 @@ export const StyledImageCarModal = styled.div`
 
   padding: 20px 10px;
 
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
+  margin: 0px auto;
 
   background-size: cover;
 
@@ -56,7 +57,7 @@ export const StyledImageCarModal = styled.div`
     /* width: 100%; */
     height: 100%;
     border-radius: 4px;
-    
+    overflow: auto;
   }
 
   @media (min-width: 700px) {
