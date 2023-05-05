@@ -367,15 +367,8 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
           <label htmlFor="">Combustível</label>
           <select
             name="fuel_type"
-            value={carEdit ? carEdit.fuel_type : car.fuel_type}
+            defaultValue={carEdit ? carEdit.fuel_type : car.fuel_type}
             onChange={handleChange}
-            // {...register("fuel_type")}
-            // onChange={(event) => {
-            //   setCar((prevState) => ({
-            //     ...prevState,
-            //     fuel_type: event.target.value,
-            //   }));
-            // }}
           >
             <option value="">Escolha</option>
             <option value="Flex">Flex</option>

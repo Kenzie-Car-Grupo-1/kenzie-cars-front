@@ -22,59 +22,64 @@ const CardItemAdminPage = ({ item }: ICardItemProps) => {
 
   return (
     <Item>
-      <div className="div-img">
-        {item.isPublished ? (
-          <span>Ativo</span>
-        ) : (
-          <span className="inactive">Inativo</span>
-        )}
+      <div className="div-space">
+        <div className="div-img">
+          {item.isPublished ? (
+            <span>Ativo</span>
+          ) : (
+            <span className="inactive">Inativo</span>
+          )}
 
-        <img src={item.images[0].url} alt={item.model} />
-      </div>
-      <div className="div-info">
-        <p className="info-title">
-          {item.brand} - {item.model}
-        </p>
-        <p className="info-text">{item.description}</p>
-      </div>
-      <div className="div-extra">
-        <div className="extra-tags">
-          <p>{item.kms}KM</p>
-          <p>{item.year}</p>
+          <img src={item.images[0].url} alt={item.model} />
         </div>
-        <p>
-          {Number(item.price).toLocaleString("pt-br", {
-            style: "currency",
-            currency: "BRL",
-          })}{" "}
-        </p>
+        <div className="div-info">
+          <p className="info-title">
+            {item.brand} - {item.model}
+          </p>
+          <p className="info-text">{item.description}</p>
+        </div>
       </div>
-      <StyledButtonsDiv>
-        <Button
-          backgroundColor="var(--grey8)"
-          buttonSize="medium"
-          fontColor="var(--grey0)"
-          borderColor="var(--grey0)"
-          backgroundColorHover="var(--brand2)"
-          borderColorHover="1.5px solid var(--brand1)"
-          fontColorHover="var(--grey0)"
-          onClick={() => handleClick(item)}
-        >
-          Editar
-        </Button>
-        <Button
-          backgroundColor="var(--grey8)"
-          buttonSize="medium"
-          fontColor="var(--grey0)"
-          borderColor="var(--grey0)"
-          backgroundColorHover="var(--brand2)"
-          borderColorHover="var(--brand1)"
-          fontColorHover="var(--grey0)"
-          onClick={() => navigate(`/dashboard/${item.id}`)}
-        >
-          Ver detalhes
-        </Button>
-      </StyledButtonsDiv>
+      <div className="div-space">
+        {" "}
+        <div className="div-extra">
+          <div className="extra-tags">
+            <p>{item.kms}KM</p>
+            <p>{item.year}</p>
+          </div>
+          <p>
+            {Number(item.price).toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}{" "}
+          </p>
+        </div>
+        <StyledButtonsDiv>
+          <Button
+            backgroundColor="var(--grey8)"
+            buttonSize="medium"
+            fontColor="var(--grey0)"
+            borderColor="var(--grey0)"
+            backgroundColorHover="var(--brand2)"
+            borderColorHover="1.5px solid var(--brand1)"
+            fontColorHover="var(--grey0)"
+            onClick={() => handleClick(item)}
+          >
+            Editar
+          </Button>
+          <Button
+            backgroundColor="var(--grey8)"
+            buttonSize="medium"
+            fontColor="var(--grey0)"
+            borderColor="var(--grey0)"
+            backgroundColorHover="var(--brand2)"
+            borderColorHover="var(--brand1)"
+            fontColorHover="var(--grey0)"
+            onClick={() => navigate(`/dashboard/${item.id}`)}
+          >
+            Ver detalhes
+          </Button>
+        </StyledButtonsDiv>
+      </div>
     </Item>
   );
 };

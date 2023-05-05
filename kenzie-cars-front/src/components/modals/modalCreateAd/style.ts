@@ -20,9 +20,9 @@ export const StyledFormCreateAd = styled.form`
   border-radius: 8px;
   padding: 24px 16px 24px 24px;
   position: relative;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   overflow-y: scroll;
 
   /* Adicione a propriedade z-index para garantir que o modal fique em cima de outros elementos */

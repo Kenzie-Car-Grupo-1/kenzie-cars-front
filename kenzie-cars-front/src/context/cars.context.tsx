@@ -61,8 +61,8 @@ export interface ICar {
   year: string;
   user: IUser;
   comment?: any[];
-  // isWhatsapp?: boolean;
-  // isPublished?: boolean;
+  isWhatsapp?: boolean;
+  isPublished?: boolean;
 }
 
 interface ICarRequest {

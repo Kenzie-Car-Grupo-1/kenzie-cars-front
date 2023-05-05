@@ -6,7 +6,7 @@ export const StyleBackgroundModal = styled(motion.div)`
   height: 100vh;
   /* padding: 10px; */
 
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: flex-start;
 

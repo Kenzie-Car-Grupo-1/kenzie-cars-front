@@ -79,7 +79,7 @@ export const Item = styled.li`
       font-weight: var(--font-weight-4);
       color: var(--grey2);
 
-      height: 48px;
+      /* height: 48px; */
       width: 312px;
       display: flex;
       align-items: center;
