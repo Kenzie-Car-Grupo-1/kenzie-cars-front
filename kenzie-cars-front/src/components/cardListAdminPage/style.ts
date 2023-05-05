@@ -13,7 +13,7 @@ export const List = styled.ul`
   @media (min-width: 1024px) {
     flex-wrap: wrap;
     justify-content: center;
-    align-items: start;
+    /* align-items: start; */
 
     gap: 72px 48px;
     margin-top: 60px;

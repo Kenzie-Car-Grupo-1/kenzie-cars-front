@@ -10,12 +10,12 @@ export const StyledModalSucess = styled.div`
 
   width: 90%;
 
-  margin-top: 58px;
+  margin-top: 58px auto;
 
   max-width: 520px;
 
   @media (min-width: 760px) {
-    margin-top: 80px;
+    margin: 80px auto;
   }
 
   div {
