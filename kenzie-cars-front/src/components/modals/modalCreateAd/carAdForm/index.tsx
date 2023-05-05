@@ -131,10 +131,10 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
     },
   });
 
-  const { fields, append } = useFieldArray<string, keyof IRegisterCarAd>({
+  const { fields, append } = useFieldArray<any, keyof IRegisterCarAd>({
     control,
     name: "images",
-    max: 5, // set the maximum number of fields to 5
+    // max: 5, // set the maximum number of fields to 5
   });
 
   const isFormValid =
@@ -159,7 +159,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
       // Adiciona os erros de validação no objeto errors
       if (err instanceof yup.ValidationError) {
         err.inner.forEach((e) => {
-          errors[e.path] = e.message;
+          errors[e.path!] = e.message;
         });
       }
       console.log(errors);
@@ -389,7 +389,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
             onChange={handleChange}
             // {...register("kms")}
             name="kms"
-            defaultValue={carEdit ? carEdit.kms! : car.kms}
+            defaultValue={carEdit ? carEdit.kms! : car.kms!}
           />
           <span> {errors.kms} </span>
         </div>
@@ -558,6 +558,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
       ) : (
         <div className="div-button">
           <Button
+            type="button"
             buttonSize="big"
             backgroundColor="var(--grey6)"
             fontColor="var(--grey2)"

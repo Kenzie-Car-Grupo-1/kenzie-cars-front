@@ -11,7 +11,7 @@ export const StyledModalDelete = styled.div`
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
-  margin: 40px 0px;
+  margin: 40px auto;
 
   div {
     display: flex;
