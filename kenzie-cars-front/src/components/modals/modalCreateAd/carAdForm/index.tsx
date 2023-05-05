@@ -131,10 +131,10 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
     },
   });
 
-  const { fields, append } = useFieldArray<string, keyof IRegisterCarAd>({
+  const { fields, append } = useFieldArray<any, keyof IRegisterCarAd>({
     control,
     name: "images",
-    max: 5, // set the maximum number of fields to 5
+    // max: 5, // set the maximum number of fields to 5
   });
 
   const isFormValid =
@@ -558,6 +558,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
       ) : (
         <div className="div-button">
           <Button
+            type="button"
             buttonSize="big"
             backgroundColor="var(--grey6)"
             fontColor="var(--grey2)"

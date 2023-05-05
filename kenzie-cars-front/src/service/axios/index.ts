@@ -1,20 +1,5 @@
 import axios from "axios";
 
 export const baseUrl = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://kenzie-deploy-render.onrender.com",
 });
-
-// export const headerAuthorizationConfig = () => {
-//   const token = localStorage.token;
-
-//   if (!token) {
-//     return {};
-//   }
-
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       "Content-Type": "application/json",
-//     },
-//   };
-// };
