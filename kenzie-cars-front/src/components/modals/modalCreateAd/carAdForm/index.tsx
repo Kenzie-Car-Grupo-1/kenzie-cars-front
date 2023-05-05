@@ -159,7 +159,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
       // Adiciona os erros de validação no objeto errors
       if (err instanceof yup.ValidationError) {
         err.inner.forEach((e) => {
-          errors[e.path] = e.message;
+          errors[e.path!] = e.message;
         });
       }
       console.log(errors);
@@ -389,7 +389,7 @@ const CardAdForm = ({ carEdit }: ICardAdFormProps) => {
             onChange={handleChange}
             // {...register("kms")}
             name="kms"
-            defaultValue={carEdit ? carEdit.kms! : car.kms}
+            defaultValue={carEdit ? carEdit.kms! : car.kms!}
           />
           <span> {errors.kms} </span>
         </div>

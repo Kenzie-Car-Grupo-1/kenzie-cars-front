@@ -14,11 +14,8 @@ const CardAdvertiserViewUser = () => {
   const { salesman, GetSalesmanById } = useUser();
   const { salesmanId } = useParams();
 
-  // const { GetCarsByUser, car } = useCars();
   useEffect(() => {
     (async () => {
-      // console.log("car", car);
-      // console.log("s", salesman);
       await GetSalesmanById(salesmanId!);
     })();
   }, []);
