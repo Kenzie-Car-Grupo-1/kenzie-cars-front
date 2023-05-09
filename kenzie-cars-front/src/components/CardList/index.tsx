@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useCars } from "../../context/cars.context";
 import CardItem from "./cardItem";
 import { List } from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
+import { NoList } from "../cardListAdminPage/style";
 
 const CardList = () => {
   const { filteredAds } = useCars();
@@ -17,7 +17,9 @@ const CardList = () => {
           <CardItem key={ad.id} item={ad} user={ad.user} />
         ))
       ) : (
-        <h1>Ops, não temos nenhum carro desse modelo no momento...</h1>
+        <NoList>
+          <h1>Não temos nenhum carro desse modelo no momento...</h1>
+        </NoList>
       )}
     </List>
   );

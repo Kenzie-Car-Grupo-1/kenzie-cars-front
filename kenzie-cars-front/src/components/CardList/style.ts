@@ -14,9 +14,6 @@ export const List = styled.ul`
     width: 80%;
     margin-top: 60px;
 
-    /* flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: start; */
     gap: 72px 48px;
     margin-bottom: 82px;
 
@@ -27,7 +24,27 @@ export const List = styled.ul`
     grid-column-gap: 40px;
     grid-row-gap: 90px;
     grid-area: auto;
-    /* justify-items: center; */
     height: max-content;
+  }
+`;
+
+export const NoListDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-family: var(--font-family-1);
+    font-weight: var(--font-weight-2);
+    font-size: var(--text-size-4);
+
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (min-width: 700px) {
+    width: 100%;
   }
 `;
