@@ -60,7 +60,9 @@ const CarDetails = (id: any) => {
               if (!localStorage.token) {
                 return navigate("/login");
               }
-              return console.log("olá mundo");
+              return window.location.replace(
+                `https://api.whatsapp.com/send?phone=+55${car.user.contact}&text=Olá! Vi seu anúncio e gostaria de mais informações sobre o veículo ${car.brand} ${car.model} ${car.year}.`
+              );
             }}
           >
             Comprar
