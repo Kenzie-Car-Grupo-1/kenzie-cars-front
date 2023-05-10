@@ -3,7 +3,7 @@ import CardComment from "./cardComponent";
 import InputBoxComment from "./inputBoxComment";
 import { useEffect } from "react";
 
-interface Comment {
+export interface Comment {
   text: string;
   createdAt: Date;
   updatedAt: Date;
@@ -29,6 +29,7 @@ const Comments = ({ comments }: any) => {
             comments.map((comment: any, index: any) => (
               <CardComment
                 key={index}
+                idComment={comment.id}
                 firstName={comment.user.firstname}
                 lastName={comment.user.lastname}
                 text={comment.text}

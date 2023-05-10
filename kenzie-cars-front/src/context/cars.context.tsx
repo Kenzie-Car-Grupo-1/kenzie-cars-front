@@ -165,7 +165,6 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       try {
         const cars = await baseUrl.get(`/cars?perPage=12&page=${currentPage}`);
         setAds(cars.data.result);
-        // setAllAds(cars.data.howManyFetched);
       } catch (error) {
         console.error(error);
       }
@@ -250,6 +249,7 @@ export const CarsProvider = ({ children }: ICarsProps) => {
       // setAds([res.data, ...ads]);
       // setOpenModalCreateAd(false);
       // setOpenModalSucess(true);
+      toast.success("Comentário criado com sucesso!");
     } catch (error) {
       console.error(error);
       toast.error("Houve um erro, tente novamente!");

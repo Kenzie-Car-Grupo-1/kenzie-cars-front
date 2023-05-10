@@ -16,7 +16,6 @@ export const StyledComment = styled.div`
   align-items: flex-start;
 
   background: var(--grey10);
-  /* margin: 18px auto 42px auto; */
   border-radius: 4px;
   width: 95%;
   margin: 0 auto;
@@ -44,5 +43,6 @@ export const StyledComment = styled.div`
     display: flex;
     flex-direction: column;
     gap: 48px;
+    width: 100%;
   }
 `;

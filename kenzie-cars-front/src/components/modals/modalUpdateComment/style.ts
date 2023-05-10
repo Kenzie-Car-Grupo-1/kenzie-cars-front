@@ -178,22 +178,23 @@ export const RegisterPost = styled.div`
 
   main {
     width: 30%;
-    min-width: 320px;
+    min-width: 280px;
     height: 350px;
     background-color: white;
     border-radius: 4px;
-    gap: 16px;
     display: flex;
     flex-direction: column;
     border: solid 2px var(--brand3);
   }
   header {
     display: flex;
-    margin: 10px auto;
+    margin: 16px auto 10px;
     width: 80%;
+    line-height: 25px;
     justify-content: space-between;
     align-items: center;
   }
+
   h2 {
     color: black;
     font-size: 16px;
@@ -203,16 +204,18 @@ export const RegisterPost = styled.div`
     border: none;
     font-size: 16px;
   }
+
   .modalForm {
     display: flex;
     flex-direction: column;
     background-color: transparent;
     border: none;
-    gap: 10px;
+    gap: 20px;
     width: 80%;
     height: 100%;
-    margin: 15px auto;
+    margin: 10px auto 15px;
   }
+
   textarea {
     font-family: "Inter";
     color: black;
