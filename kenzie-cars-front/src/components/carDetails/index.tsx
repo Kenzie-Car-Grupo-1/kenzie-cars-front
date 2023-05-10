@@ -28,7 +28,7 @@ const CarDetails = (id: any) => {
     (async () => {
       await RequestCarByID(id.id);
     })();
-  }, []);
+  }, [car.comment]);
 
   return (
     <>

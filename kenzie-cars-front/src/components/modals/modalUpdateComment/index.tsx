@@ -5,6 +5,9 @@ import { RegisterPost, StyledDivContent } from "./style";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { BsTrash } from "react-icons/bs";
+import Button from "../../Button";
+import { StyledEditeButtons } from "../modalEditeProfile/style";
+import { toast } from "react-toastify";
 
 export interface iPropsModal {
   handleModalUpdate: () => void;
@@ -22,30 +25,29 @@ const ModalUpdateComment = ({
   });
 
   const updateComment = async (data: any) => {
+    const token = localStorage.getItem("token");
+    const idComment = localStorage.getItem("idComment");
     try {
-      console.log(data);
-      const res = await baseUrl.patch<any>(`/comments/${commentId}`, data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`,
-        },
-      });
-
+      baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
+      await baseUrl.patch<any>(`/comments/${idComment}`, data);
+      toast.success("Comentário editado com sucesso");
       handleModalUpdate();
     } catch (error) {
-      console.log(error, "xxxxxxxxxxxxx");
+      toast.error("Não foi possível editar seu comentário");
+      console.error(error);
     }
   };
 
-  const deleteComment = async (id: any) => {
+  const deleteComment = async () => {
+    const token = localStorage.getItem("token");
+    const idComment = localStorage.getItem("idComment");
     try {
-      await baseUrl.delete(`/comments/${id}`),
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.token}`,
-          },
-        };
+      baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
+      await baseUrl.delete(`/comments/${idComment}`);
+      toast.success("Comentário excluído com sucesso");
       handleModalUpdate();
     } catch (error) {
+      toast.error("Não foi possível excluir seu comentário");
       console.log(error);
     }
   };
@@ -70,16 +72,35 @@ const ModalUpdateComment = ({
 
               <form className="modalForm">
                 <textarea id="text" {...register("text")} />
-                <div>
-                  <GiConfirmed
-                    onClick={() => updateComment(commentContent)}
+                <StyledEditeButtons>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--grey6)"
+                    backgroundColorHover="var(--grey3)"
+                    fontColor="var(--grey1)"
+                    fontColorHover="var(--white-fixed)"
+                    type="button"
+                    onClick={handleSubmit(updateComment)}
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    buttonSize="medium"
+                    backgroundColor="var(--alert-2)"
+                    backgroundColorHover="var(--alert-1)"
+                    fontColor="var(--grey1)"
+                    fontColorHover="var(--white-fixed)"
+                    type="button"
+                    onClick={() => deleteComment()}
+                  >
+                    Excluir
+                  </Button>
+                  {/* <GiConfirmed
+                    onClick={handleSubmit(updateComment)}
                     className="edit"
-                  ></GiConfirmed>
-                  <BsTrash
-                    className="delete"
-                    onClick={() => deleteComment(commentId)}
-                  />
-                </div>
+                  ></GiConfirmed> */}
+                  {/* <BsTrash className="delete" onClick={() => deleteComment()} /> */}
+                </StyledEditeButtons>
               </form>
             </main>
           </RegisterPost>

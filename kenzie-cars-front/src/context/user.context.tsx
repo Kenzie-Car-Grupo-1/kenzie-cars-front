@@ -104,7 +104,6 @@ export const UserProvider = ({ children }: IUserProps) => {
           baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
           const user = await baseUrl.get(`/users/${id}`);
           setUser(user.data);
-          console.log(user);
         } catch (error) {
           localStorage.clear();
           console.error(error);
@@ -172,7 +171,7 @@ export const UserProvider = ({ children }: IUserProps) => {
 
   const EditAddressUser = async (data: any) => {
     const token = localStorage.getItem("token");
-    console.log("oi", data);
+    console.log(data);
     try {
       baseUrl.defaults.headers.common.authorization = `Bearer ${token}`;
       const res = await baseUrl.patch<any>(

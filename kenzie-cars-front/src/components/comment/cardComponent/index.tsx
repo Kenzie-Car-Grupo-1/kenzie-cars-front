@@ -4,6 +4,7 @@ import { StyledCardComment } from "./style";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import ModalUpdateComment from "../../modals/modalUpdateComment/index";
 interface IPropsCardComment {
+  idComment: string;
   firstName: string;
   lastName: string;
   updateAt: Date;
@@ -34,6 +35,7 @@ const getTimeElapsed = (date: Date) => {
 };
 
 const CardComment = ({
+  idComment,
   firstName,
   lastName,
   updateAt,
@@ -46,9 +48,10 @@ const CardComment = ({
   const handleModalDelete = () => {
     alert("wait");
   };
-  const handleModalUpdate = () => {
+  const handleModalUpdate = (commentId: string) => {
     if (editModal === false) {
       setEditModal(true);
+      localStorage.setItem("idComment", commentId);
     }
     if (editModal === true) {
       setEditModal(false);
@@ -61,31 +64,35 @@ const CardComment = ({
     <>
       {editModal && (
         <ModalUpdateComment
-          handleModalUpdate={handleModalUpdate}
-          commentId={idUser}
+          handleModalUpdate={() => handleModalUpdate(idComment)}
+          commentId={idComment}
           commentContent={text}
         />
       )}
       <StyledCardComment>
         <div className="div-user">
-          <TagUserInitials
-            firstName={firstName}
-            lastName={lastName}
-            uuid={idUser}
-          />
+          <div className="div-info">
+            <TagUserInitials
+              firstName={firstName}
+              lastName={lastName}
+              uuid={idUser}
+            />
 
-          <p className="user-fullname">
-            {`${firstName} ${lastName} `}
-            <span>{`• `}</span>
-            <span>{`há ${days}`}</span>
-          </p>
+            <p className="user-fullname">
+              {`${firstName} ${lastName} `}
+              <span>{`• `}</span>
+              <span>{`há ${days}`}</span>
+            </p>
+          </div>
+          <div>
+            {userId == idUser ? (
+              <div className="div-deleteUpdate">
+                <BsPencil onClick={() => handleModalUpdate(idComment)} />{" "}
+              </div>
+            ) : null}
+          </div>
         </div>
         <p>{text}</p>
-        {userId == idUser ? (
-          <div className="div-deleteUpdate">
-            <BsPencil onClick={() => handleModalUpdate()} />{" "}
-          </div>
-        ) : null}
       </StyledCardComment>
     </>
   );
