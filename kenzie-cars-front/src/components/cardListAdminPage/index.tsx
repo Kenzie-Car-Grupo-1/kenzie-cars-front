@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useCars } from "../../context/cars.context";
 import CardItemAdminPage from "./cardItemAdmin";
-import { List } from "./style";
+import { List, NoList } from "./style";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../context/user.context";
 import ModalEditAd from "../modals/modalEditAd";
@@ -32,12 +32,17 @@ const CardListAdminPage = () => {
 
   return (
     <>
-      <List>
-        {adsbyUser.length > 0 &&
-          adsbyUser.map((item) => (
+      {adsbyUser.length > 0 ? (
+        <List>
+          {adsbyUser.map((item) => (
             <CardItemAdminPage key={item.id} item={item} />
           ))}
-      </List>
+        </List>
+      ) : (
+        <NoList>
+          <h1>Você ainda não cadastrou nenhum carro</h1>
+        </NoList>
+      )}
       {openModalEditAd && <ModalEditAd />}
       {openModalDeleteAd && <ModalDeleteAd />}
     </>
